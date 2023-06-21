@@ -1,0 +1,195 @@
+header {
+    margin-bottom: 35.5px;
+    height: 80px;
+
+    display: flex;
+    justify-content: space-around;
+
+    /* Subtitle 2 */
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+
+    /* Neutral/Black 100 */
+    
+    color: #1F201D;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    box-sizing: border-box;
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+/* Neutral/Black 10 */
+
+border-bottom: 1px solid rgba(31, 32, 29, 0.1);
+}
+
+.sign_in_text {
+    padding-top: 24px;
+}
+
+.sign_in {  
+    /* Button */
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 11px 22px;
+gap: 8px;
+
+width: 125px;
+height: 40px;
+
+/* Brand Gradient */
+
+background: linear-gradient(90deg, #46F04E 0%, #ADE34D 100%);
+border-radius: 100px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 4;
+flex-grow: 0;
+
+/* Button/Large */
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 26px;
+/* identical to box height, or 173% */
+
+
+/* Neutral/Black 100 */
+
+color: #1F201D;
+
+border: 0px;
+}
+
+.logo_text{
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+}
+
+.header_text {
+    padding-top: 31px;
+}
+
+.logo_header {
+    padding-top: 15px;
+}
+
+body {
+    margin-top: 39px;
+    width: 100%;
+}
+
+
+.intro {
+    color: white;
+    width: 100%;
+    height: 650px;
+    background: url("D:\cs\green-ev\src\components\pictures\forest.png");
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.chungtoi {
+    /* Chúng tôi là Green Env */
+
+
+width: 639px;
+height: 48px;
+
+/* H4 */
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 300;
+font-size: 32px;
+line-height: 48px;
+/* identical to box height, or 150% */
+
+text-align: center;
+
+/* Primary */
+
+color: #ADE34D;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+.mission {
+    
+
+/* H1 */
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 64px;
+line-height: 80px;
+/* identical to box height, or 125% */
+
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+}
+
+.la {
+    /* là truyền cảm hứng, thúc đẩy và trao quyền cho các cá nhân tham gia vào những phong trào môi trường tại Việt Nam. */
+
+
+width: 579px;
+height: 60px;
+
+/* Body 1 */
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 30px;
+/* or 150% */
+
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
