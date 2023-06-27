@@ -1,0 +1,124 @@
+.mission-details {
+  padding: 0 140px;
+}
+
+.mission-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 64px 0 33px 0;
+}
+
+.general-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header--first_line, .header--second_line {
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header--first_line {
+  font-weight: 700;
+}
+
+.mission-rewards {
+  color: var(--primary, #ade34d);
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+}
+
+.mission-location {
+  font-size: 16px;
+}
+
+.mission-call {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.join-button {
+  display: flex;
+  padding: 11px 22px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 100px;
+  background: var(
+    --brand-gradient,
+    linear-gradient(90deg, #46f04e 0%, #ade34d 100%)
+  );
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mission-img {
+  width: 100%;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.mission-info {
+  font-size: 20px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px; 
+}
+
+.mission-description {
+  margin-top: 32px;
+}
+
+.mission-instruction {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 144px;
+}
+
+.mission-instruction ul {
+  padding-left: 10px;
+  list-style-position: inside;
+}
+
+.mission-instruction ul li::marker {
+  font-size: 10px;
+  align-self: center;
+}
+
+.mission-regulation {
+  margin-top: 32px;
+  margin-bottom: 144px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.regulation-text {
+  font-size: 18px;
+}
+
+.map {
+  width: 100%;
+  margin-bottom: 144px;
+}

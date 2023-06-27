@@ -1,0 +1,66 @@
+.mission-confirm-bg {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  z-index: 200;
+}
+
+.mission-confirm-notif {
+  display: flex;
+  width: 440px;
+  padding: 48px 0;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  z-index: 3000;
+  border-radius: 20px;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.headline {
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.confirm-question {
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+button {
+  font-weight: 700;
+  display: flex;
+  width: 113px;
+  padding: 11px 22px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+}
+
+.btn1 {
+  border: 2px solid #46f04e;
+  background-color: white;
+}
+
+.btn2 {
+  border: none;
+  border-radius: 100px;
+  background: var(
+    --brand-gradient,
+    linear-gradient(90deg, #46f04e 0%, #ade34d 100%)
+  );
+}
