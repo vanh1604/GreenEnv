@@ -1,0 +1,45 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 144px;
+  margin: 144px 0;
+}
+
+.images {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.images img {
+  width: 30%;
+}
+
+.text-container {
+  width: 100%;
+  padding: 0 10%;
+}
+
+.who, .what {
+  width: 690px;
+  display: flex;
+  flex-direction: column;
+}
+
+.who {
+  gap: 24px;
+}
+
+.what {
+  gap: 32px;
+}
+
+.headline {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.text {
+  font-size: 20px;
+  line-height: 30px;
+}
