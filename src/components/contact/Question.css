@@ -1,0 +1,17 @@
+.question {
+  display: flex;
+  gap: 16px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.plus {
+  width: 12px;
+}
+
+.questionText {
+  color: rgba(31, 32, 29, 0.50);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+}

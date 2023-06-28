@@ -1,0 +1,6 @@
+.contactScreen {
+  display: flex;
+  flex-direction: column;
+  gap: 144px;
+  margin: 144px 0;
+}

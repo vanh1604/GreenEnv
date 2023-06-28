@@ -6,6 +6,7 @@ import Main from "./components/Main";
 // import About from "./components/about/About";
 // import Login from "./components/login/Login";
 // import Content from "./components/missions/missions/Content";
+// import Contact from "./components/contact/Contact";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
     //   <Header />
     //   {/* <Content /> */}
     //   {/* <About /> */}
+    //   {/* <Contact /> */}
     //   <Footer />
     // </>
   );

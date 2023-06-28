@@ -1,0 +1,88 @@
+.collaborationInvitation {
+  display: flex;
+  width: 100%;
+  padding: 0 10%;
+  justify-content: space-between;
+}
+
+.ci_text {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;  
+}
+
+.ci_headline {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.ci_instructions {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.ci_contacts {
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 700;
+  display: flex;
+  gap: 32px;
+}
+
+.ci--contact_email {
+  color: #ade34d;
+}
+
+.ci_form {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.ci_form input {
+  background-color: rgba(18, 18, 18, 0.05);
+  color: rgba(18, 18, 18, 0.05);
+  border: none;
+  border-radius: 8px;
+}
+
+.ci--personal_info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ci_form_name,
+.ci_form_phone {
+  padding: 16px 12px;
+  width: 48%;
+}
+
+.ci_form_details {
+  padding: 16px 12px 96px 12px;
+  width: 100%;
+}
+
+.ci_send,
+.ci--btn_container {
+  width: 100%;
+}
+
+.ci--btn_container {
+  display: flex;
+  align-items: center;
+}
+
+.ci_send {
+  padding: 11px 22px;
+  border-radius: 100px;
+  background: var(
+    --brand-gradient,
+    linear-gradient(90deg, #46f04e 0%, #ade34d 100%)
+  );
+}
+
+.ci--send_icon {
+  margin-left: 8px;
+}
