@@ -400,3 +400,121 @@ font-weight: 700;
 line-height: 26px;
 }
 
+.tiepcan {
+    background-image: url("./pictures/volunteer1.png");
+    height: 600px;
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cachchungta {
+    color: #FFF;
+
+/* H3 */
+font-size: 40px;
+font-family: 'Open Sans', sans-serif;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.chungtoi {
+    color: #FFF;
+text-align: center;
+
+/* Body 1 */
+font-size: 20px;
+font-family: 'Open Sans', sans-serif;
+font-style: normal;
+font-weight: 400;
+line-height: 30px;
+width: 670.95px;
+    justify-content: center;
+}
+
+.volunteer2 {
+    width: 70%;
+    margin-top: 60px;
+}
+
+.hayhanhdong {
+    display: flex;
+width: 678px;
+flex-direction: column;
+color: var(--neutral-black-100, #1F201D);
+text-align: center;
+
+/* H3 */
+font-size: 40px;
+font-family: 'Open Sans', sans-serif;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+    margin-top: 120px;
+    padding-bottom: 120px;
+}
+
+.last {
+    border-top: 1px solid gainsboro;
+    display: flex; 
+    justify-content: space-evenly;
+    padding: 15px 0px;
+    width: 90%;
+}
+
+.greenenv {
+    color: #000;
+
+/* Cation */
+font-size: 13px;
+font-family: 'Open Sans', sans-serif;
+font-style: normal;
+font-weight: 400;
+line-height: 18px;
+
+display: flex;
+width: 140px;
+flex-direction: column;
+flex-shrink: 0;
+    margin-top: 7px;
+}
+
+.mail {
+    color: var(--primary, #ADE34D);
+
+/* Subtitle 2 */
+font-size: 16px;
+font-family: 'Open Sans', sans-serif;
+font-style: normal;
+font-weight: 600;
+line-height: 24px;
+}
+
+.number {
+    color: var(--neutral-black-100, #1F201D);
+
+/* Subtitle 2 */
+font-size: 16px;
+font-family: 'Open Sans', sans-serif;
+font-style: normal;
+font-weight: 600;
+line-height: 24px;
+}
+
+.icon {
+    display: flex;
+width: 127px;
+justify-content: space-between;
+align-items: center;
+flex-shrink: 0;
+}
+
+.middle {
+    display: flex;
+justify-content: center;
+align-items: center;
+gap: 16px;
+flex: 1 0 0;
+}

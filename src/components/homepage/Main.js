@@ -2,6 +2,10 @@ import React from 'react';
 import "./css/Main.css";
 import logo from "./css/pictures/logo.png";
 import gift from "./css/pictures/gifts.png";
+import volunteer2 from "./css/pictures/volunteer2.png"
+import twitter from "./css/pictures/twitter.svg"
+import insta from "./css/pictures/instagram.svg"
+import dribble from "./css/pictures/dribbble.svg"
 
 const Main = () => {
     return (
@@ -82,6 +86,44 @@ const Main = () => {
                         </div>
                     </div>
 
+                </div>
+
+                <div class = "tiepcan">
+                    
+                        <h3 class = "cachchungta">
+                            Cách chúng ta tiếp cận
+                        </h3>
+                        <div class = "chungtoi">
+                        Chúng tôi tạo cơ hội cho các cá nhân và cộng đồng tham gia tích cực vào việc xử lý môi trường và tạo giá trị riêng cho bản thân.
+                        </div>
+                        
+                        <img src = {volunteer2} alt='fuck' class = "volunteer2"></img>
+
+                        <h3 class = "hayhanhdong">
+                        “HÃY HÀNH ĐỘNG cùng nhau, chúng ta có thể cứu môi trường”
+                        </h3>
+
+                <div class = "last">
+                    <div class = "greenenv">
+                        (c) Green Env Viet Nam
+                    </div>
+
+                    <div class = "middle">
+                        <div class = "mail">
+                            Greenenv@gmail.com
+                        </div>
+
+                        <div class = "number">
+                            (+84)  912 345 678
+                        </div>
+                    </div>
+
+                    <div class = "icon">
+                        <img src = {twitter} alt = "fuck"></img>
+                        <img src = {insta} alt = "fuck"></img>
+                        <img src = {dribble} alt = "fuck"></img>
+                    </div>
+                    </div>
                 </div>
                 
             </body>
