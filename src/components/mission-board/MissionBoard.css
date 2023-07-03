@@ -1,0 +1,23 @@
+.mission-board {
+  width: 100%;
+  padding: 0 10%;
+  margin: 64px 0;
+}
+
+.mission-board--labels {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: var(--neutral-black-50, rgba(31, 32, 29, 0.5));
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  padding: 16px;
+}
+
+.mission-board--missions {
+  max-height: 90vh;
+  overflow-y: auto;
+}

@@ -1,0 +1,81 @@
+.account-modify {
+  padding: 100px 10% 200px 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+}
+
+.account-modify--account_line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.account-modify--account_container {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.account-modify--avatar {
+  width: 64px;
+}
+
+.account-modify--account {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.account-modify--update_btn {
+  display: flex;
+  padding: 11px 22px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 100px;
+  background: var(
+    --brand-gradient,
+    linear-gradient(90deg, #46f04e 0%, #ade34d 100%)
+  );
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.account-modify--inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+}
+
+.account-modify--label {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.account-modify--info_line1, .account-modify--info_line2, .account-modify--info_line3 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.account-modify--name, .account-modify--phone, .account-modify--password_old, .account-modify--password_new, .account-modify--email {
+  width: 48%;
+}
+
+.account-modify--input {
+  display: flex;
+  padding: 11px 22px;
+  align-items: flex-start;
+  align-self: stretch;
+  font-size: 20px;
+  font-weight: 400;
+  border-radius: 8px;
+  border: 2px solid var(--neutral-black-10, rgba(31, 32, 29, 0.1));
+  width: 100%;
+  margin-top: 12px;
+}
