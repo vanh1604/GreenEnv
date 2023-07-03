@@ -1,5 +1,5 @@
 import React from "react";
-import Main from "./components/Main";
+import Main from "./components/homepage/Main";
 //import "./App.css";
 // import Header from "./components/missions/Header";
 // import Footer from "./components/missions/Footer";
