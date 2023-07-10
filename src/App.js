@@ -1,8 +1,7 @@
 import React from "react";
 import Main from "./components/homepage/Main";
-//import "./App.css";
-// import Header from "./components/missions/Header";
-// import Footer from "./components/missions/Footer";
+// import Header from "./components/common-components/Header";
+// import Footer from "./components/common-components/Footer";
 // import About from "./components/about/About";
 // import Login from "./components/login/Login";
 // import Content from "./components/missions/missions/Content";

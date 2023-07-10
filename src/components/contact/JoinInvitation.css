@@ -3,24 +3,24 @@
   padding: 0 10%;
 }
 
-.content-container {
+.ji--content_container {
   width: 530px;
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
-.ji_headline {
+.ji--headline {
   font-weight: 700;
   font-size: 40px;
 }
 
-.text {
+.ji--text {
   font-size: 20px;
   line-height: 30px;
 }
 
-.buttons {
+.ji--buttons {
   display: flex;
   gap: 16px;
 }
@@ -38,10 +38,10 @@ button {
   border-radius: 8px;
 }
 
-.btn1 {
+.ji--btn1 {
   background: var(--brand-gradient, linear-gradient(90deg, #46F04E 0%, #ADE34D 100%));
 }
 
-.btn2 {
+.ji--btn2 {
   background-color: rgba(31, 32, 29, 0.10);
 }

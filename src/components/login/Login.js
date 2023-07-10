@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="container">
+    <div className="login--container">
       <BrowserRouter>
         <Routes>
           <Route path="/">

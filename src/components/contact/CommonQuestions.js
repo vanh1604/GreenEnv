@@ -5,10 +5,10 @@ import Question from "./Question";
 const CommonQuestions = () => {
   return (
     <div className="commonQuestions">
-      <div className="cq_headline">
+      <div className="cq--headline">
         Trước khi gửi tin nhắn cho chúng tôi đây là những điều bạn nên biết
       </div>
-      <div className="questions-container">
+      <div className="cq--questions_container">
         <Question question={"Sứ mệnh của Green Env là gì?"}/>
         <Question question={"Green Env hoạt động trên lĩnh vực nào?"}/>
         <Question question={"Green Env là tên viết tắt của những chữ cài nào?"}/>

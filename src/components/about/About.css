@@ -5,41 +5,41 @@
   margin: 144px 0;
 }
 
-.images {
+.about--images {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.images img {
+.about--images img {
   width: 30%;
 }
 
-.text-container {
+.about--text_container {
   width: 100%;
   padding: 0 10%;
 }
 
-.who, .what {
+.about--who, .about--what {
   width: 690px;
   display: flex;
   flex-direction: column;
 }
 
-.who {
+.about--who {
   gap: 24px;
 }
 
-.what {
+.about--what {
   gap: 32px;
 }
 
-.headline {
+.about--headline {
   font-size: 40px;
   font-weight: 700;
 }
 
-.text {
+.about--text {
   font-size: 20px;
   line-height: 30px;
 }

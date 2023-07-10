@@ -7,9 +7,9 @@ import LoginButton from "../LoginButton";
 
 const SignUp = () => {
   return (
-    <div className="login-screen">
+    <div className="login--screen">
       <Img />
-      <div className="login-part">
+      <div className="login--login_part">
         <Logo />
         <SignupTexts
           text={"Đăng ký tài khoản của bạn"}

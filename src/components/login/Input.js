@@ -2,7 +2,7 @@ import React from "react";
 
 const Input = ({inputType, inputPlaceholder}) => {
   return (
-    <div className="input-container">
+    <div className="login--input_container">
       <input type={inputType} placeholder={inputPlaceholder} required/>
     </div>
   );

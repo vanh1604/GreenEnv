@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 const SignupTexts = ({text, subtext, subtextSpan}) => {
   return (
     <div>
-      <div className="login-texts">
-        <div className="login-text">{text}</div>
-        <div className="login-subtext">
+      <div className="login--texts">
+        <div className="login--text">{text}</div>
+        <div className="login--subtext">
           {subtext} <span><Link to={"/signin"}>{subtextSpan}</Link></span>
         </div>
       </div>

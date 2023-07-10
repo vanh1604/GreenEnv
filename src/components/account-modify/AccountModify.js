@@ -1,6 +1,6 @@
 import React from "react";
 import "./AccountModify.css";
-import avatar from "./img/Avatar.png";
+import avatar from "../common-components/img/Avatar.png";
 
 const AccountModify = () => {
   return (

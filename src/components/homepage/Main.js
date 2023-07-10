@@ -9,7 +9,7 @@ import dribble from "./css/pictures/dribbble.svg"
 
 const Main = () => {
     return (
-        <div>
+        <div className='main-container'>
             <header>
                 <div class = "logo_text">
                     <div class = "logo_header">
