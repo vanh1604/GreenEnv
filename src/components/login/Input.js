@@ -1,9 +1,9 @@
 import React from "react";
 
-const Input = ({inputType, inputPlaceholder}) => {
+const Input = ({inputType, inputPlaceholder, onChange}) => {
   return (
     <div className="login--input_container">
-      <input type={inputType} placeholder={inputPlaceholder} required/>
+      <input type={inputType} placeholder={inputPlaceholder} required onChange={onChange}/>
     </div>
   );
 };

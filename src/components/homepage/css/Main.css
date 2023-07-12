@@ -41,9 +41,8 @@ header {
 }
 
 .sign_in {
-  /* Button */
 
-  /* Auto layout */
+  /* text-decoration: none; */
 
   display: flex;
   flex-direction: row;
@@ -55,27 +54,16 @@ header {
   width: 125px;
   height: 40px;
 
-  /* Brand Gradient */
-
   background: linear-gradient(90deg, #46f04e 0%, #ade34d 100%);
   border-radius: 100px;
-
-  /* Inside auto layout */
 
   flex: none;
   order: 4;
   flex-grow: 0;
 
-  /* Button/Large */
-
-  font-family: "Open Sans", sans-serif;
-  font-style: normal;
   font-weight: 700;
   font-size: 15px;
   line-height: 26px;
-  /* identical to box height, or 173% */
-
-  /* Neutral/Black 100 */
 
   color: #1f201d;
 

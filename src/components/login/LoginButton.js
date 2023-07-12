@@ -2,9 +2,9 @@ import React from "react";
 
 const LoginButton = ({LoginButtonText}) => {
   return (
-    <div className="login--button" role="button">
+    <button className="login--button">
       {LoginButtonText}
-    </div>
+    </button>
   );
 };
 

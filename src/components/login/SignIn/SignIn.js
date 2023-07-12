@@ -17,7 +17,6 @@ const SignIn = () => {
           subtextSpan={"Đăng ký"}
         />
         <SigninInputs />
-        <LoginButton LoginButtonText={"Đăng Nhập"} />
       </div>
     </div>
   );

@@ -1,13 +1,38 @@
 import React from "react";
 import Input from "../Input";
+import LoginButton from "../LoginButton";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../../../context/AuthContext";
 
 const SigninInputs = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const { signIn } = UserAuth();
+
+  const navigate = useNavigate();
+
+  const handleSigninSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await signIn(email, password);
+      navigate("/missions");
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
+  };
+
   return (
-    <div className="login--inputs">
-      <Input inputType={"tel"} inputPlaceholder={"Số điện thoại"}/>
-      <Input inputType={"password"} inputPlaceholder={"Mật khẩu"}/>
+    <form className="login--inputs" onSubmit={handleSigninSubmit}>
+      <Input inputType={"email"} inputPlaceholder={"Email"} onChange={(e) => setEmail(e.target.value)}/>
+      <Input inputType={"password"} inputPlaceholder={"Mật khẩu"} onChange={(e) => setPassword(e.target.value)}/>
       <div className="login--forget_password">Quên mật khẩu</div>
-    </div>
+      <LoginButton LoginButtonText={"Đăng nhập"} />
+    </form>
   );
 };
 

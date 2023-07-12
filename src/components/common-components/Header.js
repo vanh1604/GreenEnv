@@ -4,13 +4,18 @@ import logo from "./img/logoGreen.png";
 import notificationsActiveIcon from "./img/notifications_active.png";
 import bookmarkIcon from "./img/bookmark.png";
 import avatar from "./img/Avatar.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="header">
       <div className="header--nav_part">
         <div className="header--logo_container">
-          <img className="header--logo" src={logo} alt="Green Env logo green color" />
+          <img
+            className="header--logo"
+            src={logo}
+            alt="Green Env logo green color"
+          />
         </div>
         <div className="header--nav_options">
           <div className="header--option">Giới thiệu</div>
@@ -25,7 +30,9 @@ const Header = () => {
         <img src={notificationsActiveIcon} alt="" />
         <img src={bookmarkIcon} alt="" />
         <div className="header--avatar_line"></div>
-        <img src={avatar} alt="" />
+        <Link to="/user">
+          <img src={avatar} alt="" />
+        </Link>
       </div>
     </header>
   );

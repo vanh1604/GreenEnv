@@ -3,7 +3,6 @@ import Img from "../Img";
 import Logo from "../Logo";
 import SignupTexts from "./SignupTexts";
 import SignupInputs from "./SignupInputs";
-import LoginButton from "../LoginButton";
 
 const SignUp = () => {
   return (
@@ -17,7 +16,6 @@ const SignUp = () => {
           subtextSpan={"Đăng nhập"}
         />
         <SignupInputs />
-        <LoginButton LoginButtonText={"Tiếp tục"} />
       </div>
     </div>
   );

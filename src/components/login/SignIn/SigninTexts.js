@@ -8,7 +8,7 @@ const LoginTexts = ({ text, subtext, subtextSpan }) => {
       <div className="login--subtext">
         {subtext}{" "}
         <span>
-          <Link to={"/signup"}>{subtextSpan}</Link>
+          <Link to={"signup"}>{subtextSpan}</Link>
         </span>
       </div>
     </div>
