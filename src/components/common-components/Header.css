@@ -5,14 +5,8 @@
   display: flex;
   align-items: center;
 }
-
-/* html {
-  padding-top: 96px;
-} */
-
 .header {
   width: 100%;
-  /* height: 5rem; */
   height: 96px;
   justify-content: space-between;
   padding: 0 10%;
@@ -20,6 +14,7 @@
   background: #fff;
   position: fixed;
   top: 0;
+  z-index: 1000;
 }
 
 .header--nav_part {
@@ -30,19 +25,33 @@
 .header--logo {
   /* width: 3.5rem; */
   width: 65px;
+  cursor: pointer;
 }
 
 .header--nav_options {
   column-gap: 2rem;
   font-weight: 600;
   cursor: pointer;
+  height: 96px;
+}
+
+.header--option {
+  height: 96px;
+  /* width: 85px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .header--option_chosen {
+  width: 100%;
   height: 96px;
-  border-bottom: 3px solid var(--primary, #ade34d);
   display: flex;
   align-items: center;
+  border-bottom: 3px solid var(--primary, #ade34d);
+  position: absolute;
+  z-index: 100000000;
 }
 
 .header--user_part {
@@ -53,4 +62,19 @@
   width: 1px;
   height: 16px;
   background: rgba(31, 32, 29, 0.5);
+}
+
+.header--avatar {
+  cursor: pointer;
+}
+
+.header--sign_in_text {
+  width: 125px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #46f04e 0%, #ade34d 100%);
+  border-radius: 100px;
+  font-weight: 700;
 }

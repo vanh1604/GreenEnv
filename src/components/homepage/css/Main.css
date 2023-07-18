@@ -1,4 +1,4 @@
-header {
+.main--header {
   margin-bottom: 35.5px;
   height: 80px;
 
@@ -36,60 +36,26 @@ header {
   border-bottom: 1px solid rgba(31, 32, 29, 0.1);
 }
 
-.sign_in_text {
-  padding-top: 24px;
-}
-
-.sign_in {
-
-  /* text-decoration: none; */
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 11px 22px;
-  gap: 8px;
-
-  width: 125px;
-  height: 40px;
-
-  background: linear-gradient(90deg, #46f04e 0%, #ade34d 100%);
-  border-radius: 100px;
-
-  flex: none;
-  order: 4;
-  flex-grow: 0;
-
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 26px;
-
-  color: #1f201d;
-
-  border: 0px;
-}
-
-.logo_text {
+.main--logo_text {
   display: flex;
   justify-content: space-between;
   width: 500px;
 }
 
-.header_text {
+.main--header_text {
   padding-top: 31px;
 }
 
-.logo_header {
+.main--logo_header {
   padding-top: 15px;
 }
 
-.main-container {
+.main--container {
   margin-top: 39px;
   width: 100%;
 }
 
-.intro {
+.main--intro {
   color: white;
   width: 100%;
   height: 650px;
@@ -100,7 +66,7 @@ header {
   flex-direction: column;
 }
 
-.chungtoi {
+.main--chungtoi {
   /* Chúng tôi là Green Env */
 
   height: 48px;
@@ -125,7 +91,7 @@ header {
   flex-grow: 0;
 }
 
-.mission {
+.main--mission {
   /* H1 */
 
   font-family: "Open Sans", sans-serif;
@@ -142,7 +108,7 @@ header {
   /* Inside auto layout */
 }
 
-.la {
+.main--la {
   /* là truyền cảm hứng, thúc đẩy và trao quyền cho các cá nhân tham gia vào những phong trào môi trường tại Việt Nam. */
 
   width: 579px;
@@ -168,7 +134,7 @@ header {
   flex-grow: 0;
 }
 
-.thamgia {
+.main--thamgia {
   /* Button */
 
   /* Auto layout */
@@ -200,7 +166,7 @@ header {
   color: #1f201d;
 }
 
-.assist {
+.main--assist {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -208,7 +174,7 @@ header {
   height: 300px;
 }
 
-.challenge {
+.main--challenge {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -221,7 +187,7 @@ header {
   background: #ffffff;
 }
 
-.challenge_header {
+.main--challenge_header {
   font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 700;
@@ -231,7 +197,7 @@ header {
   color: #000000;
 }
 
-.challenge_content {
+.main--challenge_content {
   font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -245,7 +211,7 @@ header {
   width: 753px;
 }
 
-.dump {
+.main--dump {
   width: 100%;
   height: 785px;
   background-image: url("./pictures/dump1.png");
@@ -254,7 +220,7 @@ header {
   justify-content: space-around;
 }
 
-.problem {
+.main--problem {
   display: flex;
   width: 567px;
   flex-direction: column;
@@ -264,7 +230,7 @@ header {
   padding-top: 284px;
 }
 
-.problem1 {
+.main--problem1 {
   color: #fff;
   /* H1 */
   font-size: 64px;
@@ -273,7 +239,7 @@ header {
   line-height: 80px;
 }
 
-.problem2 {
+.main--problem2 {
   display: flex;
   width: 488px;
   flex-direction: column;
@@ -284,14 +250,14 @@ header {
   line-height: 30px;
 }
 
-.second_pic {
+.main--second_pic {
   width: 300px;
   height: 695px;
   flex-shrink: 0;
   background-image: url("./pictures/dump2.png");
 }
 
-.third_pic {
+.main--third_pic {
   width: 400px;
   height: 695px;
   flex-shrink: 0;
@@ -301,33 +267,33 @@ header {
   right: 30px;
 }
 
-.pics {
+.main--pics {
   display: flex;
   position: relative;
   color: white;
 }
 
-.gift {
+.main--gift {
   display: flex;
   width: 1040px;
   align-items: center;
 }
 
-.left_text {
+.main--left_text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 48px;
 }
 
-.upper {
+.main--upper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
 }
 
-.tichdiem {
+.main--tichdiem {
   color: var(--neutral-black-100, #1f201d);
 
   /* H3 */
@@ -336,7 +302,7 @@ header {
   font-weight: 700;
 }
 
-.banseduoc {
+.main--banseduoc {
   display: flex;
   width: 512px;
   flex-direction: column;
@@ -348,7 +314,7 @@ header {
   line-height: 30px;
 }
 
-.doiqua {
+.main--doiqua {
   width: 100%;
   align-items: center;
   display: flex;
@@ -357,7 +323,7 @@ header {
   margin-bottom: 96px;
 }
 
-.dennhiemvu {
+.main--dennhiemvu {
   border-radius: 100px;
   background: var(
     --brand-gradient,
@@ -378,7 +344,7 @@ header {
   line-height: 26px;
 }
 
-.tiepcan {
+.main--tiepcan {
   background-image: url("./pictures/volunteer1.png");
   height: 600px;
   width: 100%;
@@ -387,7 +353,7 @@ header {
   flex-direction: column;
 }
 
-.cachchungta {
+.main--cachchungta {
   color: #fff;
 
   /* H3 */
@@ -398,7 +364,7 @@ header {
   line-height: normal;
 }
 
-.chungtoi {
+.main--chungtoi {
   color: #fff;
   text-align: center;
 
@@ -412,12 +378,12 @@ header {
   justify-content: center;
 }
 
-.volunteer2 {
+.main--volunteer2 {
   width: 70%;
   margin-top: 60px;
 }
 
-.hayhanhdong {
+.main--hayhanhdong {
   display: flex;
   width: 678px;
   flex-direction: column;
@@ -434,7 +400,7 @@ header {
   padding-bottom: 120px;
 }
 
-.last {
+.main--last {
   border-top: 1px solid gainsboro;
   display: flex;
   justify-content: space-evenly;
@@ -442,7 +408,7 @@ header {
   width: 90%;
 }
 
-.greenenv {
+.main--greenenv {
   color: #000;
 
   /* Cation */
@@ -459,7 +425,7 @@ header {
   margin-top: 7px;
 }
 
-.mail {
+.main--mail {
   color: var(--primary, #ade34d);
 
   /* Subtitle 2 */
@@ -470,7 +436,7 @@ header {
   line-height: 24px;
 }
 
-.number {
+.main--number {
   color: var(--neutral-black-100, #1f201d);
 
   /* Subtitle 2 */
@@ -481,7 +447,7 @@ header {
   line-height: 24px;
 }
 
-.icon {
+.main--icon {
   display: flex;
   width: 127px;
   justify-content: space-between;
@@ -489,7 +455,7 @@ header {
   flex-shrink: 0;
 }
 
-.middle {
+.main--middle {
   display: flex;
   justify-content: center;
   align-items: center;

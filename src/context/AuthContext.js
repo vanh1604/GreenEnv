@@ -4,8 +4,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  //sendPasswordResetEmail,
 } from "firebase/auth";
-import {auth} from "../firebase";
+import { auth } from "../firebase";
 //onAuthStateChanged : check to see if we are logged out so we can have protected route so we can have access to some of that information
 
 const UserContext = createContext();
@@ -25,9 +26,13 @@ export const AuthContextProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  // const forgotPassword = (email) => {
+  //   return sendPasswordResetEmail(auth, email);
+  // };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
+      // console.log(currentUser);
       setUser(currentUser);
     });
 
@@ -37,7 +42,9 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ createUser, user, logout, signIn }}>
+    <UserContext.Provider
+      value={{ createUser, user, logout, signIn }} //forgotPassword
+    >
       {children}
     </UserContext.Provider>
   );

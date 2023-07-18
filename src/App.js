@@ -2,9 +2,10 @@ import React from "react";
 import Main from "./components/homepage/Main";
 import Header from "./components/common-components/Header";
 import Footer from "./components/common-components/Footer";
-// import About from "./components/about/About";
+import About from "./components/about/About";
 import Login from "./components/login/Login";
 import Content from "./components/missions/missions/Content";
+import Activity from "./components/Activity/Activity";
 import Contact from "./components/contact/Contact";
 // import AccountModify from "./components/account-modify/AccountModify";
 // import MissionBoard from "./components/mission-board/MissionBoard";
@@ -24,6 +25,18 @@ const App = () => {
           <Route path="/signin/*" element={<Login />} />
           <Route path="/user" element={<ProtectedRoute><User /></ProtectedRoute>} />
           <Route
+            path="/about"
+            element={
+              <>
+                <div style={{ paddingTop: "96px" }}>
+                  <Header />
+                </div>
+                <About />
+                <Footer />
+              </>
+            }
+          />
+          <Route
             path="/missions"
             element={
               <>
@@ -31,6 +44,18 @@ const App = () => {
                   <Header />
                 </div>
                 <Content />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/activity"
+            element={
+              <>
+                <div style={{ paddingTop: "96px" }}>
+                  <Header />
+                </div>
+                <Activity />
                 <Footer />
               </>
             }
