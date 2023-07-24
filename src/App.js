@@ -14,6 +14,7 @@ import User from "./components/user/User";
 // import SignIn from "./components/login/SignIn/SignIn";
 import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import UserEdit from "./components/user/UserEdit";
 
 const App = () => {
   return (
@@ -23,7 +24,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signin/*" element={<Login />} />
-          <Route path="/user" element={<ProtectedRoute><User /></ProtectedRoute>} />
+          <Route path="/user/edit" element={<ProtectedRoute><UserEdit /></ProtectedRoute>} />
+          {/* <Route path="/user/edit" element={<ProtectedRoute><AccountModify /></ProtectedRoute>} /> */}
+          <Route exact path="/user" element={<ProtectedRoute><User /></ProtectedRoute>} />
           <Route
             path="/about"
             element={

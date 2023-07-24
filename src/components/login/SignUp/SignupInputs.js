@@ -2,11 +2,12 @@ import React from "react";
 import Input from "../Input";
 import LoginButton from "../LoginButton";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../../context/AuthContext";
 import { updateProfile } from "firebase/auth";
-import { auth } from "../../../firebase";
-import { db } from "../../../firebase";
+import { auth, colRefUsers } from "../../../firebase";
+// import { db } from "../../../firebase";
+import { setDoc, doc } from "firebase/firestore";
 // import { doc, addDoc } from "firebase/firestore";
 
 const SignUpInputs = () => {
@@ -14,18 +15,17 @@ const SignUpInputs = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
-  const [error, setError] = useState("");
 
-  const { createUser } = UserAuth();
+  const { user, createUser } = UserAuth();
 
   const navigate = useNavigate();
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     if (repassword === password) {
-      setError("");
       try {
         await createUser(email, password);
+        console.log(user);
         localStorage.setItem("email", email);
         localStorage.setItem("password", password);
         // await addDoc(doc(db, "users"), {
@@ -37,16 +37,21 @@ const SignUpInputs = () => {
           displayName: name, //, phoneNumber: "0910"
         })
           .then(() => {
-            // Profile updated!
-            // ...
+            alert("Bạn đã đăng kí thành công!");
           })
           .catch((error) => {
             console.log(error.message);
           });
       } catch (e) {
-        setError(e.message);
         console.log(e.message);
       }
+      const saveInfo = async () => {
+        await setDoc(doc(colRefUsers, email), {
+          name: name,
+          email: email,
+        });
+      }
+      saveInfo();
       navigate("/about");
     } else {
       alert("Password nhập lại không đúng.");

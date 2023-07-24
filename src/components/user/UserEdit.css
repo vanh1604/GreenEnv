@@ -1,62 +1,39 @@
-.user-menu {
+.user-edit {
   padding: 100px 10% 200px 10%;
   display: flex;
   flex-direction: column;
   gap: 48px;
   width: 100%;
   font-size: 18px;
-  position: relative;
 }
 
-.user-menu--back_button {
-  position: absolute;
-  top: 30px;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #46f04e 0%, #ade34d 100%);
-  padding: 5px 10px;
-  border-radius: 8px;
-
-  cursor: pointer;
-}
-
-.user-menu--back_button_img {
-  width: 20px;
-}
-
-.user-menu--account_line {
+.user-edit--account_line {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 }
 
-.user-menu--account_container {
+.user-edit--account_container {
   display: flex;
   align-items: center;
   gap: 32px;
 }
 
-.user-menu--avatar {
-  width: 64px;
+.user-edit--avatar {
+  height: 64px;
 }
 
-.user-menu--account {
+#user-edit--account {
   font-size: 40px;
   font-weight: 700;
 }
 
-.user-menu--update_btn,
-.user-menu--logout_btn {
+.user-edit--update_btn {
   display: flex;
   padding: 11px 22px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
   border: none;
   border-radius: 100px;
   background: var(
@@ -65,36 +42,40 @@
   );
   font-size: 18px;
   font-weight: 700;
+  align-self: flex-end;
 }
 
-.user-menu--info {
+.user-edit--info {
   display: flex;
   flex-direction: column;
   gap: 48px;
   width: 100%;
 }
 
-.user-menu--label {
+.user-edit--label {
   font-size: 25px;
   font-weight: 700;
   line-height: 30px;
 }
 
-.user-menu--info_line1,
-.user-menu--info_line2 {
+.user-edit--info_line1 {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.user-menu--name,
-.user-menu--phone,
-.user-menu--score,
-.user-menu--email {
+.user-edit--info_line2 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.user-edit--name,
+.user-edit--phone,
+.user-edit--score {
   width: 48%;
 }
 
-.user-menu--input {
+.user-edit--input {
   display: flex;
   padding: 11px 22px;
   align-items: flex-start;
@@ -104,17 +85,20 @@
   border-radius: 8px;
   border: 2px solid var(--neutral-black-10, rgba(31, 32, 29, 0.1));
   width: 100%;
+}
+
+.marginTop12 {
   margin-top: 12px;
 }
 
-.user-menu--edit_info {
+.user-edit--edit_info {
   cursor: pointer;
   color: rgb(44, 174, 44);
   font-weight: 700;
   font-size: 15px;
 }
 
-.user-menu--info_editing {
+.user-edit--info_editing {
   border: 2px solid gray;
   border-radius: 8px;
   padding: 10px;
