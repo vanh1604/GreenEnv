@@ -1,56 +1,56 @@
-.mission-details {
+.mission-details--mission-details {
   padding: 0 140px;
 }
 
-.mission-header {
+.mission-details--mission-header {
   display: flex;
   justify-content: space-between;
   gap: 16px;
   margin: 64px 0 33px 0;
 }
 
-.general-info {
+.mission-details--general-info {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.header--first_line, .header--second_line {
+.mission-details--header--first_line, .mission-details--header--second_line {
   font-size: 40px;
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.header--first_line {
+.mission-details--header--first_line {
   font-weight: 700;
 }
 
-.mission-rewards {
+.mission-details--mission-rewards {
   color: var(--primary, #ade34d);
 }
 
-.contact {
+.mission-details--contact {
   display: flex;
   align-items: center;
 }
 
-.mission-location {
+.mission-details--mission-location {
   font-size: 16px;
 }
 
-.mission-call {
+.mission-details--mission-call {
   font-size: 15px;
   font-weight: 700;
 }
 
-.button-container {
+.mission-details--button-container {
   display: flex;
   justify-content: center;
   align-items: flex-end;
 }
 
-.join-button {
+.mission-details--join-button {
   display: flex;
   padding: 11px 22px;
   justify-content: center;
@@ -64,48 +64,48 @@
   font-weight: 700;
 }
 
-.mission-img {
+.mission-details--mission-img {
   width: 100%;
 }
 
-.dots {
+.mission-details--dots {
   display: flex;
   gap: 8px;
   justify-content: center;
   margin-top: 16px;
 }
 
-.mission-info {
+.mission-details--mission-info {
   font-size: 20px;
 }
 
-.title {
+.mission-details--title {
   font-weight: 700;
   font-size: 24px; 
 }
 
-.mission-description {
+.mission-details--mission-description {
   margin-top: 32px;
 }
 
-.mission-instruction {
+.mission-details--mission-instruction {
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-top: 144px;
 }
 
-.mission-instruction ul {
+.mission-details--mission-instruction ul {
   padding-left: 10px;
   list-style-position: inside;
 }
 
-.mission-instruction ul li::marker {
+.mission-details--mission-instruction ul li::marker {
   font-size: 10px;
   align-self: center;
 }
 
-.mission-regulation {
+.mission-details--mission-regulation {
   margin-top: 32px;
   margin-bottom: 144px;
   display: flex;
@@ -113,11 +113,11 @@
   gap: 16px;
 }
 
-.regulation-text {
+.mission-details--regulation-text {
   font-size: 18px;
 }
 
-.map {
+.mission-details--map {
   width: 100%;
   margin-bottom: 144px;
 }
