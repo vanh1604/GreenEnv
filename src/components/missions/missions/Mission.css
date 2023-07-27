@@ -3,18 +3,18 @@
   margin-bottom: 64px;
 }
 
-.mission-title {
+.mission--title {
   font-weight: 700;
   font-size: 24px;
 }
 
-.container, .about-part, .mission-contacts {
+.mission--container, .mission--about_part, .mission--contacts {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.container {
+.mission--container {
   width: 700px;
   height: 700px;
   background-color: rgb(246, 249, 235);
@@ -22,40 +22,40 @@
   position: relative;
 }
 
-.about-part, .mission-contacts, .mission-rewards, .mission-buttons {
+.mission--about_part, .mission--contacts, .mission--rewards, .mission--buttons {
   width: 425px;
 }
 
-.mission-description {
+.mission--description {
   font-size: 20px;
 }
 
-.contact-icon,
-.reward-icon {
+.mission--contact_icon,
+.mission--reward_icon {
   width: 24px;
 }
 
-.contact-info,
-.reward-value {
+.mission--contact_info,
+.mission--reward_value {
   font-size: 16px;
 }
 
-#contact-call {
+#mission--contact_call {
   font-size: 15px;
   font-weight: 700;
 }
 
-.mission-contact,
-.mission-rewards {
+.mission--contact,
+.mission--rewards {
   display: flex;
 }
 
-.mission-buttons {
+.mission--buttons {
   display: flex;
   gap: 16px;
 }
 
-button {
+.mission--button {
   display: flex;
   padding: 11px 22px;
   justify-content: center;
@@ -64,7 +64,7 @@ button {
   font-weight: 700;
 }
 
-.join-button {
+.mission--join_button {
   border-radius: 100px;
   background: var(
     --brand-gradient,
@@ -73,13 +73,13 @@ button {
   border: none;
 }
 
-.info-button {
+.mission--info_button {
   border-radius: 100px;
   border: 2px solid #2dda35;
   background-color: rgb(246, 249, 235);
 }
 
-.mission-img {
+.mission--img {
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);

@@ -1,13 +1,14 @@
-.mission-confirm-bg {
+.mission-confirm--bg {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   top: 0;
+  left: 0;
   z-index: 200;
 }
 
-.mission-confirm-notif {
+.mission-confirm--notif {
   display: flex;
   width: 440px;
   padding: 48px 0;
@@ -24,24 +25,24 @@
   text-align: center;
 }
 
-.headline {
+.mission-confirm--headline {
   color: #000;
   font-size: 24px;
   font-weight: 700;
 }
 
-.confirm-question {
+.mission-confirm--question {
   font-size: 16px;
   margin-top: 16px;
 }
 
-.buttons {
+.mission-confirm--buttons {
   display: flex;
   gap: 16px;
   margin-top: 32px;
 }
 
-button {
+.mission-confirm--button {
   font-weight: 700;
   display: flex;
   width: 113px;
@@ -51,12 +52,12 @@ button {
   border-radius: 100px;
 }
 
-.btn1 {
+.mission-confirm--btn1_accept, .mission-confirm--btn1_cancel {
   border: 2px solid #46f04e;
   background-color: white;
 }
 
-.btn2 {
+.mission-confirm--btn2_accept, .mission-confirm--btn2_cancel {
   border: none;
   border-radius: 100px;
   background: var(

@@ -47,18 +47,6 @@ const User = () => {
     }
   };
 
-  // const handlePhoneEdit = () => {
-  //   const phoneAnswer = prompt("Nhập số điện thoại của bạn: ");
-  //   setPhoneNumber(phoneAnswer);
-  //   console.log(phoneNumber);
-  //   const editPhoneNumber = async () => {
-  //     await updateDoc(
-  //       doc(colRefUsers, `${user.email}`), {phoneNumber: phoneNumber}
-  //     );
-  //   };
-  //   editPhoneNumber();
-  // };
-
   const handleInfoEdit = () => {
     navigate("/user/edit");
   };
@@ -111,7 +99,7 @@ const User = () => {
           </div>
           <div className="user-menu--score">
             <div className="user-menu--label user-menu--score_label">Điểm</div>
-            <div>50</div>
+            <div className="user-menu--score_value">50</div>
           </div>
         </div>
       </div>

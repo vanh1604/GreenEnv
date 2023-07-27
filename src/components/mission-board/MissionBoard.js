@@ -5,6 +5,7 @@ import MissionItem from "./MissionItem";
 const MissionBoard = () => {
   return (
     <div className="mission-board">
+    <div className="mission-board--title">BẢNG NHIỆM VỤ</div>
       <div className="mission-board--labels">
         <div className="mission-board--label">Nhiệm vụ</div>
         <div className="mission-board--label">Địa điểm</div>

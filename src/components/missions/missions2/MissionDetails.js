@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./MissionDetails.css";
 import callIcon from "../img/ic_call.png";
 import locationIcon from "../img/ic_location_on.png";
@@ -7,51 +7,232 @@ import map from "../img/map.png";
 import dot1 from "../img/Ellipse 3.svg";
 import dot2 from "../img/Ellipse 4.svg";
 import dot3 from "../img/Ellipse 5.svg";
+import { colRefMissions, colRefUsers } from "../../../firebase";
+import { getDocs, updateDoc, doc } from "firebase/firestore";
+import MissionCancel from "../confirmation-boxes/mission-cancel/MissionCancel";
+import MissionConfirm from "../confirmation-boxes/mission-confirm/MissionConfirm";
+import backArrow from "../../common-components/img/arrow-left-solid.svg";
+import { useNavigate } from "react-router";
 
-const MissionDetails = () => {
+const MissionDetails = ({
+  title,
+  point,
+  address,
+  number,
+  content,
+  duration,
+  status,
+  id,
+}) => {
+  const [userDoc, setUserDoc] = useState({});
+  const [mission, setMission] = useState({});
+  const pathname = window.location.pathname; //returns the current url minus the domain name
+  const [confirmCancel, setConfirmCancel] = useState(false);
+  const [confirmAccept, setConfirmAccept] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getUserDoc = async () => {
+      const data = await getDocs(colRefUsers);
+      data.docs.forEach((doc) => {
+        if (doc.data().email === localStorage.email) {
+          setUserDoc({ ...doc.data(), id: doc.id });
+          return;
+        }
+      });
+    };
+    getUserDoc();
+
+    const getMission = async () => {
+      const data2 = await getDocs(colRefMissions);
+      data2.docs.forEach((doc) => {
+        // console.log(doc.data(), doc.id);
+        if (doc.data().title === title) {
+          //does not work if compare id
+          setMission({ ...doc.data(), id: doc.id });
+          return;
+        }
+      });
+    };
+    getMission();
+  }, []);
+
+  const HandleBackToMissions = () => {
+    navigate('/missions')
+  };
+
+  const HandleAcceptMissionClicked = () => {
+    // console.log(`You have accepted mission ${id}`);
+    setConfirmAccept(true);
+    // alert(`Bạn đã nhận thành công nhiệm vụ ${id}`);
+  };
+
+  const HandleAcceptMission = async () => {
+    setConfirmAccept(false);
+    console.log("Accepted!");
+    await updateDoc(doc(colRefMissions, id), {
+      volunteer: userDoc.email,
+    });
+    await updateDoc(doc(colRefMissions, id), {
+      status: "accepted",
+    });
+    const getMission = async () => {
+      const data2 = await getDocs(colRefMissions);
+      data2.docs.forEach((doc) => {
+        // console.log(doc.data(), doc.id);
+        if (doc.data().title === title) {
+          setMission({ ...doc.data(), id: doc.id });
+          // console.log(mission);
+          return;
+        }
+      });
+    };
+    getMission();
+  };
+
+  const HandleNotAcceptMission = () => {
+    setConfirmAccept(false);
+  };
+
+  const HandleCancelMissionClicked = () => {
+    setConfirmCancel(true);
+  };
+
+  const HandleKeepMission = () => {
+    setConfirmCancel(false);
+  };
+
+  const updateInfo2 = async (missionId) => {
+    await updateDoc(doc(colRefMissions, missionId), {
+      volunteer: "",
+    });
+    await updateDoc(doc(colRefMissions, missionId), {
+      status: "not accepted",
+    });
+    const getMission = async () => {
+      const data2 = await getDocs(colRefMissions);
+      data2.docs.forEach((doc) => {
+        // console.log(doc.data(), doc.id);
+        if (doc.data().title === title) {
+          setMission({ ...doc.data(), id: doc.id });
+          // console.log(mission);
+          return;
+        }
+      });
+    };
+    getMission();
+  };
+
+  const HandleCancelMission = async () => {
+    const data = await getDocs(colRefMissions);
+    data.docs.forEach((doc) => {
+      if (doc.data().title === title) {
+        updateInfo2(id);
+        return;
+      }
+    });
+    setConfirmCancel(false);
+  };
+
   return (
-    <main class="mission-details--mission-details">
-      <div class="mission-details--mission-header">
-        <div class="mission-details--general-info">
-          <div class="mission-details--header--first_line">
-            <div class="mission-details--mission-title">Nhiệm vụ làm sạch</div>
-            <div class="mission-details--mission-rewards">+50</div>
+    <main className="mission-details--mission-details">
+      {confirmCancel ? (
+        <MissionCancel
+          title={title}
+          number={number}
+          address={address}
+          content={content}
+          point={point}
+          duration={duration}
+          id={id}
+          HandleKeepMission={HandleKeepMission}
+          HandleCancelMission={HandleCancelMission}
+        />
+      ) : null}
+      {confirmAccept ? (
+        <MissionConfirm
+          title={title}
+          number={number}
+          address={address}
+          content={content}
+          point={point}
+          duration={duration}
+          id={id}
+          HandleNotAcceptMission={HandleNotAcceptMission}
+          HandleAcceptMission={HandleAcceptMission}
+        />
+      ) : null}
+      <div
+        role="button"
+        className="mission-details--back_button"
+        onClick={HandleBackToMissions}
+      >
+        <img
+          src={backArrow}
+          alt="back"
+          className="user-menu--back_button_img"
+        />
+        <div className="user-menu--back_button_label">Nhiệm vụ</div>
+      </div>
+      <div className="mission-details--mission-header">
+        <div className="mission-details--general-info">
+          <div className="mission-details--header--first_line">
+            <div className="mission-details--mission-title">{title}</div>
+            <div className="mission-details--mission-rewards">+{point}</div>
           </div>
-          <div class="mission-details--header--second_line">
-            <div class="mission-details--contact">
-              <img src={locationIcon} alt="" class="mission-details--icon" />
-              <div class="mission-details--mission-location">
-                Số 11, Vũ Phạm Hàm, Yên Hòa, Cầu Giấy, HN
-              </div>
+          <div className="mission-details--header--second_line">
+            <div className="mission-details--contact">
+              <img
+                src={locationIcon}
+                alt=""
+                className="mission-details--icon"
+              />
+              <div className="mission-details--mission-location">{address}</div>
             </div>
 
-            <div class="mission-details--contact">
-              <img src={callIcon} alt="" class="mission-details--icon" />
-              <div class="mission-details--mission-call">(+84) 912 345 678</div>
+            <div className="mission-details--contact">
+              <img src={callIcon} alt="" className="mission-details--icon" />
+              <div className="mission-details--mission-call">{number}</div>
             </div>
           </div>
         </div>
-        <div class="mission-details--button-container">
-          <button class="mission-details--join-button">Tham gia</button>
+        <div className="mission-details--button-container">
+          {mission.status === "not accepted" ? (
+            <button
+              className="mission-details--button mission-details--join-button"
+              onClick={HandleAcceptMissionClicked}
+            >
+              Tham gia
+            </button>
+          ) : (
+            <>
+              <button className="mission-details--button mission-details--upload_button">
+                {" "}
+                <span className="mission-details--plus_sign">&#43;</span> Tải
+                ảnh lên
+              </button>
+              <button
+                className="mission-details--button mission-details--cancel_button"
+                onClick={HandleCancelMissionClicked}
+              >
+                Hủy nhiệm vụ
+              </button>
+            </>
+          )}
         </div>
       </div>
-      <div class="mission-details--mission-hero">
-        <img src={missionImg} alt="" class="mission-details--mission-img" />
-        <div class="mission-details--dots">
-          <img src={dot1} alt="" class="mission-details--dot" />
-          <img src={dot2} alt="" class="mission-details--dot" />
-          <img src={dot3} alt="" class="mission-details--dot" />
+      <div className="mission-details--mission-hero">
+        <img src={missionImg} alt="" className="mission-details--mission-img" />
+        <div className="mission-details--dots">
+          <img src={dot1} alt="" className="mission-details--dot" />
+          <img src={dot2} alt="" className="mission-details--dot" />
+          <img src={dot3} alt="" className="mission-details--dot" />
         </div>
       </div>
-      <div class="mission-details--mission-info">
-        <div class="mission-details--mission-description">
-          Lorem ipsum dolor sit amet consectetur. Eget nascetur in dolor lectus
-          parturient pretium amet eu pellentesque. Senectus eu aliquet elementum
-          id est. Ullamcorper ipsum in aliquet sed aliquam egestas diam. Egestas
-          iaculis sit gravida fringilla egestas amet ac.
-        </div>
-        <div class="mission-details--mission-instruction">
-          <div class="mission-details--title">Hướng dẫn:</div>
+      <div className="mission-details--mission-info">
+        <div className="mission-details--mission-description">{content}</div>
+        <div className="mission-details--mission-instruction">
+          <div className="mission-details--title">Hướng dẫn:</div>
           <ul>
             <li>Bước 1: Đăng ký nhận nhiệm vụ</li>
             <li>Bước 2: Thực hiện nhiệm vụ làm sạch</li>
@@ -62,15 +243,15 @@ const MissionDetails = () => {
             <li>Bước 5: Nhận điểm</li>
           </ul>
         </div>
-        <div class="mission-details--mission-regulation">
-          <div class="mission-details--title">Quy định:</div>
-          <div class="mission-details--regulation-text">
-            Bạn cần phải hoàn thành nhiệm vụ trong vòng tối đa 3 ngày. Sau 3
-            ngày nhiệm vụ sẽ tự động hủy
+        <div className="mission-details--mission-regulation">
+          <div className="mission-details--title">Quy định:</div>
+          <div className="mission-details--regulation-text">
+            Bạn cần phải hoàn thành nhiệm vụ trong vòng tối đa {duration} ngày.
+            Sau 3 ngày nhiệm vụ sẽ tự động hủy
           </div>
         </div>
       </div>
-      <img src={map} alt="" class="mission-details--map" />
+      <img src={map} alt="" className="mission-details--map" />
     </main>
   );
 };

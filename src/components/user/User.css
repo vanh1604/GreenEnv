@@ -1,5 +1,5 @@
 .user-menu {
-  padding: 100px 10% 200px 10%;
+  padding: 100px 10% 100px 10%;
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -92,6 +92,12 @@
 .user-menu--score,
 .user-menu--email {
   width: 48%;
+}
+
+.user-menu--score_value {
+  color: var(--primary, #ade34d);
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .user-menu--input {

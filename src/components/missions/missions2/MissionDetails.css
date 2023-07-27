@@ -2,11 +2,27 @@
   padding: 0 140px;
 }
 
+.mission-details--back_button {
+  position: absolute;
+  top: 30px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #46f04e 0%, #ade34d 100%);
+  padding: 5px 10px;
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
 .mission-details--mission-header {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  margin: 64px 0 33px 0;
+  margin: 84px 0 33px 0;
 }
 
 .mission-details--general-info {
@@ -50,18 +66,37 @@
   align-items: flex-end;
 }
 
-.mission-details--join-button {
+.mission-details--button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mission-details--button {
   display: flex;
   padding: 11px 22px;
   justify-content: center;
   align-items: center;
   border: none;
   border-radius: 100px;
+  font-weight: 700;
+}
+
+.mission-details--plus_sign {
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.mission-details--join-button, .mission-details--upload_button {
   background: var(
     --brand-gradient,
     linear-gradient(90deg, #46f04e 0%, #ade34d 100%)
   );
-  font-weight: 700;
+}
+
+.mission-details--cancel_button {
+  border: 1px solid #46f04e;
+  background: white;
 }
 
 .mission-details--mission-img {
