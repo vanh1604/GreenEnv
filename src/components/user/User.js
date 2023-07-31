@@ -51,16 +51,8 @@ const User = () => {
     navigate("/user/edit");
   };
 
-  const handleBackToHomepage = () => {
-    navigate("/");
-  }
-
   return (
     <div className="user-menu">
-      <div role="button" className="user-menu--back_button" onClick={handleBackToHomepage}>
-        <img src={backArrow} alt="back" className="user-menu--back_button_img"/>
-        <div className="user-menu--back_button_label">Trang chủ</div>
-      </div>
       <div className="user-menu--account_line">
         <div className="user-menu--account_container">
           <img src={avatar} alt="" className="user-menu--avatar" />
@@ -99,7 +91,7 @@ const User = () => {
           </div>
           <div className="user-menu--score">
             <div className="user-menu--label user-menu--score_label">Điểm</div>
-            <div className="user-menu--score_value">50</div>
+            <div className="user-menu--score_value">{userDoc.score}</div>
           </div>
         </div>
       </div>

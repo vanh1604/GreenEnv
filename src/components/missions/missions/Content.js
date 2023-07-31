@@ -4,6 +4,7 @@ import Mission from "./Mission";
 import { useState, useEffect } from "react";
 import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { UserAuth } from "../../../context/AuthContext";
 
 const Content = () => {
   const [missions, setMissions] = useState([]);
@@ -17,20 +18,23 @@ const Content = () => {
     getMissions();
   }, []);
 
+  const { user } = UserAuth();
+
   return (
     <div>
       {missions.map((mission, key = mission.id) => {
-        return (
-          <Mission
-            title={mission.title}
-            content={mission.content}
-            address={mission.address}
-            number={mission.number}
-            point={mission.point}
-            status={mission.status}
-            id={mission.id}
-          />
-        );
+        if (mission.status === "not accepted" || mission.volunteer === user.email)
+          return (
+            <Mission
+              title={mission.title}
+              content={mission.content}
+              address={mission.address}
+              number={mission.number}
+              point={mission.point}
+              status={mission.status}
+              id={mission.id}
+            />
+          );
       })}
     </div>
   );

@@ -42,7 +42,7 @@
   );
   font-size: 18px;
   font-weight: 700;
-  align-self: flex-end;
+  align-self: flex-start;
 }
 
 .user-edit--info {
@@ -58,20 +58,15 @@
   line-height: 30px;
 }
 
-.user-edit--info_line1 {
+.user-edit--info_line1, .user-edit--info_line2 {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.user-edit--info_line2 {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .user-edit--name,
 .user-edit--phone,
-.user-edit--score {
+.user-edit--password_confirm {
   width: 48%;
 }
 
@@ -96,10 +91,4 @@
   color: rgb(44, 174, 44);
   font-weight: 700;
   font-size: 15px;
-}
-
-.user-edit--info_editing {
-  border: 2px solid gray;
-  border-radius: 8px;
-  padding: 10px;
 }

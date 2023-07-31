@@ -7,9 +7,6 @@ import Login from "./components/login/Login";
 import Content from "./components/missions/missions/Content";
 import Activity from "./components/Activity/Activity";
 import Contact from "./components/contact/Contact";
-// import AccountModify from "./components/account-modify/AccountModify";
-import MissionConfirm from "./components/missions/confirmation-boxes/mission-confirm/MissionConfirm";
-import MissionCancel from "./components/missions/confirmation-boxes/mission-cancel/MissionCancel";
 import MissionBoard from "./components/mission-board/MissionBoard";
 import { Route, Routes } from "react-router";
 import User from "./components/user/User";
@@ -37,7 +34,6 @@ const App = () => {
 
   return (
     <div>
-      {/* style={{paddingTop:"96px"}} */}
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<Main />} />
@@ -46,7 +42,9 @@ const App = () => {
             path="/user/edit"
             element={
               <ProtectedRoute>
+                <Header />
                 <UserEdit />
+                <Footer />
               </ProtectedRoute>
             }
           />
@@ -56,7 +54,19 @@ const App = () => {
             path="/user"
             element={
               <ProtectedRoute>
-                <User /> <MissionBoard />{" "}
+                <Header />
+                <User />
+                <Footer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/user/missions"
+            element={
+              <ProtectedRoute>
+                <Header />
+                <MissionBoard /> <Footer />
               </ProtectedRoute>
             }
           />
@@ -64,9 +74,7 @@ const App = () => {
             path="/about"
             element={
               <>
-                <div style={{ paddingTop: "96px" }}>
-                  <Header />
-                </div>
+                <Header />
                 <About />
                 <Footer />
               </>
@@ -77,9 +85,7 @@ const App = () => {
             path="/missions"
             element={
               <>
-                <div style={{ paddingTop: "96px" }}>
-                  <Header />
-                </div>
+                <Header />
                 <Content />
                 <Footer />
               </>
@@ -90,15 +96,19 @@ const App = () => {
               <Route
                 path={`/missions/details/${mission.id}`}
                 element={
-                  <MissionDetails
-                    title={mission.title}
-                    number={mission.number}
-                    address={mission.address}
-                    content={mission.content}
-                    point={mission.point}
-                    duration={mission.duration}
-                    id={mission.id}
-                  />
+                  <>
+                    {/* <Header /> */}
+                    <MissionDetails
+                      title={mission.title}
+                      number={mission.number}
+                      address={mission.address}
+                      content={mission.content}
+                      point={mission.point}
+                      duration={mission.duration}
+                      id={mission.id}
+                    />
+                    {/* <Footer /> */}
+                  </>
                 }
               />
             );
@@ -107,9 +117,7 @@ const App = () => {
             path="/activity"
             element={
               <>
-                <div style={{ paddingTop: "96px" }}>
-                  <Header />
-                </div>
+                <Header />
                 <Activity />
                 <Footer />
               </>
@@ -119,9 +127,7 @@ const App = () => {
             path="/contact"
             element={
               <>
-                <div style={{ paddingTop: "96px" }}>
-                  <Header />
-                </div>
+                <Header />
                 <Contact />
                 <Footer />
               </>

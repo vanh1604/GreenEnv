@@ -13,6 +13,10 @@
   border: 1px solid #1f201d1a;
 }
 
+.mission-item--location {
+  max-width: 300px;
+}
+
 .mission-item--reward {
   color: var(--primary, #ade34d);
 
@@ -33,7 +37,7 @@
   line-height: 18px;
 }
 
-.mission-item--status_new {
+.mission-item--status_accepted {
   background: rgba(94, 129, 247, 0.5);
   border: 1px solid var(--secondary-new, #5e81f7);
 }

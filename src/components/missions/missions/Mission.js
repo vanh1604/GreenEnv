@@ -8,12 +8,14 @@ import { useNavigate } from "react-router";
 import { colRefMissions, colRefUsers } from "../../../firebase";
 import { updateDoc, doc, getDocs } from "firebase/firestore";
 import MissionConfirm from "../confirmation-boxes/mission-confirm/MissionConfirm";
+import { UserAuth } from "../../../context/AuthContext";
 
 const Mission = ({ title, content, address, number, point, id }) => {
   const navigate = useNavigate();
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [userDoc, setUserDoc] = useState({});
   const [mission, setMission] = useState({});
+  const { user } = UserAuth();
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -25,7 +27,8 @@ const Mission = ({ title, content, address, number, point, id }) => {
         }
       });
     };
-    getUserDoc();
+    if (user)
+      getUserDoc();
 
     const getMission = async () => {
       const data2 = await getDocs(colRefMissions);
@@ -38,17 +41,26 @@ const Mission = ({ title, content, address, number, point, id }) => {
         }
       });
     };
-    getMission();
+    if (user)
+      getMission();
   }, []);
 
   const HandleAcceptMissionClicked = () => {
     // console.log(`You have accepted mission ${id}`);
+    if (!user) {
+      alert("Vui lòng đăng nhập trước!");
+      return;
+    };
     setConfirmAccept(true);
     // alert(`Bạn đã nhận thành công nhiệm vụ ${id}`);
   };
 
   const HandleAcceptMission = async () => {
     setConfirmAccept(false);
+    // if (!user) {
+    //   alert("Vui lòng đăng nhập trước!");
+    //   return;
+    // };
     console.log("Accepted!");
     await updateDoc(doc(colRefMissions, id), {
       volunteer: userDoc.email,
@@ -67,7 +79,8 @@ const Mission = ({ title, content, address, number, point, id }) => {
         }
       });
     };
-    getMission();
+    if (user)
+      getMission();
   };
 
   const HandleNotAcceptMission = () => {
@@ -123,7 +136,7 @@ const Mission = ({ title, content, address, number, point, id }) => {
           <div className="mission--reward_value">+{point}</div>
         </div>
         <div className="mission--buttons">
-          {mission.status === "not accepted" ? (
+          {(mission.status === "not accepted" || !user) ? (
             <button
               className="mission--button mission--join_button"
               onClick={HandleAcceptMissionClicked}

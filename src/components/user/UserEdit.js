@@ -31,9 +31,15 @@ const UserEdit = () => {
   const [username, setUsername] = useState(userDoc.username);
   const [name, setName] = useState(userDoc.name);
   const [phoneNumber, setPhoneNumber] = useState(userDoc.phoneNumber);
+  const [password, setPassword] = useState("");
 
   const handleUserEdit = (e) => {
     e.preventDefault();
+
+    if (password !== localStorage.getItem("password")) {
+      alert("Mật khẩu chưa đúng!");
+      return;
+    }
 
     const saveInfo = async () => {
       updateProfile(auth.currentUser, {
@@ -45,13 +51,6 @@ const UserEdit = () => {
         .catch((error) => {
           console.log(error.message);
         });
-
-      const check = () => {
-        if (!username) setUsername("");
-        if (!name) setName("");
-        if (!phoneNumber) setPhoneNumber("");
-      };
-      check();
 
       if (username) {
         await updateDoc(doc(colRefUsers, `${user.email}`), {
@@ -123,8 +122,35 @@ const UserEdit = () => {
           </div>
         </div>
         <div className="user-edit--info_line2">
-          <button className="user-edit--update_btn">Cập nhật</button>
+          {/* <div className="user-edit--new_password">
+            <div className="user-edit--label user-edit--new_password_label">
+              Mật khẩu mới
+            </div>
+            <input
+              type="text"
+              className="user-edit--input marginTop12"
+              placeholder="Mật khẩu mới..."
+              onChange={(e) => {
+                setNewPassword(e.target.value);
+              }}
+            />
+          </div> */}
+          <div className="user-edit--password_confirm">
+            <div className="user-edit--label user-edit--password_confirm_label">
+              Mật khẩu
+            </div>
+            <input
+              type="password"
+              id="user-edit--phone_number"
+              className="user-edit--input marginTop12"
+              placeholder="Mật khẩu..."
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </div>
         </div>
+        <button className="user-edit--update_btn">Cập nhật</button>
       </div>
     </form>
   );

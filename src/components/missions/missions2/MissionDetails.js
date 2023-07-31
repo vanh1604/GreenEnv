@@ -13,6 +13,7 @@ import MissionCancel from "../confirmation-boxes/mission-cancel/MissionCancel";
 import MissionConfirm from "../confirmation-boxes/mission-confirm/MissionConfirm";
 import backArrow from "../../common-components/img/arrow-left-solid.svg";
 import { useNavigate } from "react-router";
+import { UserAuth } from "../../../context/AuthContext";
 
 const MissionDetails = ({
   title,
@@ -26,10 +27,11 @@ const MissionDetails = ({
 }) => {
   const [userDoc, setUserDoc] = useState({});
   const [mission, setMission] = useState({});
-  const pathname = window.location.pathname; //returns the current url minus the domain name
+  // const pathname = window.location.pathname; //returns the current url minus the domain name
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
   const navigate = useNavigate();
+  const { user } = UserAuth();
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -41,7 +43,7 @@ const MissionDetails = ({
         }
       });
     };
-    getUserDoc();
+    if (user) getUserDoc();
 
     const getMission = async () => {
       const data2 = await getDocs(colRefMissions);
@@ -54,22 +56,30 @@ const MissionDetails = ({
         }
       });
     };
-    getMission();
+    if (user) getMission();
   }, []);
 
   const HandleBackToMissions = () => {
-    navigate('/missions')
+    navigate("/missions");
   };
 
   const HandleAcceptMissionClicked = () => {
     // console.log(`You have accepted mission ${id}`);
+    if (!user) {
+      alert("Vui lòng đăng nhập trước!");
+      return;
+    }
     setConfirmAccept(true);
     // alert(`Bạn đã nhận thành công nhiệm vụ ${id}`);
   };
 
   const HandleAcceptMission = async () => {
     setConfirmAccept(false);
-    console.log("Accepted!");
+    // if (!user) {
+    //   alert("Vui lòng đăng nhập trước!");
+    //   return;
+    // }
+    // console.log("Accepted!");
     await updateDoc(doc(colRefMissions, id), {
       volunteer: userDoc.email,
     });
@@ -124,6 +134,11 @@ const MissionDetails = ({
   };
 
   const HandleCancelMission = async () => {
+    setConfirmCancel(false);
+    // if (!user) {
+    //   alert("Vui lòng đăng nhập trước!");
+    //   return;
+    // }
     const data = await getDocs(colRefMissions);
     data.docs.forEach((doc) => {
       if (doc.data().title === title) {
@@ -131,7 +146,6 @@ const MissionDetails = ({
         return;
       }
     });
-    setConfirmCancel(false);
   };
 
   return (
@@ -197,7 +211,7 @@ const MissionDetails = ({
           </div>
         </div>
         <div className="mission-details--button-container">
-          {mission.status === "not accepted" ? (
+          {(mission.status === "not accepted" || !user) ? (
             <button
               className="mission-details--button mission-details--join-button"
               onClick={HandleAcceptMissionClicked}

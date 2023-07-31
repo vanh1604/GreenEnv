@@ -49,6 +49,7 @@ const SignUpInputs = () => {
         await setDoc(doc(colRefUsers, email), {
           name: name,
           email: email,
+          score: 0,
         });
       }
       saveInfo();
