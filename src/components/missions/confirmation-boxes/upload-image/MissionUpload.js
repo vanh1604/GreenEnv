@@ -31,7 +31,7 @@ const MissionUpload = ({
     });
 
     await updateDoc(doc(colRefMissions, id), {
-      status: "accepted",
+      status: "pending",
     });
   }
 
