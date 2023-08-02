@@ -47,6 +47,11 @@
   background: rgba(255, 122, 0, 0.5);
 }
 
+.mission-item--status_denied {
+  border: 1px solid var(--secondary-closed, #ff2727);
+  background: rgba(255, 0, 0, 0.5);
+}
+
 .mission-item--status_done {
   border: 1px solid var(--secondary-in-progress, #8de06a);
   background: rgba(141, 224, 106, 0.5);

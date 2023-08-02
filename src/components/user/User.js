@@ -5,28 +5,28 @@ import { UserAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 import { getDocs } from "firebase/firestore";
 import { colRefUsers } from "../../firebase";
-import backArrow from "../common-components/img/arrow-left-solid.svg";
+// import backArrow from "../common-components/img/arrow-left-solid.svg";
 
-const User = () => {
+const User = (props) => {
   const navigate = useNavigate();
   const { user, logout } = UserAuth();
   const [userDoc, setUserDoc] = useState({});
-  // console.log(user);
 
   useEffect(() => {
     const getUserDoc = async () => {
       const data = await getDocs(colRefUsers);
       data.docs.forEach((doc) => {
-        // console.log(doc.data());
         if (doc.data().email === localStorage.email) {
           setUserDoc({ ...doc.data(), id: doc.id });
-          // console.log(userDoc.phoneNumber);
           return;
         }
       });
     };
     getUserDoc();
-    // console.log(userDoc);
+    if (props.role !== props.userRole) {
+      if (props.role === "user") navigate("/admin")
+      else navigate("/user");
+    }
   }, []);
 
   const handleLogout = async () => {
@@ -40,7 +40,6 @@ const User = () => {
         localStorage.removeItem("email");
         localStorage.removeItem("password");
       }
-      // console.log(user);
       navigate("/");
     } catch (err) {
       console.log(err.message);
@@ -48,7 +47,7 @@ const User = () => {
   };
 
   const handleInfoEdit = () => {
-    navigate("/user/edit");
+    navigate(`edit`);
   };
 
   return (

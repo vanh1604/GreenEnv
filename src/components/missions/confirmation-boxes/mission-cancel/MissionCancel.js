@@ -1,8 +1,8 @@
 import React from "react";
 import "../MissionConfirmCancel.css";
-import { useNavigate } from "react-router";
-import { colRefMissions } from "../../../../firebase";
-import { getDocs, updateDoc, doc } from "firebase/firestore";
+// import { useNavigate } from "react-router";
+// import { colRefMissions } from "../../../../firebase";
+// import { getDocs, updateDoc, doc } from "firebase/firestore";
 
 const MissionCancel = ({
   title,

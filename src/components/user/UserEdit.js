@@ -8,7 +8,7 @@ import { UserAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 import { updateProfile } from "firebase/auth";
 
-const UserEdit = () => {
+const UserEdit = (props) => {
   const navigate = useNavigate();
   const { user } = UserAuth();
 
@@ -26,6 +26,11 @@ const UserEdit = () => {
       });
     };
     getUserDoc();
+
+    if (props.role !== props.userRole) {
+      if (props.role === "user") navigate("/admin/edit")
+      else navigate("/user/edit");
+    }
   }, []);
 
   const [username, setUsername] = useState(userDoc.username);
@@ -141,7 +146,7 @@ const UserEdit = () => {
             </div>
             <input
               type="password"
-              id="user-edit--phone_number"
+              id="user-edit--password"
               className="user-edit--input marginTop12"
               placeholder="Mật khẩu..."
               onChange={(e) => {

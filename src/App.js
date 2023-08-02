@@ -17,15 +17,28 @@ import MissionDetails from "./components/missions/missions2/MissionDetails";
 import { useState, useEffect } from "react";
 import { db } from "./firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { colRefMissions, colRefUsers } from "./firebase";
 
 const App = () => {
   const [missions, setMissions] = useState([]);
-  const usersCollectionRef = collection(db, "missions");
+  const [userDoc, setUserDoc] = useState({});
   useEffect(() => {
+
+    const getUserDoc = async () => {
+      const data = await getDocs(colRefUsers);
+      data.docs.forEach((doc) => {
+        if (doc.data().email === localStorage.email) {
+          setUserDoc({ ...doc.data(), id: doc.id, key: doc.id });
+          return;
+        }
+      });
+    };
+    getUserDoc();
+
     const getMissions = async () => {
-      const data = await getDocs(usersCollectionRef);
+      const data = await getDocs(colRefMissions);
       setMissions(
-        data.docs.map((doc, key = doc.id) => ({ ...doc.data(), id: doc.id }))
+        data.docs.map((doc) => ({ ...doc.data(), id: doc.id, key: doc.id }))
       );
     };
 
@@ -38,16 +51,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signin/*" element={<Login />} />
-          <Route
-            path="/user/edit"
-            element={
-              <ProtectedRoute>
-                <Header />
-                <UserEdit />
-                <Footer />
-              </ProtectedRoute>
-            }
-          />
           {/* <Route path="/user/edit" element={<ProtectedRoute><AccountModify /></ProtectedRoute>} /> */}
           <Route
             exact
@@ -55,18 +58,69 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Header />
-                <User />
+                <User role="user" userRole = {userDoc.role}/>
                 <Footer />
               </ProtectedRoute>
             }
           />
           <Route
             exact
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <Header />
+                <User role="admin" userRole = {userDoc.role}/>
+                <Footer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user/edit"
+            element={
+              <ProtectedRoute>
+                <Header />
+                <UserEdit role="user" userRole = {userDoc.role}/>
+                <Footer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/edit"
+            element={
+              <ProtectedRoute>
+                <Header />
+                <UserEdit role="admin" userRole = {userDoc.role}/>
+                <Footer />
+              </ProtectedRoute>
+            }
+          />
+          {/* <Route
+            path="/admin/check"
+            element={
+              <ProtectedRoute>
+                <Header />
+                <UserEdit role="admin" />
+                <Footer />
+              </ProtectedRoute>
+            }
+          /> */}
+          <Route
+            exact
             path="/user/missions"
             element={
               <ProtectedRoute>
                 <Header />
-                <MissionBoard /> <Footer />
+                <MissionBoard role="user" userRole = {userDoc.role}/> <Footer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/admin/missions"
+            element={
+              <ProtectedRoute>
+                <Header />
+                <MissionBoard role="admin" userRole = {userDoc.role}/> <Footer />
               </ProtectedRoute>
             }
           />
@@ -86,12 +140,12 @@ const App = () => {
             element={
               <>
                 <Header />
-                <Content />
+                <Content userRole = {userDoc.role}/>
                 <Footer />
               </>
             }
           />
-          {missions.map((mission, key = mission.id) => {
+          {missions.map((mission) => {
             return (
               <Route
                 path={`/missions/details/${mission.id}`}
@@ -106,6 +160,7 @@ const App = () => {
                       point={mission.point}
                       duration={mission.duration}
                       id={mission.id}
+                      key={mission.id}
                     />
                     {/* <Footer /> */}
                   </>

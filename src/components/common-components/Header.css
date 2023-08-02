@@ -87,19 +87,6 @@
   opacity: 100%;
 }
 
-.header--avatar_userbox_option {
-  padding: 6px;
-  display: flex;
-  border-radius: 8px;
-  align-items: center;
-  cursor: pointer;
-  transition: background-color 0.15s;
-}
-
-.header--avatar_userbox_option:hover {
-  background-color: rgb(232, 232, 232);
-}
-
 .header--avatar_userbox {
   opacity: 0%;
   font-size: 20px;
@@ -111,6 +98,19 @@
   top: 45px;
   right: 0;
   transition: opacity 0.5s;
+}
+
+.header--avatar_userbox_option {
+  padding: 6px;
+  display: flex;
+  border-radius: 8px;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.header--avatar_userbox_option:hover {
+  background-color: rgb(232, 232, 232);
 }
 
 .header--avatar_userbox_user, .header--avatar_userbox_details, .header--avatar_userbox_actions {

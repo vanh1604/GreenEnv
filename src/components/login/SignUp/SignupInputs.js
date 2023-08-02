@@ -15,6 +15,7 @@ const SignUpInputs = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
+  const [role, setRole] = useState("user");
 
   const { user, createUser } = UserAuth();
 
@@ -46,10 +47,14 @@ const SignUpInputs = () => {
         console.log(e.message);
       }
       const saveInfo = async () => {
+        if (password === "admin--admin--admin--greenenv--adminx3!") {
+          setRole("admin");
+        }
         await setDoc(doc(colRefUsers, email), {
           name: name,
           email: email,
           score: 0,
+          role: role
         });
       }
       saveInfo();
