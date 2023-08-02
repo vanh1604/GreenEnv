@@ -14,13 +14,24 @@ import MissionConfirm from "../confirmation-boxes/mission-confirm/MissionConfirm
 import backArrow from "../../common-components/img/arrow-left-solid.svg";
 import { useNavigate } from "react-router";
 import { UserAuth } from "../../../context/AuthContext";
+import MissionUpload from "../confirmation-boxes/upload-image/MissionUpload";
 
-const MissionDetails = (props) => {
+const MissionDetails = ({
+  title,
+  point,
+  address,
+  number,
+  content,
+  duration,
+  status,
+  id,
+}) => {
   const [userDoc, setUserDoc] = useState({});
   const [mission, setMission] = useState({});
   // const pathname = window.location.pathname; //returns the current url minus the domain name
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
+  const [confirmUpload, setConfirmUpload] = useState(false);
   const navigate = useNavigate();
   const { user } = UserAuth();
 
@@ -40,7 +51,7 @@ const MissionDetails = (props) => {
       const data2 = await getDocs(colRefMissions);
       data2.docs.forEach((doc) => {
         // console.log(doc.data(), doc.id);
-        if (doc.data().title === props.title) {
+        if (doc.data().title === title) {
           //does not work if compare id
           setMission({ ...doc.data(), id: doc.id });
           return;
@@ -66,18 +77,24 @@ const MissionDetails = (props) => {
 
   const HandleAcceptMission = async () => {
     setConfirmAccept(false);
-    await updateDoc(doc(colRefMissions, props.id), {
+    // if (!user) {
+    //   alert("Vui lòng đăng nhập trước!");
+    //   return;
+    // }
+    // console.log("Accepted!");
+    await updateDoc(doc(colRefMissions, id), {
       volunteer: userDoc.email,
     });
-    await updateDoc(doc(colRefMissions, props.id), {
+    await updateDoc(doc(colRefMissions, id), {
       status: "accepted",
-      statusText: "Mới",
     });
     const getMission = async () => {
       const data2 = await getDocs(colRefMissions);
       data2.docs.forEach((doc) => {
-        if (doc.data().title === props.title) {
+        // console.log(doc.data(), doc.id);
+        if (doc.data().title === title) {
           setMission({ ...doc.data(), id: doc.id });
+          // console.log(mission);
           return;
         }
       });
@@ -85,13 +102,25 @@ const MissionDetails = (props) => {
     getMission();
   };
 
+  const HandleUploadImage = () => {
+
+  }
+
   const HandleNotAcceptMission = () => {
     setConfirmAccept(false);
   };
 
+  const HandleNotUploadImage = () => {
+    setConfirmUpload(false);
+  }
+
   const HandleCancelMissionClicked = () => {
     setConfirmCancel(true);
   };
+
+  const HandleUploadImageClicked = () => {
+    setConfirmUpload(true);
+  }
 
   const HandleKeepMission = () => {
     setConfirmCancel(false);
@@ -103,13 +132,12 @@ const MissionDetails = (props) => {
     });
     await updateDoc(doc(colRefMissions, missionId), {
       status: "not accepted",
-      statusText: "Chưa nhận",
     });
     const getMission = async () => {
       const data2 = await getDocs(colRefMissions);
       data2.docs.forEach((doc) => {
         // console.log(doc.data(), doc.id);
-        if (doc.data().title === props.title) {
+        if (doc.data().title === title) {
           setMission({ ...doc.data(), id: doc.id });
           // console.log(mission);
           return;
@@ -127,8 +155,8 @@ const MissionDetails = (props) => {
     // }
     const data = await getDocs(colRefMissions);
     data.docs.forEach((doc) => {
-      if (doc.data().title === props.title) {
-        updateInfo2(props.id);
+      if (doc.data().title === title) {
+        updateInfo2(id);
         return;
       }
     });
@@ -138,28 +166,42 @@ const MissionDetails = (props) => {
     <main className="mission-details--mission-details">
       {confirmCancel ? (
         <MissionCancel
-          title={props.title}
-          number={props.number}
-          address={props.address}
-          content={props.content}
-          point={props.point}
-          duration={props.duration}
-          id={props.id}
+          title={title}
+          number={number}
+          address={address}
+          content={content}
+          point={point}
+          duration={duration}
+          id={id}
           HandleKeepMission={HandleKeepMission}
           HandleCancelMission={HandleCancelMission}
         />
       ) : null}
       {confirmAccept ? (
         <MissionConfirm
-          title={props.title}
-          number={props.number}
-          address={props.address}
-          content={props.content}
-          point={props.point}
-          duration={props.duration}
-          id={props.id}
+          title={title}
+          number={number}
+          address={address}
+          content={content}
+          point={point}
+          duration={duration}
+          id={id}
           HandleNotAcceptMission={HandleNotAcceptMission}
           HandleAcceptMission={HandleAcceptMission}
+        />
+      ) : null}
+
+      {confirmUpload ? (
+        <MissionUpload
+          title={title}
+          number={number}
+          address={address}
+          content={content}
+          point={point}
+          duration={duration}
+          id={id}
+          HandleNotUploadImage={HandleNotUploadImage}
+          HandleUploadImage={HandleUploadImage}
         />
       ) : null}
       <div
@@ -177,10 +219,8 @@ const MissionDetails = (props) => {
       <div className="mission-details--mission-header">
         <div className="mission-details--general-info">
           <div className="mission-details--header--first_line">
-            <div className="mission-details--mission-title">{props.title}</div>
-            <div className="mission-details--mission-rewards">
-              +{props.point}
-            </div>
+            <div className="mission-details--mission-title">{title}</div>
+            <div className="mission-details--mission-rewards">+{point}</div>
           </div>
           <div className="mission-details--header--second_line">
             <div className="mission-details--contact">
@@ -189,21 +229,17 @@ const MissionDetails = (props) => {
                 alt=""
                 className="mission-details--icon"
               />
-              <div className="mission-details--mission-location">
-                {props.address}
-              </div>
+              <div className="mission-details--mission-location">{address}</div>
             </div>
 
             <div className="mission-details--contact">
               <img src={callIcon} alt="" className="mission-details--icon" />
-              <div className="mission-details--mission-call">
-                {props.number}
-              </div>
+              <div className="mission-details--mission-call">{number}</div>
             </div>
           </div>
         </div>
         <div className="mission-details--button-container">
-          {mission.status === "not accepted" || !user ? (
+          {(mission.status === "not accepted" || !user) ? (
             <button
               className="mission-details--button mission-details--join-button"
               onClick={HandleAcceptMissionClicked}
@@ -212,20 +248,17 @@ const MissionDetails = (props) => {
             </button>
           ) : (
             <>
-              {userDoc.role === "user" ? (
-                <>
-                  <button className="mission-details--button mission-details--upload_button">
-                    <span className="mission-details--plus_sign">&#43;</span>{" "}
-                    Tải ảnh lên
-                  </button>
-                  <button
-                    className="mission-details--button mission-details--cancel_button"
-                    onClick={HandleCancelMissionClicked}
-                  >
-                    Hủy nhiệm vụ
-                  </button>
-                </>
-              ) : null}
+              <button className="mission-details--button mission-details--upload_button" onClick = {HandleUploadImageClicked}>
+                {" "}
+                <span className="mission-details--plus_sign">&#43;</span> Tải
+                ảnh lên
+              </button>
+              <button
+                className="mission-details--button mission-details--cancel_button"
+                onClick={HandleCancelMissionClicked}
+              >
+                Hủy nhiệm vụ
+              </button>
             </>
           )}
         </div>
@@ -239,9 +272,7 @@ const MissionDetails = (props) => {
         </div>
       </div>
       <div className="mission-details--mission-info">
-        <div className="mission-details--mission-description">
-          {props.content}
-        </div>
+        <div className="mission-details--mission-description">{content}</div>
         <div className="mission-details--mission-instruction">
           <div className="mission-details--title">Hướng dẫn:</div>
           <ul>
@@ -257,8 +288,8 @@ const MissionDetails = (props) => {
         <div className="mission-details--mission-regulation">
           <div className="mission-details--title">Quy định:</div>
           <div className="mission-details--regulation-text">
-            Bạn cần phải hoàn thành nhiệm vụ trong vòng tối đa {props.duration}{" "}
-            ngày. Sau 3 ngày nhiệm vụ sẽ tự động hủy
+            Bạn cần phải hoàn thành nhiệm vụ trong vòng tối đa {duration} ngày.
+            Sau 3 ngày nhiệm vụ sẽ tự động hủy
           </div>
         </div>
       </div>
