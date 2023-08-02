@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 // import { getAnalytics } from "firebase/analytics";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getStorage } from "firebase/storage"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -36,5 +37,8 @@ export const colRefMissions = collection(db, "missions");
 //     })
 //     console.log(users);
 //   });
+
+export const storage = getStorage(app); 
+
 export default app;
 // const analytics = getAnalytics(app);

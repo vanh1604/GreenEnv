@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { colRefMissions } from "../../../../firebase";
 import { getDocs, updateDoc, doc } from "firebase/firestore";
 import { useState } from "react";
-import { storage } from "../../../../firebase-config";
+import { storage } from "../../../../firebase";
 import { ref, uploadBytes } from "firebase/storage" 
 import { v4 } from "uuid"
 
