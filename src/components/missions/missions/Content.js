@@ -1,4 +1,5 @@
 import React from "react";
+import "./Content.css";
 import Mission from "./Mission";
 
 import { useState, useEffect } from "react";
@@ -6,7 +7,7 @@ import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { UserAuth } from "../../../context/AuthContext";
 
-const Content = () => {
+const Content = (props) => {
   const [missions, setMissions] = useState([]);
   const usersCollectionRef = collection(db, "missions");
   useEffect(() => {
@@ -20,39 +21,40 @@ const Content = () => {
 
   const { user } = UserAuth();
 
+  let cnt = 0;
+
   return (
     <div>
-      {missions.map((mission, key = mission.id) => {
-        if (mission.status === "not accepted" || (user && mission.volunteer === user.email))
+      {missions.map((mission) => {
+        if (
+          mission.status === "not accepted" ||
+          (user && mission.volunteer === user.email) ||
+          props.userRole === "admin"
+        ) {
+          cnt++;
           return (
             <Mission
               title={mission.title}
               content={mission.content}
               address={mission.address}
               number={mission.number}
-              point={mission.point}
+              score={mission.score}
               status={mission.status}
+              statusText={mission.statusText}
+              volunteer={mission.volunteer}
               id={mission.id}
+              key={mission.id}
             />
           );
+        }
       })}
+      {cnt == 0 ? (
+        <div className="missions--empty_notification">
+          Chưa có nhiệm vụ nào, bạn hãy quay lại sau nhé!
+        </div>
+      ) : null}
     </div>
   );
 };
 
 export default Content;
-
-// import React from 'react';
-// import Mission from './Mission';
-
-// const Content = () => {
-//   return (
-//     <main className='content'>
-//       <Mission />
-//       <Mission />
-//       <Mission />
-//     </main>
-//   );
-// };
-
-// export default Content;

@@ -157,7 +157,7 @@ const App = () => {
                       number={mission.number}
                       address={mission.address}
                       content={mission.content}
-                      point={mission.point}
+                      score={mission.score}
                       duration={mission.duration}
                       id={mission.id}
                       key={mission.id}

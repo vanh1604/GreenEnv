@@ -6,9 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../../context/AuthContext";
 import { updateProfile } from "firebase/auth";
 import { auth, colRefUsers } from "../../../firebase";
-// import { db } from "../../../firebase";
 import { setDoc, doc } from "firebase/firestore";
-// import { doc, addDoc } from "firebase/firestore";
 
 const SignUpInputs = () => {
   const [name, setName] = useState("");
@@ -29,13 +27,8 @@ const SignUpInputs = () => {
         console.log(user);
         localStorage.setItem("email", email);
         localStorage.setItem("password", password);
-        // await addDoc(doc(db, "users"), {
-        //   name: name,
-        //   email: email,
-        //   password: password
-        // })
         updateProfile(auth.currentUser, {
-          displayName: name, //, phoneNumber: "0910"
+          displayName: name,
         })
           .then(() => {
             alert("Bạn đã đăng kí thành công!");
@@ -54,7 +47,7 @@ const SignUpInputs = () => {
           name: name,
           email: email,
           score: 0,
-          role: role
+          role: role,
         });
       }
       saveInfo();

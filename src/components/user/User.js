@@ -24,7 +24,7 @@ const User = (props) => {
     };
     getUserDoc();
     if (props.role !== props.userRole) {
-      if (props.role === "user") navigate("/admin")
+      if (props.role === "user") navigate("/admin");
       else navigate("/user");
     }
   }, []);
@@ -59,12 +59,14 @@ const User = (props) => {
             {userDoc.username ? userDoc.username : userDoc.name}
           </div>
         </div>
-        <button className="user-menu--update_btn" onClick={handleInfoEdit}>
-          Chỉnh sửa
-        </button>
-        <button className="user-menu--logout_btn" onClick={handleLogout}>
-          Đăng xuất
-        </button>
+        <div className="user-menu--buttons">
+          <button className="user-menu--update_btn" onClick={handleInfoEdit}>
+            Chỉnh sửa
+          </button>
+          <button className="user-menu--logout_btn" onClick={handleLogout}>
+            Đăng xuất
+          </button>
+        </div>
       </div>
       <div className="user-menu--info">
         <div className="user-menu--info_line1">

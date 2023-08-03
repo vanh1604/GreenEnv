@@ -43,12 +43,12 @@ const MissionBoard = (props) => {
                 id={mission.id}
                 mission={mission.mission}
                 time="08:30AM"
-                reward={mission.point}
+                reward={mission.score}
                 title={mission.title}
                 content={mission.content}
                 address={mission.address}
                 number={mission.number}
-                point={mission.point}
+                score={mission.score}
                 status={mission.status}
                 statusText={mission.statusText}
                 //key = {mission.id}

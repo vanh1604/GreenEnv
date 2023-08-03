@@ -36,14 +36,14 @@ const SigninInputs = () => {
       alert("Mật khẩu hoặc Email chưa khớp!");
       // setError(e.message);
       console.log(e.message);
-      if (
-        (e.message =
-          "Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).")
-      ) {
-        alert(
-          "Đã tạm thời vô hiệu hóa tài khoản vì có quá nhiều lần đăng nhập thất bại, nhằm bảo vệ an toàn cho tài khoản của bạn."
-        );
-      }
+      // if (
+      //   (e.message =
+      //     "Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).")
+      // ) {
+      //   alert(
+      //     "Đã tạm thời vô hiệu hóa tài khoản vì có quá nhiều lần đăng nhập thất bại, nhằm bảo vệ an toàn cho tài khoản của bạn."
+      //   );
+      // }
     }
   };
 

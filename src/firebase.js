@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 // import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection } from "firebase/firestore";
 import { getStorage } from "firebase/storage"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,20 +25,6 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const colRefUsers = collection(db, "users");
 export const colRefMissions = collection(db, "missions");
-// const dt = await getDocs(colRefMissions);
-// dt.docs.forEach((doc) => {
-//     console.log(doc.data());
-// });
-//the function below returns a promise
-// getDocs(colRefUsers).then((snapshot) => {
-//     let users = [];
-//     snapshot.docs.forEach((doc) => {
-//       users.push({...doc.data(), id: doc.id})
-//     })
-//     console.log(users);
-//   });
-
 export const storage = getStorage(app); 
-
 export default app;
 // const analytics = getAnalytics(app);

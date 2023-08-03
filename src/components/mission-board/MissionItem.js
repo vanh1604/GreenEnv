@@ -23,7 +23,7 @@ const MissionItem = (props) => {
       <div className="mission-item--mission">{props.id + ". " + props.mission}</div>
       <div className="mission-item--location">{props.address}</div>
       <div className="mission-item--time">{props.time}</div>
-      <div className="mission-item--reward">{props.point}</div>
+      <div className="mission-item--reward">{props.score}</div>
       <div className="mission-item--status">
       {statusDisplay}
       </div>

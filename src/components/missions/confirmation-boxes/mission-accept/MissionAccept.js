@@ -1,9 +1,9 @@
 import React from "react";
 import "../MissionConfirmCancel.css";
 
-const MissionConfirm = (
-  {title,
-  point,
+const MissionAccept = ({
+  title,
+  score,
   address,
   number,
   content,
@@ -11,8 +11,8 @@ const MissionConfirm = (
   status,
   id,
   HandleNotAcceptMission,
-  HandleAcceptMission}
-) => {
+  HandleAcceptMission,
+}) => {
   return (
     <div className="mision-confirm">
       <div className="mission-confirm--bg"></div>
@@ -40,4 +40,4 @@ const MissionConfirm = (
   );
 };
 
-export default MissionConfirm;
+export default MissionAccept;

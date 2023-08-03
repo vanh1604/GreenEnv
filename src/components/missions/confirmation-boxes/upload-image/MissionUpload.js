@@ -17,7 +17,7 @@ const MissionUpload = ({
   duration,
   status,
   id,
-  HandleNotUploadImage,
+  HandleNotUploadImage
 }) => {
 
   const [imageUpload, setImageUpload] = useState(null); 
@@ -32,6 +32,7 @@ const MissionUpload = ({
 
     await updateDoc(doc(colRefMissions, id), {
       status: "pending",
+      statusText: "Chờ duyệt"
     });
   }
 

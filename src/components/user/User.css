@@ -31,7 +31,7 @@
 .user-menu--account_line {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 100px;
   width: 100%;
 }
 
@@ -48,6 +48,11 @@
 .user-menu--account {
   font-size: 40px;
   font-weight: 700;
+}
+
+.user-menu--buttons {
+  display: flex;
+  gap: 50px;
 }
 
 .user-menu--update_btn,
