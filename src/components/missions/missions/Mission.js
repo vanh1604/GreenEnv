@@ -12,11 +12,13 @@ import { useNavigate } from "react-router";
 import { colRefMissions, colRefUsers } from "../../../firebase";
 import { updateDoc, doc, getDocs } from "firebase/firestore";
 import MissionAccept from "../confirmation-boxes/mission-accept/MissionAccept";
+import CheckImage from "../confirmation-boxes/check-image/CheckImage";
 import { UserAuth } from "../../../context/AuthContext";
 
 const Mission = (props) => {
   const navigate = useNavigate();
   const [confirmAccept, setConfirmAccept] = useState(false);
+  const [confirmCheck, setConfirmCheck] = useState(false);
   const [userDoc, setUserDoc] = useState({});
   const [volunteerDoc, setVolunteerDoc] = useState({});
   const [mission, setMission] = useState({});
@@ -95,6 +97,14 @@ const Mission = (props) => {
     setConfirmAccept(true);
   };
 
+  const HandleCheckImageClicked = () => {
+    if (!user) {
+      alert("Vui lòng đăng nhập trước!");
+      return;
+    }
+    setConfirmCheck(true);
+  };
+
   const HandleAcceptMission = async () => {
     setConfirmAccept(false);
     await updateDoc(doc(colRefMissions, props.id), {
@@ -121,6 +131,14 @@ const Mission = (props) => {
 
   const HandleNotAcceptMission = () => {
     setConfirmAccept(false);
+  };
+
+  const HandleNotAcceptImage = () => {
+    setConfirmCheck(false);
+  };
+
+  const HandleAcceptImage = () => {
+    setConfirmCheck(false);
   };
 
   const handleToMissionInfo = () => {
@@ -155,6 +173,21 @@ const Mission = (props) => {
           HandleNotAcceptMission={HandleNotAcceptMission}
         />
       ) : null}
+
+      {confirmCheck ? (
+          <CheckImage
+          title={mission.title}
+          number={mission.number}
+          address={mission.address}
+          content={mission.content}
+          score={mission.score}
+          duration={mission.duration}
+          id={mission.id}
+          HandleAcceptImage={HandleAcceptImage}
+          HandleNotAcceptImage={HandleNotAcceptImage}
+        />
+      ) : null}
+
       <div className="mission--big_container">
         <div className="mission--container">
           <div className="mission--about_part">
@@ -301,7 +334,8 @@ const Mission = (props) => {
             {userDoc.role === "admin" && status === "pending" ? (
               <button
                 className="mission--button mission--check_button"
-                onClick={handleApproveMissionWork}
+                //onClick={handleApproveMissionWork}
+                onClick = {HandleCheckImageClicked}
               >
                 Xem ảnh nộp
               </button>

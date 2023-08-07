@@ -25,7 +25,7 @@ const MissionUpload = ({
   const HandleUploadImage = async () => {
     if (!imageUpload) return; 
 
-    const imageRef = ref(storage, `images/ ${imageUpload.name}` ); 
+    const imageRef = ref(storage, `images/${id}/ ${imageUpload.name}` ); 
     uploadBytes(imageRef, imageUpload).then( () => {
       alert("Đã tải ảnh lên");
     });
