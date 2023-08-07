@@ -22,6 +22,11 @@ const MissionDetails = (props) => {
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmUpload, setConfirmUpload] = useState(false);
+  const [statusDisplay, setStatusDisplay] = useState(
+    <div className={`mission--details_chip mission--status_${props.status}`}>
+      {props.statusText}
+    </div>
+  );
   const navigate = useNavigate();
   const { user } = UserAuth();
 
@@ -103,6 +108,10 @@ const MissionDetails = (props) => {
     setConfirmCancel(false);
   };
 
+  const HandleConfirmUploadExit = () => {
+    setConfirmUpload(false);
+  }
+
   const updateInfo2 = async (missionId) => {
     await updateDoc(doc(colRefMissions, missionId), {
       volunteer: "",
@@ -172,6 +181,7 @@ const MissionDetails = (props) => {
           duration={props.duration}
           id={props.id}
           HandleNotUploadImage={HandleNotUploadImage}
+          HandleConfirmUploadExit={HandleConfirmUploadExit}
         />
       ) : null}
 
@@ -194,6 +204,19 @@ const MissionDetails = (props) => {
             <div className="mission-details--mission-rewards">
               +{props.score}
             </div>
+            {statusDisplay ? (
+              statusDisplay
+            ) : (
+              <>
+                {props.volunteer === userDoc.email ? (
+                  <div
+                    className={`mission--details_chip mission--status_${props.status}`}
+                  >
+                    {props.statusText}
+                  </div>
+                ) : null}
+              </>
+            )}
           </div>
           <div className="mission-details--header--second_line">
             <div className="mission-details--contact">

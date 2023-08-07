@@ -25,6 +25,12 @@
   margin: 84px 0 33px 0;
 }
 
+.mission--details_chip {
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 100px;
+}
+
 .mission-details--general-info {
   display: flex;
   flex-direction: column;

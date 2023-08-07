@@ -133,10 +133,14 @@ const Mission = (props) => {
     setConfirmAccept(false);
   };
 
-  const HandleNotAcceptImage = () => {
+  const HandleNotAcceptImage = async () => {
+    await updateDoc(doc(colRefMissions, props.id), {
+      status: "denied",
+      statusText: "Chưa đạt",
+    });
+    setStatus("denied");
     setConfirmCheck(false);
   };
-
 
   const handleToMissionInfo = () => {
     navigate(`/missions/details/${props.id}`);
@@ -156,6 +160,10 @@ const Mission = (props) => {
     setConfirmCheck(false);
   };
 
+  const HandleConfirmCheckExit = () => {
+    setConfirmCheck(false);
+  }
+
   return (
     <div className="mission">
       {confirmAccept ? (
@@ -173,7 +181,7 @@ const Mission = (props) => {
       ) : null}
 
       {confirmCheck ? (
-          <CheckImage
+        <CheckImage
           title={mission.title}
           number={mission.number}
           address={mission.address}
@@ -183,6 +191,7 @@ const Mission = (props) => {
           id={mission.id}
           HandleAcceptImage={HandleAcceptImage}
           HandleNotAcceptImage={HandleNotAcceptImage}
+          HandleConfirmCheckExit={HandleConfirmCheckExit}
         />
       ) : null}
 
@@ -249,8 +258,7 @@ const Mission = (props) => {
                     </div>
                   </div>
                   <div className="mission--result">
-                    {status === "accepted" ||
-                    status === "pending" ? (
+                    {status === "accepted" || status === "pending" ? (
                       <>
                         <img
                           src={pendingIcon}
@@ -329,11 +337,14 @@ const Mission = (props) => {
             >
               Thông tin
             </button>
-            {userDoc.role === "admin" && status === "pending" ? (
+            {//userDoc.role === "admin" &&
+            user &&
+            status !== "not accepted" &&
+            status !== "accepted" ? (
               <button
                 className="mission--button mission--check_button"
                 //onClick={handleApproveMissionWork}
-                onClick = {HandleCheckImageClicked}
+                onClick={HandleCheckImageClicked}
               >
                 Xem ảnh nộp
               </button>

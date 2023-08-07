@@ -159,6 +159,8 @@ const App = () => {
                       content={mission.content}
                       score={mission.score}
                       duration={mission.duration}
+                      status={mission.status}
+                      statusText={mission.statusText}
                       id={mission.id}
                       key={mission.id}
                     />

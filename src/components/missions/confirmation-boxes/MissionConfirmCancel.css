@@ -25,10 +25,27 @@
   text-align: center;
 }
 
+.mission-confirm--notif_checkImg {
+  margin-top: 50px;
+  width: 60vw;
+}
+
+.checkImg--xmark_container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.checkImg--xmark_container img {
+  width: 30px;
+}
+
 .mission-confirm--headline {
   color: #000;
   font-size: 24px;
   font-weight: 700;
+  padding-bottom: 10px;
 }
 
 .mission-confirm--question {
@@ -66,6 +83,14 @@
   );
 }
 
+.checkImg--img_container {
+  width: 100%;
+  max-height: 300px;
+  overflow: auto;
+}
+
 .CheckImage--img {
-  height: 100px;
+  /* height: 100px; */
+  width: 300px;
+  border-radius: 8px;
 }
