@@ -24,30 +24,20 @@ const MissionAccept = ({
         listAll(imageListRef).then((response) => {
             response.items.forEach((item) => {
                 getDownloadURL(item).then((url) => {
-                    setImagelist((prev) => [...prev, url]); 
+                    setImagelist(imageList => [...imageList, url]); 
                 })
             })
         }); 
     }, []);
-
-    const something = () => {
-        listAll(imageListRef).then((response) => {
-            response.items.forEach((item) => {
-                getDownloadURL(item).then((url) => {
-                    setImagelist((prev) => [...prev, url]); 
-                })
-            })
-        }); 
-    }
 
   return (
     <div className="mision-confirm">
       <div className="mission-confirm--bg"></div>
       <div className="mission-confirm--notif">
         <div className="mission-confirm--headline">Ảnh người dùng</div>
-        
+
         {imageList.map((url) => {
-            return <img src = {url} class = "CheckImage--img"></img>
+            return <img src = {url} className = "CheckImage--img"></img>
         })}
 
         <div className="mission-confirm--buttons">
