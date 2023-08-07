@@ -4,7 +4,7 @@ import "../MissionConfirmCancel.css";
 import { storage } from "../../../../firebase"
 import { listAll, ref, getDownloadURL} from "firebase/storage"
 
-const MissionAccept = ({
+const CheckImage = ({
   title,
   score,
   address,
@@ -59,4 +59,4 @@ const MissionAccept = ({
   );
 };
 
-export default MissionAccept;
+export default CheckImage;
