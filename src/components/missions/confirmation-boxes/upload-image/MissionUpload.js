@@ -26,7 +26,7 @@ const MissionUpload = ({
   const HandleUploadImage = async () => {
     if (!imageUpload) return;
 
-    const imageRef = ref(storage, `images/${id}/ ${imageUpload.name}`);
+    const imageRef = ref(storage, `images/${id}/pic.jpg`);
     uploadBytes(imageRef, imageUpload).then(() => {
       alert("Đã tải ảnh lên");
     });
@@ -47,30 +47,37 @@ const MissionUpload = ({
         >
           <img src={xmark} alt="exit" />
         </div>
-        <div className="mission-confirm--headline">Tải ảnh lên</div>
-        <div className="mission-confirm--question">
-          Tải ảnh bạn đã hoàn thành nhiệm vụ
-        </div>
+        <div className="mission-upload--headline">Tải ảnh lên</div>
         <div className="mission-confirm--buttons">
-          <button
-            className="mission-confirm--button mission-confirm--btn1_cancel"
-            onClick={HandleNotUploadImage}
-          >
-            Hủy
-          </button>
 
-          <input
-            type="file"
-            onChange={(e) => setImageUpload(e.target.files[0])}
-          ></input>
+          <div className = "mission-upload--choose-file">
+           
+            <input
+              type="file"
+              onChange={(e) => setImageUpload(e.target.files[0])}
+              className="test"
+            />
+            
+            <div className = "mission-upload--buttons">
+              <button
+                  className="mission-confirm--button mission-confirm--btn1_cancel"
+                  onClick={HandleNotUploadImage}
+              >
+                  Hủy
+              </button>
 
-          <button
-            onClick={HandleUploadImage}
-            className="mission-confirm--button mission-confirm--btn2_cancel"
-          >
-            Upload image
-          </button>
+              <button
+                  onClick={HandleUploadImage}
+                  className="mission-confirm--button mission-confirm--btn2_cancel"
+                >
+                  Upload
+              </button>
+            </div>
+            
+          </div>
+
         </div>
+
       </div>
     </div>
   );

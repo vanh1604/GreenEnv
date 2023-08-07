@@ -57,6 +57,7 @@
   display: flex;
   gap: 16px;
   margin-top: 32px;
+  justify-content: center;
 }
 
 .mission-confirm--button {
@@ -93,4 +94,29 @@
   /* height: 100px; */
   width: 300px;
   border-radius: 8px;
+}
+
+.mission-upload--choose-file {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mission-upload--buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  justify-content: space-between;
+  width: 250px;
+}
+
+.mission-upload--headline {
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.test {
+  width: 190px;
+  
 }
