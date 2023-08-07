@@ -137,15 +137,12 @@ const Mission = (props) => {
     setConfirmCheck(false);
   };
 
-  const HandleAcceptImage = () => {
-    setConfirmCheck(false);
-  };
 
   const handleToMissionInfo = () => {
     navigate(`/missions/details/${props.id}`);
   };
 
-  const handleApproveMissionWork = async () => {
+  const HandleAcceptImage = async () => {
     await updateDoc(doc(colRefMissions, props.id), {
       status: "done",
       statusText: "Đã duyệt",
@@ -156,6 +153,7 @@ const Mission = (props) => {
       // score: userDoc.score + props.score,
       score: newScore,
     });
+    setConfirmCheck(false);
   };
 
   return (

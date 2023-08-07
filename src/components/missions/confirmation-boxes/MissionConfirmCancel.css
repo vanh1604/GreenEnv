@@ -65,3 +65,7 @@
     linear-gradient(90deg, #46f04e 0%, #ade34d 100%)
   );
 }
+
+.CheckImage--img {
+  height: 100px;
+}
