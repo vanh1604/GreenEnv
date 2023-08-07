@@ -36,9 +36,8 @@ const CheckImage = ({
       <div className="mission-confirm--notif">
         <div className="mission-confirm--headline">Ảnh người dùng</div>
 
-        {imageList.map((url) => {
-            return <img src = {url} className = "CheckImage--img"></img>
-        })}
+        <img src = {imageList[0]} className = "CheckImage--img"></img>
+        
 
         <div className="mission-confirm--buttons">
           <button
