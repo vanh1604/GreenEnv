@@ -20,7 +20,7 @@ const MissionCancel = ({
       <div className="mission-confirm--notif">
         <div className="mission-confirm--headline">Xác nhận hủy</div>
         <div className="mission-confirm--question">
-          Bạn có chắc chắn muốn hủy nhiệm vụ
+          Bạn có chắc chắn muốn hủy nhiệm vụ?
         </div>
         <div className="mission-confirm--buttons">
           <button

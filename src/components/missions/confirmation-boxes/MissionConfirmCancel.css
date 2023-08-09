@@ -70,7 +70,7 @@
   border-radius: 100px;
 }
 
-.mission-confirm--btn1_accept, .mission-confirm--btn1_cancel {
+.mission-confirm--btn0_return, .mission-confirm--btn1_accept, .mission-confirm--btn1_cancel {
   border: 2px solid #46f04e;
   background-color: white;
 }
@@ -118,5 +118,5 @@
 
 .test {
   width: 190px;
-  
+  margin: 0 auto;
 }

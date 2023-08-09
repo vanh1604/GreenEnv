@@ -18,8 +18,8 @@ const MissionUpload = ({
   duration,
   status,
   id,
-  HandleNotUploadImage,
-  HandleConfirmUploadExit
+  //HandleNotUploadImage,
+  HandleConfirmUploadExit,
 }) => {
   const [imageUpload, setImageUpload] = useState(null);
 
@@ -35,6 +35,7 @@ const MissionUpload = ({
       status: "pending",
       statusText: "Chờ duyệt",
     });
+    HandleConfirmUploadExit();
   };
 
   return (
@@ -59,25 +60,23 @@ const MissionUpload = ({
             />
             
             <div className = "mission-upload--buttons">
-              <button
+              {/* <button
                   className="mission-confirm--button mission-confirm--btn1_cancel"
                   onClick={HandleNotUploadImage}
               >
                   Hủy
-              </button>
+              </button> */}
 
               <button
                   onClick={HandleUploadImage}
                   className="mission-confirm--button mission-confirm--btn2_cancel"
+                  style={{margin: "0 auto"}}
                 >
                   Upload
               </button>
             </div>
-            
           </div>
-
         </div>
-
       </div>
     </div>
   );

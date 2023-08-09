@@ -19,7 +19,7 @@ const MissionAccept = ({
       <div className="mission-confirm--notif">
         <div className="mission-confirm--headline">Xác nhận tham gia</div>
         <div className="mission-confirm--question">
-          Bạn có chắc chắn muốn tham gia
+          Bạn có chắc chắn muốn tham gia?
         </div>
         <div className="mission-confirm--buttons">
           <button

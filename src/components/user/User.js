@@ -5,12 +5,14 @@ import { UserAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 import { getDocs } from "firebase/firestore";
 import { colRefUsers } from "../../firebase";
+import ConfirmLogout from "../common-components/ConfirmLogout";
 // import backArrow from "../common-components/img/arrow-left-solid.svg";
 
 const User = (props) => {
   const navigate = useNavigate();
   const { user, logout } = UserAuth();
   const [userDoc, setUserDoc] = useState({});
+  const [confirmLogout, setConfirmLogout] = useState(false);
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -29,14 +31,18 @@ const User = (props) => {
     }
   }, []);
 
-  const handleLogout = async () => {
+  const handleLogoutClicked = () => {
+    setConfirmLogout(true);
+  };
+
+  const handleNotLogout = () => {
+    setConfirmLogout(false);
+  };
+
+  const handleLogout = async (choice) => {
     try {
       await logout();
-      let qSaveAccount = "";
-      do {
-        qSaveAccount = prompt("Bạn có muốn lưu tài khoản không? (YES / NO) ");
-      } while (qSaveAccount !== "YES" && qSaveAccount !== "NO");
-      if (qSaveAccount === "NO") {
+      if (choice === 0) {
         localStorage.removeItem("email");
         localStorage.removeItem("password");
       }
@@ -44,14 +50,20 @@ const User = (props) => {
     } catch (err) {
       console.log(err.message);
     }
+    setConfirmLogout(false);
   };
-
   const handleInfoEdit = () => {
     navigate(`edit`);
   };
 
   return (
     <div className="user-menu">
+      {confirmLogout ? (
+        <ConfirmLogout
+          handleLogout={handleLogout}
+          handleNotLogout={handleNotLogout}
+        />
+      ) : null}
       <div className="user-menu--account_line">
         <div className="user-menu--account_container">
           <img src={avatar} alt="" className="user-menu--avatar" />
@@ -63,7 +75,10 @@ const User = (props) => {
           <button className="user-menu--update_btn" onClick={handleInfoEdit}>
             Chỉnh sửa
           </button>
-          <button className="user-menu--logout_btn" onClick={handleLogout}>
+          <button
+            className="user-menu--logout_btn"
+            onClick={handleLogoutClicked}
+          >
             Đăng xuất
           </button>
         </div>

@@ -88,6 +88,10 @@ const MissionDetails = (props) => {
     getMission();
   };
 
+  const HandleNotAcceptMission = () => {
+    setConfirmAccept(false);
+  };
+
   const HandleUploadImageClicked = () => {
     setConfirmUpload(true);
   };
@@ -96,9 +100,9 @@ const MissionDetails = (props) => {
     setConfirmUpload(false);
   };
 
-  const HandleNotAcceptMission = () => {
-    setConfirmAccept(false);
-  };
+  const HandleConfirmUploadExit = () => {
+    setConfirmUpload(false);
+  }
 
   const HandleCancelMissionClicked = () => {
     setConfirmCancel(true);
@@ -107,10 +111,6 @@ const MissionDetails = (props) => {
   const HandleKeepMission = () => {
     setConfirmCancel(false);
   };
-
-  const HandleConfirmUploadExit = () => {
-    setConfirmUpload(false);
-  }
 
   const updateInfo2 = async (missionId) => {
     await updateDoc(doc(colRefMissions, missionId), {

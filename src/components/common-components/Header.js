@@ -8,10 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { getDocs } from "firebase/firestore";
 import { colRefUsers } from "../../firebase";
+import ConfirmLogout from "./ConfirmLogout";
 
 const Header = () => {
   const { user, logout } = UserAuth();
   const pathname = window.location.pathname; //returns the current url minus the domain name
+  const [confirmLogout, setConfirmLogout] = useState(false);
 
   const navigate = useNavigate();
 
@@ -66,26 +68,36 @@ const Header = () => {
     navigate(`/${userDoc.role}/edit`);
   };
 
-  const handleLogout = async () => {
+  const handleLogoutClicked = () => {
+    setConfirmLogout(true);
+  };
+
+  const handleNotLogout = () => {
+    setConfirmLogout(false);
+  };
+
+  const handleLogout = async (choice) => {
     try {
       await logout();
-      let qSaveAccount = "";
-      do {
-        qSaveAccount = prompt("Bạn có muốn lưu tài khoản không? (YES / NO) ");
-      } while (qSaveAccount !== "YES" && qSaveAccount !== "NO");
-      if (qSaveAccount === "NO") {
+      if (choice === 0) {
         localStorage.removeItem("email");
         localStorage.removeItem("password");
       }
-      // console.log(user);
       navigate("/");
     } catch (err) {
       console.log(err.message);
     }
+    setConfirmLogout(false);
   };
 
   return (
     <div className="header--container">
+      {confirmLogout ? (
+        <ConfirmLogout
+          handleLogout={handleLogout}
+          handleNotLogout={handleNotLogout}
+        />
+      ) : null}
       <header className="header">
         <div className="header--nav_part">
           <div className="header--logo_container">
@@ -175,7 +187,7 @@ const Header = () => {
                   </div>
                   <div
                     className="header--avatar_userbox_option header--avatar_userbox_missions"
-                    onClick={handleLogout}
+                    onClick={handleLogoutClicked}
                   >
                     Đăng xuất
                   </div>
