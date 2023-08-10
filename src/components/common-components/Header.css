@@ -83,12 +83,12 @@
   cursor: pointer;
 }
 
-.header--avatar_container:hover .header--avatar_userbox{
+/* .header--avatar_container:hover .header--avatar_userbox{
   opacity: 100%;
-}
+} */
 
 .header--avatar_userbox {
-  opacity: 0%;
+  /* opacity: 0%; */
   font-size: 20px;
   border-radius: 8px;
   background: #fff;
@@ -97,7 +97,7 @@
   position: absolute;
   top: 45px;
   right: 0;
-  transition: opacity 0.5s;
+  /* transition: opacity 0.5s; */
 }
 
 .header--avatar_userbox_option {

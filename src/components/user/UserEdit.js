@@ -7,6 +7,7 @@ import { auth, colRefUsers } from "../../firebase";
 import { UserAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 import { updateProfile } from "firebase/auth";
+import Error from "../error/Error";
 
 const UserEdit = (props) => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const UserEdit = (props) => {
     getUserDoc();
 
     if (props.role !== props.userRole) {
-      if (props.role === "user") navigate("/admin/edit")
+      if (props.role === "user") navigate("/admin/edit");
       else navigate("/user/edit");
     }
   }, []);

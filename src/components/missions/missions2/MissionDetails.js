@@ -16,19 +16,35 @@ import backArrow from "../../common-components/img/arrow-left-solid.svg";
 import { useNavigate } from "react-router";
 import { UserAuth } from "../../../context/AuthContext";
 
-const MissionDetails = (props) => {
+const MissionDetails = ({
+  title,
+  number,
+  address,
+  content,
+  score,
+  duration,
+  status,
+  volunteer,
+  statusText,
+  id,
+  key,
+  missionReload,
+}) => {
+
   const [userDoc, setUserDoc] = useState({});
   const [mission, setMission] = useState({});
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmUpload, setConfirmUpload] = useState(false);
   const [statusDisplay, setStatusDisplay] = useState(
-    <div className={`mission--details_chip mission--status_${props.status}`}>
-      {props.statusText}
+    <div className={`mission--details_chip mission--status_${status}`}>
+      {statusText}
     </div>
   );
   const navigate = useNavigate();
   const { user } = UserAuth();
+
+  missionReload();
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -45,7 +61,7 @@ const MissionDetails = (props) => {
     const getMission = async () => {
       const data2 = await getDocs(colRefMissions);
       data2.docs.forEach((doc) => {
-        if (doc.data().title === props.title) {
+        if (doc.data().title === title) {
           //does not work if compare id
           setMission({ ...doc.data(), id: doc.id });
           return;
@@ -55,9 +71,9 @@ const MissionDetails = (props) => {
     if (user) getMission();
   }, []);
 
-  const HandleBackToMissions = () => {
-    navigate("/missions");
-  };
+  // const HandleBackToMissions = () => {
+  //   navigate("/missions");
+  // };
 
   const HandleAcceptMissionClicked = () => {
     if (!user) {
@@ -69,17 +85,22 @@ const MissionDetails = (props) => {
 
   const HandleAcceptMission = async () => {
     setConfirmAccept(false);
-    await updateDoc(doc(colRefMissions, props.id), {
+    await updateDoc(doc(colRefMissions, id), {
       volunteer: userDoc.email,
     });
-    await updateDoc(doc(colRefMissions, props.id), {
+    await updateDoc(doc(colRefMissions, id), {
       status: "accepted",
-      statusText: "Mới",
+      statusText: "Đang làm",
     });
+    setStatusDisplay(
+      <div className={`mission--details_chip mission--status_accepted`}>
+        Đang làm
+      </div>
+    );
     const getMission = async () => {
       const data2 = await getDocs(colRefMissions);
       data2.docs.forEach((doc) => {
-        if (doc.data().title === props.title) {
+        if (doc.data().title === title) {
           setMission({ ...doc.data(), id: doc.id });
           return;
         }
@@ -96,13 +117,17 @@ const MissionDetails = (props) => {
     setConfirmUpload(true);
   };
 
-  const HandleNotUploadImage = () => {
-    setConfirmUpload(false);
+  const HandleUploadImageStatusChange = () => {
+    setStatusDisplay(
+      <div className={`mission--details_chip mission--status_pending`}>
+        Chờ duyệt
+      </div>
+    );
   };
 
   const HandleConfirmUploadExit = () => {
     setConfirmUpload(false);
-  }
+  };
 
   const HandleCancelMissionClicked = () => {
     setConfirmCancel(true);
@@ -112,32 +137,32 @@ const MissionDetails = (props) => {
     setConfirmCancel(false);
   };
 
-  const updateInfo2 = async (missionId) => {
-    await updateDoc(doc(colRefMissions, missionId), {
-      volunteer: "",
-    });
-    await updateDoc(doc(colRefMissions, missionId), {
-      status: "not accepted",
-      statusText: "Chưa nhận",
-    });
-    const getMission = async () => {
-      const data2 = await getDocs(colRefMissions);
-      data2.docs.forEach((doc) => {
-        if (doc.data().title === props.title) {
-          setMission({ ...doc.data(), id: doc.id });
-          return;
-        }
-      });
-    };
-    getMission();
-  };
-
   const HandleCancelMission = async () => {
     setConfirmCancel(false);
+    const updateInfo2 = async (missionId) => {
+      await updateDoc(doc(colRefMissions, missionId), {
+        volunteer: "",
+      });
+      await updateDoc(doc(colRefMissions, missionId), {
+        status: "not accepted",
+        statusText: "",
+      });
+      setStatusDisplay(<></>);
+      const getMission = async () => {
+        const data2 = await getDocs(colRefMissions);
+        data2.docs.forEach((doc) => {
+          if (doc.data().title === title) {
+            setMission({ ...doc.data(), id: doc.id });
+            return;
+          }
+        });
+      };
+      getMission();
+    };
     const data = await getDocs(colRefMissions);
     data.docs.forEach((doc) => {
-      if (doc.data().title === props.title) {
-        updateInfo2(props.id);
+      if (doc.data().title === title) {
+        updateInfo2(id);
         return;
       }
     });
@@ -147,72 +172,60 @@ const MissionDetails = (props) => {
     <main className="mission-details--mission-details">
       {confirmCancel ? (
         <MissionCancel
-          title={props.title}
-          number={props.number}
-          address={props.address}
-          content={props.content}
-          score={props.score}
-          duration={props.duration}
-          id={props.id}
+          title={title}
+          number={number}
+          address={address}
+          content={content}
+          score={score}
+          duration={duration}
+          id={id}
           HandleKeepMission={HandleKeepMission}
           HandleCancelMission={HandleCancelMission}
         />
       ) : null}
       {confirmAccept ? (
         <MissionAccept
-          title={props.title}
-          number={props.number}
-          address={props.address}
-          content={props.content}
-          score={props.score}
-          duration={props.duration}
-          id={props.id}
+          title={title}
+          number={number}
+          address={address}
+          content={content}
+          score={score}
+          duration={duration}
+          id={id}
           HandleNotAcceptMission={HandleNotAcceptMission}
           HandleAcceptMission={HandleAcceptMission}
         />
       ) : null}
       {confirmUpload ? (
         <MissionUpload
-          title={props.title}
-          number={props.number}
-          address={props.address}
-          content={props.content}
-          point={props.point}
-          duration={props.duration}
-          id={props.id}
-          HandleNotUploadImage={HandleNotUploadImage}
+          title={title}
+          number={number}
+          address={address}
+          content={content}
+          score={score}
+          duration={duration}
+          id={id}
           HandleConfirmUploadExit={HandleConfirmUploadExit}
+          HandleUploadImageStatusChange={HandleUploadImageStatusChange}
         />
       ) : null}
 
-      <div
-        role="button"
-        className="mission-details--back_button"
-        onClick={HandleBackToMissions}
-      >
-        <img
-          src={backArrow}
-          alt="back"
-          className="user-menu--back_button_img"
-        />
-        <div className="user-menu--back_button_label">Nhiệm vụ</div>
-      </div>
       <div className="mission-details--mission-header">
         <div className="mission-details--general-info">
           <div className="mission-details--header--first_line">
-            <div className="mission-details--mission-title">{props.title}</div>
+            <div className="mission-details--mission-title">{title}</div>
             <div className="mission-details--mission-rewards">
-              +{props.score}
+              +{score}
             </div>
             {statusDisplay ? (
               statusDisplay
             ) : (
               <>
-                {props.volunteer === userDoc.email ? (
+                {volunteer === userDoc.email ? (
                   <div
-                    className={`mission--details_chip mission--status_${props.status}`}
+                    className={`mission--details_chip mission--status_${status}`}
                   >
-                    {props.statusText}
+                    {statusText}
                   </div>
                 ) : null}
               </>
@@ -226,14 +239,14 @@ const MissionDetails = (props) => {
                 className="mission-details--icon"
               />
               <div className="mission-details--mission-location">
-                {props.address}
+                {address}
               </div>
             </div>
 
             <div className="mission-details--contact">
               <img src={callIcon} alt="" className="mission-details--icon" />
               <div className="mission-details--mission-call">
-                {props.number}
+                {number}
               </div>
             </div>
           </div>
@@ -248,7 +261,7 @@ const MissionDetails = (props) => {
             </button>
           ) : (
             <>
-              {userDoc.role === "user" ? (
+              {userDoc.role === "user" && mission.status !== "done" ? (
                 <>
                   <button
                     className="mission-details--button mission-details--upload_button"
@@ -279,7 +292,7 @@ const MissionDetails = (props) => {
       </div>
       <div className="mission-details--mission-info">
         <div className="mission-details--mission-description">
-          {props.content}
+          {content}
         </div>
         <div className="mission-details--mission-instruction">
           <div className="mission-details--title">Hướng dẫn:</div>
@@ -296,7 +309,7 @@ const MissionDetails = (props) => {
         <div className="mission-details--mission-regulation">
           <div className="mission-details--title">Quy định:</div>
           <div className="mission-details--regulation-text">
-            Bạn cần phải hoàn thành nhiệm vụ trong vòng tối đa {props.duration}{" "}
+            Bạn cần phải hoàn thành nhiệm vụ trong vòng tối đa {duration}{" "}
             ngày. Sau 3 ngày nhiệm vụ sẽ tự động hủy
           </div>
         </div>

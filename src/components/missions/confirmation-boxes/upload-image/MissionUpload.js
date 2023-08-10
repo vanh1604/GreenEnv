@@ -11,7 +11,7 @@ import xmark from "./img/circle-xmark-regular.svg";
 
 const MissionUpload = ({
   title,
-  point,
+  score,
   address,
   number,
   content,
@@ -20,6 +20,7 @@ const MissionUpload = ({
   id,
   //HandleNotUploadImage,
   HandleConfirmUploadExit,
+  HandleUploadImageStatusChange
 }) => {
   const [imageUpload, setImageUpload] = useState(null);
 
@@ -35,6 +36,7 @@ const MissionUpload = ({
       status: "pending",
       statusText: "Chờ duyệt",
     });
+    HandleUploadImageStatusChange();
     HandleConfirmUploadExit();
   };
 

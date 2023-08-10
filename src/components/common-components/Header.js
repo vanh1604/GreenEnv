@@ -14,6 +14,7 @@ const Header = () => {
   const { user, logout } = UserAuth();
   const pathname = window.location.pathname; //returns the current url minus the domain name
   const [confirmLogout, setConfirmLogout] = useState(false);
+  const [userBoxShowing, setUserBoxShowing] = useState(false);
 
   const navigate = useNavigate();
 
@@ -57,19 +58,27 @@ const Header = () => {
   };
 
   const handleAvatarClick = () => {
+    setUserBoxShowing(!userBoxShowing);
+  };
+
+  const handleUserMenuClicked = () => {
     navigate(`/${userDoc.role}`);
+    setUserBoxShowing(!userBoxShowing);
   };
 
   const handleUserMissionsClicked = () => {
     navigate(`/${userDoc.role}/missions`);
+    setUserBoxShowing(!userBoxShowing);
   };
 
   const handleInfoEdit = () => {
     navigate(`/${userDoc.role}/edit`);
+    setUserBoxShowing(!userBoxShowing);
   };
 
   const handleLogoutClicked = () => {
     setConfirmLogout(true);
+    setUserBoxShowing(!userBoxShowing);
   };
 
   const handleNotLogout = () => {
@@ -147,52 +156,63 @@ const Header = () => {
                 alt=""
                 onClick={handleAvatarClick}
               />
-              <div className="header--avatar_userbox">
-                <div className="header--avatar_userbox_user">
-                  <img
-                    className="header--avatar_userbox_img"
-                    src={avatar}
-                    alt=""
-                  />
-                  <div className="header--avatar_userbox_name">
-                    {userDoc.username ? userDoc.username : userDoc.name}
+              {userBoxShowing ? (
+                <div className="header--avatar_userbox">
+                  <div className="header--avatar_userbox_user">
+                    <img
+                      className="header--avatar_userbox_img"
+                      src={avatar}
+                      alt=""
+                    />
+                    <div className="header--avatar_userbox_name">
+                      {userDoc.username ? userDoc.username : userDoc.name}
+                    </div>
                   </div>
-                </div>
-                <div className="header--avatar_userbox_line"></div>
-                {userDoc.role === "user" ? (
+                  <div className="header--avatar_userbox_line"></div>
+
                   <div className="header--avatar_userbox_details">
-                    <div className="header--avatar_userbox_score">
-                      <div className="header--avatar_userbox_score_label">
-                        Điểm
-                      </div>
-                      <div className="header--avatar_userbox_score_value">
-                        {userDoc.score}
-                      </div>
+                    <div
+                      className="header--avatar_userbox_option header--avatar_userbox_missions"
+                      onClick={handleUserMenuClicked}
+                    >
+                      Trang cá nhân
+                    </div>
+                    {userDoc.role === "user" ? (
+                      <>
+                        <div className="header--avatar_userbox_score">
+                          <div className="header--avatar_userbox_score_label">
+                            Điểm
+                          </div>
+                          <div className="header--avatar_userbox_score_value">
+                            {userDoc.score}
+                          </div>
+                        </div>
+                        <div
+                          className="header--avatar_userbox_option header--avatar_userbox_missions"
+                          onClick={handleUserMissionsClicked}
+                        >
+                          Nhiệm vụ
+                        </div>
+                      </>
+                    ) : null}
+                  </div>
+                  <div className="header--avatar_userbox_line"></div>
+                  <div className="header--avatar_userbox_actions">
+                    <div
+                      className="header--avatar_userbox_option header--avatar_userbox_missions"
+                      onClick={handleInfoEdit}
+                    >
+                      Cài đặt tài khoản
                     </div>
                     <div
                       className="header--avatar_userbox_option header--avatar_userbox_missions"
-                      onClick={handleUserMissionsClicked}
+                      onClick={handleLogoutClicked}
                     >
-                      Nhiệm vụ
+                      Đăng xuất
                     </div>
                   </div>
-                ) : null}
-                <div className="header--avatar_userbox_line"></div>
-                <div className="header--avatar_userbox_actions">
-                  <div
-                    className="header--avatar_userbox_option header--avatar_userbox_missions"
-                    onClick={handleInfoEdit}
-                  >
-                    Cài đặt tài khoản
-                  </div>
-                  <div
-                    className="header--avatar_userbox_option header--avatar_userbox_missions"
-                    onClick={handleLogoutClicked}
-                  >
-                    Đăng xuất
-                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </div>
         ) : (

@@ -36,22 +36,22 @@ const SignUpInputs = () => {
           .catch((error) => {
             console.log(error.message);
           });
+        const saveInfo = async () => {
+          if (password === "admin--admin--admin--greenenv--adminx3!") {
+            setRole("admin");
+          }
+          await setDoc(doc(colRefUsers, email), {
+            name: name,
+            email: email,
+            score: 0,
+            role: role,
+          });
+        };
+        saveInfo();
+        navigate("/about");
       } catch (e) {
         console.log(e.message);
       }
-      const saveInfo = async () => {
-        if (password === "admin--admin--admin--greenenv--adminx3!") {
-          setRole("admin");
-        }
-        await setDoc(doc(colRefUsers, email), {
-          name: name,
-          email: email,
-          score: 0,
-          role: role,
-        });
-      }
-      saveInfo();
-      navigate("/about");
     } else {
       alert("Password nhập lại không đúng.");
     }

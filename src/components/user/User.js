@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { getDocs } from "firebase/firestore";
 import { colRefUsers } from "../../firebase";
 import ConfirmLogout from "../common-components/ConfirmLogout";
+import Error from "../error/Error";
 // import backArrow from "../common-components/img/arrow-left-solid.svg";
 
 const User = (props) => {
@@ -13,6 +14,8 @@ const User = (props) => {
   const { user, logout } = UserAuth();
   const [userDoc, setUserDoc] = useState({});
   const [confirmLogout, setConfirmLogout] = useState(false);
+
+  console.log(user);
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -25,6 +28,7 @@ const User = (props) => {
       });
     };
     getUserDoc();
+    
     if (props.role !== props.userRole) {
       if (props.role === "user") navigate("/admin");
       else navigate("/user");
@@ -57,61 +61,67 @@ const User = (props) => {
   };
 
   return (
-    <div className="user-menu">
-      {confirmLogout ? (
-        <ConfirmLogout
-          handleLogout={handleLogout}
-          handleNotLogout={handleNotLogout}
-        />
-      ) : null}
-      <div className="user-menu--account_line">
-        <div className="user-menu--account_container">
-          <img src={avatar} alt="" className="user-menu--avatar" />
-          <div className="user-menu--account">
-            {userDoc.username ? userDoc.username : userDoc.name}
+    <>
+      <div className="user-menu">
+        {confirmLogout ? (
+          <ConfirmLogout
+            handleLogout={handleLogout}
+            handleNotLogout={handleNotLogout}
+          />
+        ) : null}
+        <div className="user-menu--account_line">
+          <div className="user-menu--account_container">
+            <img src={avatar} alt="" className="user-menu--avatar" />
+            <div className="user-menu--account">
+              {userDoc.username ? userDoc.username : userDoc.name}
+            </div>
+          </div>
+          <div className="user-menu--buttons">
+            <button className="user-menu--update_btn" onClick={handleInfoEdit}>
+              Chỉnh sửa
+            </button>
+            <button
+              className="user-menu--logout_btn"
+              onClick={handleLogoutClicked}
+            >
+              Đăng xuất
+            </button>
           </div>
         </div>
-        <div className="user-menu--buttons">
-          <button className="user-menu--update_btn" onClick={handleInfoEdit}>
-            Chỉnh sửa
-          </button>
-          <button
-            className="user-menu--logout_btn"
-            onClick={handleLogoutClicked}
-          >
-            Đăng xuất
-          </button>
+        <div className="user-menu--info">
+          <div className="user-menu--info_line1">
+            <div className="user-menu--name">
+              <div className="user-menu--label user-menu--name_label">
+                Họ và tên
+              </div>
+              <div>{userDoc.name}</div>
+            </div>
+            <div className="user-menu--phone">
+              <div className="user-menu--label user-menu--phone_label">
+                Số điện thoại
+              </div>
+              <div id="user-menu--phone_number">
+                {userDoc.phoneNumber !== "" ? userDoc.phoneNumber : "Chưa có"}
+              </div>
+            </div>
+          </div>
+          <div className="user-menu--info_line2">
+            <div className="user-menu--email">
+              <div className="user-menu--label user-menu--email_label">
+                Email
+              </div>
+              <div>{user.email}</div>
+            </div>
+            <div className="user-menu--score">
+              <div className="user-menu--label user-menu--score_label">
+                Điểm
+              </div>
+              <div className="user-menu--score_value">{userDoc.score}</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="user-menu--info">
-        <div className="user-menu--info_line1">
-          <div className="user-menu--name">
-            <div className="user-menu--label user-menu--name_label">
-              Họ và tên
-            </div>
-            <div>{userDoc.name}</div>
-          </div>
-          <div className="user-menu--phone">
-            <div className="user-menu--label user-menu--phone_label">
-              Số điện thoại
-            </div>
-            <div id="user-menu--phone_number">
-              {userDoc.phoneNumber !== "" ? userDoc.phoneNumber : "Chưa có"}
-            </div>
-          </div>
-        </div>
-        <div className="user-menu--info_line2">
-          <div className="user-menu--email">
-            <div className="user-menu--label user-menu--email_label">Email</div>
-            <div>{user.email}</div>
-          </div>
-          <div className="user-menu--score">
-            <div className="user-menu--label user-menu--score_label">Điểm</div>
-            <div className="user-menu--score_value">{userDoc.score}</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

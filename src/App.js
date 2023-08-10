@@ -14,6 +14,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserEdit from "./components/user/UserEdit";
 import MissionDetails from "./components/missions/missions2/MissionDetails";
+import Error from "./components/error/Error";
 import { useState, useEffect } from "react";
 import { db } from "./firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -23,7 +24,6 @@ const App = () => {
   const [missions, setMissions] = useState([]);
   const [userDoc, setUserDoc] = useState({});
   useEffect(() => {
-
     const getUserDoc = async () => {
       const data = await getDocs(colRefUsers);
       data.docs.forEach((doc) => {
@@ -45,10 +45,32 @@ const App = () => {
     getMissions();
   }, []);
 
+  const missionReload = () => {
+    const getMissions = async () => {
+      const data = await getDocs(colRefMissions);
+      setMissions(
+        data.docs.map((doc) => ({ ...doc.data(), id: doc.id, key: doc.id }))
+      );
+    };
+
+    getMissions();
+  };
+
   return (
     <div>
       <AuthContextProvider>
         <Routes>
+          <Route
+            exact
+            path="*"
+            element={
+              <>
+                <Header />
+                <Error />
+                <Footer />
+              </>
+            }
+          />
           <Route path="/" element={<Main />} />
           <Route path="/signin/*" element={<Login />} />
           {/* <Route path="/user/edit" element={<ProtectedRoute><AccountModify /></ProtectedRoute>} /> */}
@@ -58,7 +80,7 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Header />
-                <User role="user" userRole = {userDoc.role}/>
+                <User role="user" userRole={userDoc.role} />
                 <Footer />
               </ProtectedRoute>
             }
@@ -69,7 +91,7 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Header />
-                <User role="admin" userRole = {userDoc.role}/>
+                <User role="admin" userRole={userDoc.role} />
                 <Footer />
               </ProtectedRoute>
             }
@@ -79,7 +101,7 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Header />
-                <UserEdit role="user" userRole = {userDoc.role}/>
+                <UserEdit role="user" userRole={userDoc.role} />
                 <Footer />
               </ProtectedRoute>
             }
@@ -89,7 +111,7 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Header />
-                <UserEdit role="admin" userRole = {userDoc.role}/>
+                <UserEdit role="admin" userRole={userDoc.role} />
                 <Footer />
               </ProtectedRoute>
             }
@@ -110,7 +132,7 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Header />
-                <MissionBoard role="user" userRole = {userDoc.role}/> <Footer />
+                <MissionBoard role="user" userRole={userDoc.role} /> <Footer />
               </ProtectedRoute>
             }
           />
@@ -120,7 +142,7 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Header />
-                <MissionBoard role="admin" userRole = {userDoc.role}/> <Footer />
+                <MissionBoard role="admin" userRole={userDoc.role} /> <Footer />
               </ProtectedRoute>
             }
           />
@@ -140,7 +162,10 @@ const App = () => {
             element={
               <>
                 <Header />
-                <Content userRole = {userDoc.role}/>
+                <Content
+                  userRole={userDoc.role}
+                  // missionReload={missionReload}
+                />
                 <Footer />
               </>
             }
@@ -151,7 +176,7 @@ const App = () => {
                 path={`/missions/details/${mission.id}`}
                 element={
                   <>
-                    {/* <Header /> */}
+                    <Header />
                     <MissionDetails
                       title={mission.title}
                       number={mission.number}
@@ -160,11 +185,13 @@ const App = () => {
                       score={mission.score}
                       duration={mission.duration}
                       status={mission.status}
+                      volunteer={mission.volunteer}
                       statusText={mission.statusText}
                       id={mission.id}
                       key={mission.id}
+                      missionReload={missionReload}
                     />
-                    {/* <Footer /> */}
+                    <Footer />
                   </>
                 }
               />
@@ -186,6 +213,16 @@ const App = () => {
               <>
                 <Header />
                 <Contact />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/error"
+            element={
+              <>
+                <Header />
+                <Error />
                 <Footer />
               </>
             }

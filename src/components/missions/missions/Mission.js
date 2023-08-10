@@ -26,33 +26,6 @@ const Mission = (props) => {
   const [statusDisplay, setStatusDisplay] = useState(null);
   const [status, setStatus] = useState(props.status);
 
-  // let statusDisplayTmp;
-  // if (props.status === "accepted") {
-  //   statusDisplayTmp = (
-  //     <div className={`mission--status_chip mission--status_${props.status}`}>
-  //       Mới
-  //     </div>
-  //   );
-  // } else if (props.status === "pending") {
-  //   statusDisplayTmp = (
-  //     <div className={`mission--status_chip mission--status_${props.status}`}>
-  //       Chờ duyệt
-  //     </div>
-  //   );
-  // } else if (props.status === "denied") {
-  //   statusDisplayTmp = (
-  //     <div className={`mission--status_chip mission--status_${props.status}`}>
-  //       Chưa đạt
-  //     </div>
-  //   );
-  // } else if (props.status === "done") {
-  //   statusDisplayTmp = (
-  //     <div className={`mission--status_chip mission--status_${props.status}`}>
-  //       Đã duyệt
-  //     </div>
-  //   );
-  // }
-
   useEffect(() => {
     const getUserDoc = async () => {
       const data = await getDocs(colRefUsers);
@@ -162,7 +135,7 @@ const Mission = (props) => {
 
   const HandleConfirmCheckExit = () => {
     setConfirmCheck(false);
-  }
+  };
 
   return (
     <div className="mission">
@@ -337,18 +310,18 @@ const Mission = (props) => {
             >
               Thông tin
             </button>
-            {//userDoc.role === "admin" &&
-            user &&
-            status !== "not accepted" &&
-            status !== "accepted" ? (
-              <button
-                className="mission--button mission--check_button"
-                //onClick={handleApproveMissionWork}
-                onClick={HandleCheckImageClicked}
-              >
-                Xem ảnh nộp
-              </button>
-            ) : null}
+            {
+              //userDoc.role === "admin" &&
+              user && status !== "not accepted" && status !== "accepted" ? (
+                <button
+                  className="mission--button mission--check_button"
+                  //onClick={handleApproveMissionWork}
+                  onClick={HandleCheckImageClicked}
+                >
+                  Xem ảnh nộp
+                </button>
+              ) : null
+            }
           </div>
           <div className="img-part">
             <img src={missionImg} alt="mission img" className="mission--img" />

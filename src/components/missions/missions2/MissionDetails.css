@@ -1,28 +1,13 @@
 .mission-details--mission-details {
-  padding: 0 140px;
-}
-
-.mission-details--back_button {
-  position: absolute;
-  top: 30px;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #46f04e 0%, #ade34d 100%);
-  padding: 5px 10px;
-  border-radius: 8px;
-
-  cursor: pointer;
+  width: 1040px;
+  margin: auto;
 }
 
 .mission-details--mission-header {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  margin: 84px 0 33px 0;
+  margin: 64px 0 33px 0;
 }
 
 .mission--details_chip {
