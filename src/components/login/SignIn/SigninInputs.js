@@ -3,16 +3,24 @@ import Input from "../Input";
 import LoginButton from "../LoginButton";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../../context/AuthContext";
+import Notification from "../../common-components/Notification";
 
 const SigninInputs = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [error, setError] = useState("");
+  const [error, setError] = useState("");
+  const [messageShowing, setMessageShowing] = useState(false);
+  const [notifType, setNotifType] = useState("Thông báo");
+  const [message, setMessage] = useState("");
 
   // const { signIn, forgotPassword } = UserAuth();
   const { signIn } = UserAuth();
 
   const navigate = useNavigate();
+
+  const HandleMessageExit = () => {
+    setMessageShowing(!messageShowing);
+  };
 
   useEffect(() => {
     const savedEmail = localStorage.getItem("email");
@@ -33,7 +41,20 @@ const SigninInputs = () => {
       localStorage.setItem("password", password);
       navigate("/about");
     } catch (e) {
-      alert("Mật khẩu hoặc Email chưa khớp!");
+      // alert("Mật khẩu hoặc Email chưa khớp!");
+      setError(e);
+      let m = "";
+      switch (e.code) {
+        case "auth/wrong-password":
+          m = "Mật khẩu hoặc Email không đúng!";
+          break;
+        case "auth/too-many-requests":
+          m = "Quyền truy cập tài khoản đã tạm thời bị khóa vì có quá nhiều lần đăng nhập thất bại! Xin hãy thử lại sau.";
+          break;
+      }
+      setNotifType("Báo lỗi");
+      setMessage(m);
+      if (m != "") HandleMessageExit();
       // setError(e.message);
       console.log(e.message);
       // if (
@@ -53,6 +74,13 @@ const SigninInputs = () => {
 
   return (
     <form className="login--inputs" onSubmit={handleSigninSubmit}>
+      {messageShowing ? (
+        <Notification
+          notifType={notifType}
+          message={message}
+          HandleMessageExit={HandleMessageExit}
+        />
+      ) : null}
       <Input
         inputType={"email"}
         inputPlaceholder={"Email"}
