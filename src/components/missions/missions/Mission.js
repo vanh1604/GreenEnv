@@ -13,6 +13,7 @@ import { colRefMissions, colRefUsers } from "../../../firebase";
 import { updateDoc, doc, getDocs } from "firebase/firestore";
 import MissionAccept from "../confirmation-boxes/mission-accept/MissionAccept";
 import CheckImage from "../confirmation-boxes/check-image/CheckImage";
+import Notification from "../../common-components/Notification";
 import { UserAuth } from "../../../context/AuthContext";
 
 const Mission = (props) => {
@@ -25,6 +26,9 @@ const Mission = (props) => {
   const { user } = UserAuth();
   const [statusDisplay, setStatusDisplay] = useState(null);
   const [status, setStatus] = useState(props.status);
+  const [messageShowing, setMessageShowing] = useState(false);
+  const [notifType, setNotifType] = useState("Thông báo");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -62,9 +66,16 @@ const Mission = (props) => {
     if (user) getMission();
   }, []);
 
+  const HandleMessageExit = () => {
+    setMessageShowing(!messageShowing);
+  };
+
   const HandleAcceptMissionClicked = () => {
     if (!user) {
-      alert("Vui lòng đăng nhập trước!");
+      // alert("Vui lòng đăng nhập trước!");
+      setNotifType("Bạn chưa thể nhận nhiệm vụ!");
+      setMessage("Vui lòng đăng nhập trước!");
+      HandleMessageExit();
       return;
     }
     setConfirmAccept(true);
@@ -72,7 +83,10 @@ const Mission = (props) => {
 
   const HandleCheckImageClicked = () => {
     if (!user) {
-      alert("Vui lòng đăng nhập trước!");
+      // alert("Vui lòng đăng nhập trước!");
+      setNotifType("Bạn chưa thể nhận nhiệm vụ!");
+      setMessage("Vui lòng đăng nhập trước!");
+      HandleMessageExit();
       return;
     }
     setConfirmCheck(true);
@@ -88,7 +102,9 @@ const Mission = (props) => {
       statusText: "Đang làm",
     });
     setStatusDisplay(
-      <div className={`mission--status_chip mission--status_accepted`}>Đang làm</div>
+      <div className={`mission--status_chip mission--status_accepted`}>
+        Đang làm
+      </div>
     );
     const getMission = async () => {
       const data2 = await getDocs(colRefMissions);
@@ -139,6 +155,13 @@ const Mission = (props) => {
 
   return (
     <div className="mission">
+      {messageShowing ? (
+        <Notification
+          notifType={notifType}
+          message={message}
+          HandleMessageExit={HandleMessageExit}
+        />
+      ) : null}
       {confirmAccept ? (
         <MissionAccept
           title={mission.title}

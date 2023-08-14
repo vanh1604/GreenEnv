@@ -86,7 +86,7 @@ const SignUpInputs = () => {
   };
 
   return (
-    <form className="login--inputs" onSubmit={handleSignupSubmit}>
+    <>
       {messageShowing ? (
         <Notification
           notifType={notifType}
@@ -94,28 +94,30 @@ const SignUpInputs = () => {
           HandleMessageExit={HandleMessageExit}
         />
       ) : null}
-      <Input
-        inputType={"text"}
-        inputPlaceholder={"Tên"}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Input
-        inputType={"email"}
-        inputPlaceholder={"Email"}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        inputType={"password"}
-        inputPlaceholder={"Mật khẩu"}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Input
-        inputType={"password"}
-        inputPlaceholder={"Nhập lại mật khẩu"}
-        onChange={(e) => setRepassword(e.target.value)}
-      />
-      <LoginButton LoginButtonText={"Tiếp tục"} />
-    </form>
+      <form className="login--inputs" onSubmit={handleSignupSubmit}>
+        <Input
+          inputType={"text"}
+          inputPlaceholder={"Tên"}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
+          inputType={"email"}
+          inputPlaceholder={"Email"}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          inputType={"password"}
+          inputPlaceholder={"Mật khẩu"}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Input
+          inputType={"password"}
+          inputPlaceholder={"Nhập lại mật khẩu"}
+          onChange={(e) => setRepassword(e.target.value)}
+        />
+        <LoginButton LoginButtonText={"Tiếp tục"} />
+      </form>
+    </>
   );
 };
 

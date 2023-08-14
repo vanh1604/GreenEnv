@@ -12,7 +12,7 @@ import { getDocs, updateDoc, doc } from "firebase/firestore";
 import MissionCancel from "../confirmation-boxes/mission-cancel/MissionCancel";
 import MissionAccept from "../confirmation-boxes/mission-accept/MissionAccept";
 import MissionUpload from "../confirmation-boxes/upload-image/MissionUpload";
-import backArrow from "../../common-components/img/arrow-left-solid.svg";
+import Notification from "../../common-components/Notification";
 import { useNavigate } from "react-router";
 import { UserAuth } from "../../../context/AuthContext";
 
@@ -36,6 +36,9 @@ const MissionDetails = ({
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmUpload, setConfirmUpload] = useState(false);
   const [statusDisplay, setStatusDisplay] = useState(null);
+  const [messageShowing, setMessageShowing] = useState(false);
+  const [notifType, setNotifType] = useState("Thông báo");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { user } = UserAuth();
 
@@ -70,9 +73,16 @@ const MissionDetails = ({
   //   navigate("/missions");
   // };
 
+  const HandleMessageExit = () => {
+    setMessageShowing(!messageShowing);
+  };
+
   const HandleAcceptMissionClicked = () => {
     if (!user) {
-      alert("Vui lòng đăng nhập trước!");
+      // alert("Vui lòng đăng nhập trước!");
+      setNotifType("Bạn chưa thể nhận nhiệm vụ!");
+      setMessage("Vui lòng đăng nhập trước!");
+      HandleMessageExit();
       return;
     }
     setConfirmAccept(true);
@@ -165,6 +175,13 @@ const MissionDetails = ({
 
   return (
     <main className="mission-details--mission-details">
+      {messageShowing ? (
+        <Notification
+          notifType={notifType}
+          message={message}
+          HandleMessageExit={HandleMessageExit}
+        />
+      ) : null}
       {confirmCancel ? (
         <MissionCancel
           title={title}

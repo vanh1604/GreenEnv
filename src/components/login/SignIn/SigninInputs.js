@@ -49,7 +49,8 @@ const SigninInputs = () => {
           m = "Mật khẩu hoặc Email không đúng!";
           break;
         case "auth/too-many-requests":
-          m = "Quyền truy cập tài khoản đã tạm thời bị khóa vì có quá nhiều lần đăng nhập thất bại! Xin hãy thử lại sau.";
+          m =
+            "Quyền truy cập tài khoản đã tạm thời bị khóa vì có quá nhiều lần đăng nhập thất bại! Xin hãy thử lại sau.";
           break;
       }
       setNotifType("Báo lỗi");
@@ -73,7 +74,7 @@ const SigninInputs = () => {
   };
 
   return (
-    <form className="login--inputs" onSubmit={handleSigninSubmit}>
+    <>
       {messageShowing ? (
         <Notification
           notifType={notifType}
@@ -81,26 +82,28 @@ const SigninInputs = () => {
           HandleMessageExit={HandleMessageExit}
         />
       ) : null}
-      <Input
-        inputType={"email"}
-        inputPlaceholder={"Email"}
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-      />
-      <Input
-        inputType={"password"}
-        inputPlaceholder={"Mật khẩu"}
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
-      <div
-        className="login--forget_password"
-        onClick={handleForgotPasswordClicked}
-      >
-        Quên mật khẩu
-      </div>
-      <LoginButton LoginButtonText={"Đăng nhập"} />
-    </form>
+      <form className="login--inputs" onSubmit={handleSigninSubmit}>
+        <Input
+          inputType={"email"}
+          inputPlaceholder={"Email"}
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+        />
+        <Input
+          inputType={"password"}
+          inputPlaceholder={"Mật khẩu"}
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
+        <div
+          className="login--forget_password"
+          onClick={handleForgotPasswordClicked}
+        >
+          Quên mật khẩu
+        </div>
+        <LoginButton LoginButtonText={"Đăng nhập"} />
+      </form>
+    </>
   );
 };
 
