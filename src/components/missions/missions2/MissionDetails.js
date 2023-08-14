@@ -1,3 +1,5 @@
+//DOES NOT SYNC WITH MISSION.JS YET. TRYING TO FIX.
+
 import React, { useEffect, useState } from "react";
 import "./MissionDetails.css";
 import callIcon from "../img/ic_call.png";
