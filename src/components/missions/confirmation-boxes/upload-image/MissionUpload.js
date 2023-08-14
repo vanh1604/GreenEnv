@@ -34,7 +34,7 @@ const MissionUpload = ({
 
     await updateDoc(doc(colRefMissions, id), {
       status: "pending",
-      statusText: "Chờ duyệt",
+      statusText: "Chưa duyệt",
     });
     HandleUploadImageStatusChange();
     HandleConfirmUploadExit();

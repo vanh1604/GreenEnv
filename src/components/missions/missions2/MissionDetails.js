@@ -127,7 +127,7 @@ const MissionDetails = ({
   const HandleUploadImageStatusChange = () => {
     setStatusDisplay(
       <div className={`mission--details_chip mission--status_pending`}>
-        Chờ duyệt
+        Chưa duyệt
       </div>
     );
   };
@@ -232,15 +232,45 @@ const MissionDetails = ({
             {statusDisplay ? (
               statusDisplay
             ) : (
-              <>
-                {volunteer === userDoc.email ? (
+              <div>
+                {mission.status === "accepted" ? (
                   <div
-                    className={`mission--details_chip mission--status_${status}`}
+                    className={`mission--details_chip mission--status_accepted`}
                   >
-                    {statusText}
+                    Đang làm
                   </div>
-                ) : null}
-              </>
+                ) : (
+                  <div>
+                    {mission.status === "pending" ? (
+                      <div
+                        className={`mission--details_chip mission--status_pending`}
+                      >
+                        Chưa duyệt
+                      </div>
+                    ) : (
+                      <dv>
+                        {mission.status === "denied" ? (
+                          <div
+                            className={`mission--details_chip mission--status_pending`}
+                          >
+                            Chưa đạt
+                          </div>
+                        ) : (
+                          <div>
+                            {mission.status === "done" ? (
+                              <div
+                                className={`mission--details_chip mission--status_pending`}
+                              >
+                                Đã duyệt
+                              </div>
+                            ) : null}
+                          </div>
+                        )}
+                      </dv>
+                    )}
+                  </div>
+                )}
+              </div>
             )}
           </div>
           <div className="mission-details--header--second_line">

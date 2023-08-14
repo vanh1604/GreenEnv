@@ -9,7 +9,7 @@ const MissionItem = (props) => {
   //   statusDisplay = <div className={`mission-item--status_chip mission-item--status_${props.status}`}>Mới</div>
   // }
   // else if (props.status === "pending") {
-  //   statusDisplay = <div className={`mission-item--status_chip mission-item--status_${props.status}`}>Chờ duyệt</div>
+  //   statusDisplay = <div className={`mission-item--status_chip mission-item--status_${props.status}`}>Chưa duyệt</div>
   // }
   // else if (props.status === "denied") {
   //   statusDisplay = <div className={`mission-item--status_chip mission-item--status_${props.status}`}>Chưa đạt</div>

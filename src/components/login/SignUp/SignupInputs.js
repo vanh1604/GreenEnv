@@ -40,7 +40,7 @@ const SignUpInputs = () => {
           displayName: name,
         })
           .then(() => {
-            alert("Bạn đã đăng kí thành công!");
+            // alert("Bạn đã đăng kí thành công!");
             // setNotifType("Chào mừng!");
             // setMessage("Bạn đã đăng kí thành công!");
             // HandleMessageExit();
@@ -60,7 +60,7 @@ const SignUpInputs = () => {
           });
         };
         saveInfo();
-        navigate("/about");
+        navigate("/");
       } catch (e) {
         console.log(e);
         setError(e);
