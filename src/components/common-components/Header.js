@@ -49,6 +49,10 @@ const Header = () => {
     navigate("/activity");
   };
 
+  const handleExchangeClick = () => {
+    navigate("/exchange");
+  };
+
   const handleContactClick = () => {
     navigate("/contact");
   };
@@ -135,6 +139,12 @@ const Header = () => {
                 <div className="header--option_chosen"></div>
               ) : null}
               Hành động
+            </div>
+            <div className="header--option" onClick={handleExchangeClick}>
+              {pathname === "/contact" ? (
+                <div className="header--option_chosen"></div>
+              ) : null}
+              Đổi quà
             </div>
             <div className="header--option" onClick={handleContactClick}>
               {pathname === "/contact" ? (

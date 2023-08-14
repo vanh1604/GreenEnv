@@ -19,6 +19,7 @@ import { useState, useEffect } from "react";
 import { db } from "./firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { colRefMissions, colRefUsers } from "./firebase";
+import Exchange from "./components/exchange/Exchange"
 
 const App = () => {
   const [missions, setMissions] = useState([]);
@@ -152,6 +153,16 @@ const App = () => {
               <>
                 <Header />
                 <About />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/exchange"
+            element={
+              <>
+                <Header />
+                <Exchange/>
                 <Footer />
               </>
             }
