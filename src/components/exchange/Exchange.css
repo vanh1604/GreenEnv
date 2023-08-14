@@ -41,12 +41,14 @@
     text-transform: uppercase;
     font-weight: 700;
     font-size: 16px;
+    margin-top: 15px;
 }
 
 ._263v2 {
-    -ms-flex-align: center;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    text-align: center;
+    margin: 20px 0;
 }
 
 .present--name {
