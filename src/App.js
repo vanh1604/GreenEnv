@@ -45,16 +45,16 @@ const App = () => {
     getMissions();
   }, []);
 
-  const missionReload = () => {
-    const getMissions = async () => {
-      const data = await getDocs(colRefMissions);
-      setMissions(
-        data.docs.map((doc) => ({ ...doc.data(), id: doc.id, key: doc.id }))
-      );
-    };
+  // const missionReload = () => {
+  //   const getMissions = async () => {
+  //     const data = await getDocs(colRefMissions);
+  //     setMissions(
+  //       data.docs.map((doc) => ({ ...doc.data(), id: doc.id, key: doc.id }))
+  //     );
+  //   };
 
-    getMissions();
-  };
+  //   getMissions();
+  // };
 
   return (
     <div>
@@ -189,7 +189,7 @@ const App = () => {
                       statusText={mission.statusText}
                       id={mission.id}
                       key={mission.id}
-                      missionReload={missionReload}
+                      // missionReload={missionReload}
                     />
                     <Footer />
                   </>

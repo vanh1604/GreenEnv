@@ -55,7 +55,7 @@ const CheckImage = ({
         <div className="checkImg--xmark_container" onClick={HandleConfirmCheckExit}>
           <img src={xmark} alt="exit" />
         </div>
-        <div className="mission-confirm--headline">Ảnh người dùng</div>
+        <div className="mission-confirm--headline">Ảnh đã nộp</div>
 
         <div className="checkImg--img_container">
           <img src={imageList[0]} className="CheckImage--img"></img>

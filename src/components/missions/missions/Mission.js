@@ -85,10 +85,10 @@ const Mission = (props) => {
     });
     await updateDoc(doc(colRefMissions, props.id), {
       status: "accepted",
-      statusText: "Mới",
+      statusText: "Đang làm",
     });
     setStatusDisplay(
-      <div className={`mission--status_chip mission--status_accepted`}>Mới</div>
+      <div className={`mission--status_chip mission--status_accepted`}>Đang làm</div>
     );
     const getMission = async () => {
       const data2 = await getDocs(colRefMissions);

@@ -28,23 +28,16 @@ const MissionDetails = ({
   statusText,
   id,
   key,
-  missionReload,
+  // missionReload,
 }) => {
-
   const [userDoc, setUserDoc] = useState({});
   const [mission, setMission] = useState({});
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmUpload, setConfirmUpload] = useState(false);
-  const [statusDisplay, setStatusDisplay] = useState(
-    <div className={`mission--details_chip mission--status_${status}`}>
-      {statusText}
-    </div>
-  );
+  const [statusDisplay, setStatusDisplay] = useState(null);
   const navigate = useNavigate();
   const { user } = UserAuth();
-
-  missionReload();
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -68,7 +61,9 @@ const MissionDetails = ({
         }
       });
     };
-    if (user) getMission();
+    if (user) {
+      getMission();
+    }
   }, []);
 
   // const HandleBackToMissions = () => {
@@ -214,9 +209,7 @@ const MissionDetails = ({
         <div className="mission-details--general-info">
           <div className="mission-details--header--first_line">
             <div className="mission-details--mission-title">{title}</div>
-            <div className="mission-details--mission-rewards">
-              +{score}
-            </div>
+            <div className="mission-details--mission-rewards">+{score}</div>
             {statusDisplay ? (
               statusDisplay
             ) : (
@@ -238,16 +231,12 @@ const MissionDetails = ({
                 alt=""
                 className="mission-details--icon"
               />
-              <div className="mission-details--mission-location">
-                {address}
-              </div>
+              <div className="mission-details--mission-location">{address}</div>
             </div>
 
             <div className="mission-details--contact">
               <img src={callIcon} alt="" className="mission-details--icon" />
-              <div className="mission-details--mission-call">
-                {number}
-              </div>
+              <div className="mission-details--mission-call">{number}</div>
             </div>
           </div>
         </div>
@@ -291,9 +280,7 @@ const MissionDetails = ({
         </div>
       </div>
       <div className="mission-details--mission-info">
-        <div className="mission-details--mission-description">
-          {content}
-        </div>
+        <div className="mission-details--mission-description">{content}</div>
         <div className="mission-details--mission-instruction">
           <div className="mission-details--title">Hướng dẫn:</div>
           <ul>
@@ -309,8 +296,8 @@ const MissionDetails = ({
         <div className="mission-details--mission-regulation">
           <div className="mission-details--title">Quy định:</div>
           <div className="mission-details--regulation-text">
-            Bạn cần phải hoàn thành nhiệm vụ trong vòng tối đa {duration}{" "}
-            ngày. Sau 3 ngày nhiệm vụ sẽ tự động hủy
+            Bạn cần phải hoàn thành nhiệm vụ trong vòng tối đa {duration} ngày.
+            Sau 3 ngày nhiệm vụ sẽ tự động hủy
           </div>
         </div>
       </div>

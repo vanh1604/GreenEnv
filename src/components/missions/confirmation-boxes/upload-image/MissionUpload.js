@@ -29,7 +29,7 @@ const MissionUpload = ({
 
     const imageRef = ref(storage, `images/${id}/pic.jpg`);
     uploadBytes(imageRef, imageUpload).then(() => {
-      alert("Đã tải ảnh lên");
+      // alert("Đã tải ảnh lên");
     });
 
     await updateDoc(doc(colRefMissions, id), {
