@@ -125,4 +125,18 @@
     color: #ffe7a2;
     align-self: center;
 
+
+}
+
+.exchange--border {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 300px;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 0px;
+    border: 2px dashed #a3e44d;
+    border-radius: 30px;
+    align-self: center;
 }

@@ -46,7 +46,7 @@ const Exchange = () => {
 
   const handleExchangePresent = async (present, user, id, status) => {
     if (status === "out of stock") {
-      Notify("Tin buồn!", "Ôi không! Món quà này đã hết hàng!");
+
       return;
     }
 
@@ -60,7 +60,7 @@ const Exchange = () => {
       });
 
       await updateDoc(doc(colRefPresents, `${id}`), {
-        status: "out of stock",
+        status: userDoc.email,
       });
 
       window.location.reload(true);
@@ -90,12 +90,14 @@ const Exchange = () => {
           <span className="_9MmQs">Quà Chiến Binh</span>
         </div>
 
-        <div className="exchange">
-          {presents.map((present) => {
-            return (
-              <div className="exchange--each-box">
-                <div className="test">
-                  <div className="present--name">{present.name}</div>
+
+      <div className="exchange">
+        {presents.map((present) => {
+          return (
+            <div className="exchange--each-box">
+              <div className="exchange--border">
+                <div className="present--name">{present.name}</div>
+
 
                   <div>
                     <img
