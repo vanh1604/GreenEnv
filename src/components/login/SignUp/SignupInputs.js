@@ -15,8 +15,8 @@ const SignUpInputs = () => {
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const [role, setRole] = useState("user");
+  const [message, setMessage] = useState("");
   const [messageShowing, setMessageShowing] = useState(false);
   const [notifType, setNotifType] = useState("Thông báo");
 
