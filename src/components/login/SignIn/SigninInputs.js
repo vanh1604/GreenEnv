@@ -41,14 +41,12 @@ const SigninInputs = () => {
 
   const handleSigninSubmit = async (e) => {
     e.preventDefault();
-    // setError("");
     try {
       await signIn(email, password);
       localStorage.setItem("email", email);
       localStorage.setItem("password", password);
       navigate("/");
     } catch (e) {
-      // alert("Mật khẩu hoặc Email chưa khớp!");
       setError(e);
       let m = "";
       switch (e.code) {

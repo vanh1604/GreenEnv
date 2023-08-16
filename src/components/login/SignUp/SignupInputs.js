@@ -47,10 +47,6 @@ const SignUpInputs = () => {
           displayName: name,
         })
           .then(() => {
-            // alert("Bạn đã đăng kí thành công!");
-            // setNotifType("Chào mừng!");
-            // setMessage("Bạn đã đăng kí thành công!");
-            // HandleMessageExit();
           })
           .catch((error) => {
             console.log(error.message);

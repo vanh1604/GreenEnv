@@ -46,17 +46,6 @@ const App = () => {
     getMissions();
   }, []);
 
-  // const missionReload = () => {
-  //   const getMissions = async () => {
-  //     const data = await getDocs(colRefMissions);
-  //     setMissions(
-  //       data.docs.map((doc) => ({ ...doc.data(), id: doc.id, key: doc.id }))
-  //     );
-  //   };
-
-  //   getMissions();
-  // };
-
   return (
     <div>
       <AuthContextProvider>
@@ -74,7 +63,6 @@ const App = () => {
           />
           <Route path="/" element={<Main />} />
           <Route path="/signin/*" element={<Login />} />
-          {/* <Route path="/user/edit" element={<ProtectedRoute><AccountModify /></ProtectedRoute>} /> */}
           <Route
             exact
             path="/user"
@@ -117,16 +105,6 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          {/* <Route
-            path="/admin/check"
-            element={
-              <ProtectedRoute>
-                <Header />
-                <UserEdit role="admin" />
-                <Footer />
-              </ProtectedRoute>
-            }
-          /> */}
           <Route
             exact
             path="/user/missions"
@@ -175,7 +153,6 @@ const App = () => {
                 <Header />
                 <Content
                   userRole={userDoc.role}
-                  // missionReload={missionReload}
                 />
                 <Footer />
               </>
@@ -200,7 +177,6 @@ const App = () => {
                       statusText={mission.statusText}
                       id={mission.id}
                       key={mission.id}
-                      // missionReload={missionReload}
                     />
                     <Footer />
                   </>
