@@ -46,11 +46,8 @@ const Exchange = () => {
 
   const handleExchangePresent = async (present, user, id, status) => {
     if (status === "out of stock") {
-<<<<<<< Updated upstream
-      Notify("Tin buồn!", "Ôi không! Món quà này đã hết hàng!");
-=======
+
       alert("Món quà này đã hết rồi :(");
->>>>>>> Stashed changes
       return;
     }
 
@@ -94,21 +91,14 @@ const Exchange = () => {
           <span className="_9MmQs">Quà Chiến Binh</span>
         </div>
 
-<<<<<<< Updated upstream
-        <div className="exchange">
-          {presents.map((present) => {
-            return (
-              <div className="exchange--each-box">
-                <div className="test">
-                  <div className="present--name">{present.name}</div>
-=======
+
       <div className="exchange">
         {presents.map((present) => {
           return (
             <div className="exchange--each-box">
               <div className="exchange--border">
                 <div className="present--name">{present.name}</div>
->>>>>>> Stashed changes
+
 
                   <div>
                     <img
