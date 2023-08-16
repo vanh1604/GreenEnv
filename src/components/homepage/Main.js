@@ -6,39 +6,22 @@ import volunteer2 from "./css/pictures/volunteer2.png";
 import twitter from "./css/pictures/twitter.svg";
 import insta from "./css/pictures/instagram.svg";
 import dribble from "./css/pictures/dribbble.svg";
-// import { useNavigate } from "react-router";
 import Header from "../common-components/Header";
+import { useNavigate } from "react-router";
 
 const Main = () => {
 
-  // const navigate = useNavigate();
-  // const handleMainSigninText = () => {
-  //   navigate('/signin');
-  // }
+  const navigate = useNavigate();
+
+  const HandleToMissions = () => {
+    navigate("/missions");
+  }
 
   return (
     <div className="main--container">
-      {/* <header className="main--header">
-        <div className="main--logo_text">
-          <div className="main--logo_header">
-            <img src={logo} alt="fck"></img>
-          </div>
-          <div className="main--header_text">Giới thiệu</div>
-          <div className="main--header_text">Nhiệm vụ</div>
-          <div className="main--header_text">Hành động</div>
-          <div className="main--header_text">Liên hệ</div>
-        </div>
-
-        <div className="main--sign_in_text">
-          <button className="main--sign_in" onClick={handleMainSigninText}>
-            Đăng nhập
-          </button>
-        </div>
-      </header> */}
-      <Header />
-
+      <Header /> 
+      {/* Header here because <Footer /> somehow does not stick to the end of the page... */}
       <main>
-        {/* <body> */}
         <div className="main--intro">
           <div className="main--assist">
             <div className="main--chungtoi">Chúng tôi là Green Env</div>
@@ -91,7 +74,7 @@ const Main = () => {
                 </div>
               </div>
 
-              <button className="main--dennhiemvu">Đến nhiệm vụ</button>
+              <button className="main--dennhiemvu" onClick={HandleToMissions}>Đến nhiệm vụ</button>
             </div>
 
             <div className="main--right_text">
@@ -129,8 +112,6 @@ const Main = () => {
             </div>
           </div>
         </div>
-
-        {/* </body> */}
       </main>
     </div>
   );

@@ -141,7 +141,7 @@ const Header = () => {
               Hành động
             </div>
             <div className="header--option" onClick={handleExchangeClick}>
-              {pathname === "/contact" ? (
+              {pathname === "/exchange" ? (
                 <div className="header--option_chosen"></div>
               ) : null}
               Đổi quà
