@@ -130,3 +130,41 @@
   border-radius: 8px;
   padding: 10px;
 }
+
+.user-present-board {
+  width: 100%;
+  padding: 0 10%;
+  margin: 0px;
+}
+
+.user-present-board--title {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.user-present-board--labels {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 0.75fr 2fr 2fr;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: var(--neutral-black-50, rgba(31, 32, 29, 0.5));
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  padding: 5px;
+}
+
+/* .user-present-board--missions {
+  max-height: 90vh;
+  overflow-y: none;
+} */
+
+.user-menu-present {
+  width: 100%;
+}
+
+.user-present-board--label2{
+  padding-left: 53px;
+}
