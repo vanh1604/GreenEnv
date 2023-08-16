@@ -28,6 +28,13 @@ const SignUpInputs = () => {
     setMessageShowing(!messageShowing);
   };
 
+  const Notify = (nType, nMessage) => {
+    //notification type, notification message
+    setNotifType(nType);
+    setMessage(nMessage);
+    if (nMessage != "") HandleMessageExit();
+  };
+
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     if (repassword === password) {
@@ -73,15 +80,10 @@ const SignUpInputs = () => {
             m = "Email này đã được sử dụng.";
             break;
         }
-        setNotifType("Báo lỗi");
-        setMessage(m);
-        if (m != "") HandleMessageExit();
+        Notify("Báo lỗi", m);
       }
     } else {
-      // alert("Password nhập lại không đúng.");
-      setNotifType("Báo lỗi");
-      setMessage("Mật khẩu nhập lại không đúng.");
-      HandleMessageExit();
+      Notify("Báo lỗi", "Mật khẩu nhập lại không đúng.");
     }
   };
 

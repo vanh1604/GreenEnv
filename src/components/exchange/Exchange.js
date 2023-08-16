@@ -37,18 +37,21 @@ const Exchange = () => {
     setMessageShowing(!messageShowing);
   };
 
+  const Notify = (nType, nMessage) => {
+    //notification type, notification message
+    setNotifType(nType);
+    setMessage(nMessage);
+    if (nMessage != "")  HandleMessageExit();
+  };
+
   const handleExchangePresent = async (present, user, id, status) => {
     if (status === "out of stock") {
-      setNotifType("Tin buồn!");
-      setMessage("Ôi không! Món quà này đã hết hàng!");
-      HandleMessageExit();
+      Notify("Tin buồn!", "Ôi không! Món quà này đã hết hàng!");
       return;
     }
 
     if (user >= present) {
-      setNotifType("Chúc mừng!");
-      setMessage("Bạn đã đổi quà thành công!");
-      HandleMessageExit();
+      Notify("Chúc mừng!", "Bạn đã đổi quà thành công!");
       let newScore = user - present;
 
       await updateDoc(doc(colRefUsers, `${userDoc.email}`), {
@@ -62,9 +65,7 @@ const Exchange = () => {
 
       window.location.reload(true);
     } else {
-      setNotifType("Báo lỗi");
-      setMessage("Bạn không đủ điểm để đổi quà");
-      HandleMessageExit();
+      Notify("Báo lỗi", "Bạn không đủ điểm để đổi quà");
     }
   };
 

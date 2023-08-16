@@ -18,10 +18,6 @@ const SigninInputs = () => {
 
   const navigate = useNavigate();
 
-  const HandleMessageExit = () => {
-    setMessageShowing(!messageShowing);
-  };
-
   useEffect(() => {
     const savedEmail = localStorage.getItem("email");
     const savedPassword = localStorage.getItem("password");
@@ -31,6 +27,17 @@ const SigninInputs = () => {
       setPassword(savedPassword);
     }
   }, []);
+
+  const Notify = (nType, nMessage) => {
+    //notification type, notification message
+    setNotifType(nType);
+    setMessage(nMessage);
+    if (nMessage != "") HandleMessageExit();
+  };
+
+  const HandleMessageExit = () => {
+    setMessageShowing(!messageShowing);
+  };
 
   const handleSigninSubmit = async (e) => {
     e.preventDefault();
@@ -53,19 +60,8 @@ const SigninInputs = () => {
             "Quyền truy cập tài khoản đã tạm thời bị khóa vì có quá nhiều lần đăng nhập thất bại! Xin hãy thử lại sau.";
           break;
       }
-      setNotifType("Báo lỗi");
-      setMessage(m);
-      if (m != "") HandleMessageExit();
-      // setError(e.message);
+      Notify("Báo lỗi", m);
       console.log(e.message);
-      // if (
-      //   (e.message =
-      //     "Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).")
-      // ) {
-      //   alert(
-      //     "Đã tạm thời vô hiệu hóa tài khoản vì có quá nhiều lần đăng nhập thất bại, nhằm bảo vệ an toàn cho tài khoản của bạn."
-      //   );
-      // }
     }
   };
 
