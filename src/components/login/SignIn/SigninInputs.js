@@ -39,7 +39,7 @@ const SigninInputs = () => {
       await signIn(email, password);
       localStorage.setItem("email", email);
       localStorage.setItem("password", password);
-      navigate("/about");
+      navigate("/");
     } catch (e) {
       // alert("Mật khẩu hoặc Email chưa khớp!");
       setError(e);
