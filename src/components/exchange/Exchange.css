@@ -17,6 +17,7 @@
 
 .exchange--img {
     height: 150px; 
+    max-width: 150px;
     align-self: center;
 }
 
@@ -57,7 +58,7 @@
     font-weight: 700;
 }
 
-.exchange--button {
+.exchange--button--instock {
     align-self: center;
 
     display: flex;
@@ -68,6 +69,52 @@
     border: none;
     border-radius: 100px;
     background: var( --brand-gradient, linear-gradient(90deg, #46f04e 0%, #ade34d 100%) );
+    font-size: 18px;
+    font-weight: 700;
+
+    margin-top: 10px;
+    width: 140px;
+    height: 30px;
+
+    color: #ffe7a2;
+    align-self: center;
+
+}
+
+.exchange--button--instock {
+    align-self: center;
+
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    border-radius: 100px;
+    background: var( --brand-gradient, linear-gradient(90deg, #46f04e 0%, #ade34d 100%) );
+    font-size: 18px;
+    font-weight: 700;
+
+    margin-top: 10px;
+    width: 140px;
+    height: 30px;
+
+    color: #ffe7a2;
+    align-self: center;
+
+}
+
+.exchange--button--outstock {
+    align-self: center;
+
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    border-radius: 100px;
+    background: grey;
     font-size: 18px;
     font-weight: 700;
 

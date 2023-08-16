@@ -1,14 +1,14 @@
 import React from "react";
 import "./Exchange.css";
 import { useState, useEffect } from "react";
-import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
-import Header from "../common-components/Header";
-import Footer from "../common-components/Footer";
+import { db, colRefUsers, colRefPresents } from "../../firebase";
+import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 
 const Exchange = () => {
   const [presents, setPresents] = useState([]);
   const usersCollectionRef = collection(db, "presents");
+  const [userDoc, setUserDoc] = useState({});
+
   useEffect(() => {
     const getPresents = async () => {
       const data = await getDocs(usersCollectionRef);
@@ -16,8 +16,46 @@ const Exchange = () => {
     };
 
     getPresents();
+
+    const getUserDoc = async () => {
+      const data = await getDocs(colRefUsers);
+      data.docs.forEach((doc) => {
+        if (doc.data().email === localStorage.email) {
+          setUserDoc({ ...doc.data(), id: doc.id });
+          return;
+        }
+      });
+    };
+    getUserDoc();
   }, []);
 
+
+  const handleExchangePresent = async(present, user, id, status) => {
+    if (status === "out of stock") {
+      alert("Bạn đã đổi quà này trước đây");
+      return;
+    }
+
+    if (user >= present) {
+      alert("Bạn đã đổi quà thành công"); 
+      let newScore = user - present;
+
+      await updateDoc(doc(colRefUsers, `${userDoc.email}`), {
+        // score: userDoc.score + props.score,
+        score: newScore,
+      });
+
+      await updateDoc(doc(colRefPresents, `${id}`), {
+        status: "out of stock",
+      });
+
+      window.location.reload(true);
+    }
+    else {
+      alert("Bạn không đủ điểm để đổi quà"); 
+    }
+  }
+  
   return (
     <div>
       <div className="_263v2">
@@ -46,7 +84,7 @@ const Exchange = () => {
                   ></img>
                 </div>
 
-                <button className="exchange--button">
+                <button className= {present.status === "in stock" ? "exchange--button--instock" : "exchange--button--outstock"} onClick={() => handleExchangePresent(present.point, userDoc.score, present.id, present.status)}>
                   <img
                     src="https://vio.edu.vn/assets/63cb73d5.png"
                     width="20px"
