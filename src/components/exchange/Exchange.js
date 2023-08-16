@@ -47,7 +47,6 @@ const Exchange = () => {
   const handleExchangePresent = async (present, user, id, status) => {
     if (status === "out of stock") {
 
-      alert("Món quà này đã hết rồi :(");
       return;
     }
 
@@ -61,7 +60,7 @@ const Exchange = () => {
       });
 
       await updateDoc(doc(colRefPresents, `${id}`), {
-        status: "out of stock",
+        status: userDoc.email,
       });
 
       window.location.reload(true);
