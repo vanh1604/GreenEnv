@@ -4,7 +4,7 @@ import avatar from "../common-components/img/Avatar.png";
 import { UserAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 import { getDocs } from "firebase/firestore";
-import { colRefUsers } from "../../firebase";
+import { colRefUsers, colRefPresents } from "../../firebase";
 import ConfirmLogout from "../common-components/ConfirmLogout";
 import Error from "../error/Error";
 // import backArrow from "../common-components/img/arrow-left-solid.svg";
@@ -14,6 +14,7 @@ const User = (props) => {
   const { user, logout } = UserAuth();
   const [userDoc, setUserDoc] = useState({});
   const [confirmLogout, setConfirmLogout] = useState(false);
+  const [presents, setPresents] = useState([]);
 
   console.log(user);
 
@@ -28,6 +29,12 @@ const User = (props) => {
       });
     };
     getUserDoc();
+
+    const getPresents = async () => {
+      const data = await getDocs(colRefPresents);
+      setPresents(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getPresents();
     
     if (props.role !== props.userRole) {
       if (props.role === "user") navigate("/admin");
@@ -119,6 +126,27 @@ const User = (props) => {
               <div className="user-menu--score_value">{userDoc.score}</div>
             </div>
           </div>
+
+          <div className="user-menu--email">
+              <div className="user-menu--label user-menu--email_label">
+                Quà đã đổi
+              </div>
+
+              <div>
+                {presents.map((present) => {
+                  if (present.status === "out of stock") return (
+                  
+                        <img
+                          src={present.pic}
+                          alt="fu"
+                          className="exchange--img"
+                        ></img>
+                      
+                  );
+                })}
+              </div>
+            </div>
+
         </div>
       </div>
     </>

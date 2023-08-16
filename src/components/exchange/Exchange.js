@@ -6,12 +6,11 @@ import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 
 const Exchange = () => {
   const [presents, setPresents] = useState([]);
-  const usersCollectionRef = collection(db, "presents");
   const [userDoc, setUserDoc] = useState({});
 
   useEffect(() => {
     const getPresents = async () => {
-      const data = await getDocs(usersCollectionRef);
+      const data = await getDocs(colRefPresents);
       setPresents(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
