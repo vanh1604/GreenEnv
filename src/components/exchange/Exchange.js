@@ -44,23 +44,21 @@ const Exchange = () => {
     if (nMessage != "")  HandleMessageExit();
   };
 
-  const handleExchangePresent = async (present, user, id, status) => {
-    if (status === "out of stock") {
-
+  const handleExchangePresent = async (present, user) => {
+    if (user.exchange[present.id] === true) {
+      Notify("Báo lỗi", "Bạn đã đổi quà này trước đây")
       return;
     }
 
-    if (user >= present) {
+    if (user.score >= present.point) {
       Notify("Chúc mừng!", "Bạn đã đổi quà thành công!");
-      let newScore = user - present;
+      let newScore = user.score - present.point;
+      let newExchange = userDoc.exchange;
+      newExchange[present.id] = true;
 
       await updateDoc(doc(colRefUsers, `${userDoc.email}`), {
-        // score: userDoc.score + props.score,
         score: newScore,
-      });
-
-      await updateDoc(doc(colRefPresents, `${id}`), {
-        status: userDoc.email,
+        exchange: newExchange,
       });
 
       window.location.reload(true);
@@ -98,7 +96,6 @@ const Exchange = () => {
               <div className="exchange--border">
                 <div className="present--name">{present.name}</div>
 
-
                   <div>
                     <img
                       src={present.pic}
@@ -109,16 +106,14 @@ const Exchange = () => {
 
                   <button
                     className={
-                      present.status === "in stock"
+                      (userDoc.exchange == undefined || userDoc.exchange[present.id] === false)
                         ? "exchange--button--instock"
                         : "exchange--button--outstock"
                     }
                     onClick={() =>
                       handleExchangePresent(
-                        present.point,
-                        userDoc.score,
-                        present.id,
-                        present.status
+                        present,
+                        userDoc
                       )
                     }
                   >
