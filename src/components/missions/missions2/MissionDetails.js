@@ -17,6 +17,7 @@ import MissionUpload from "../confirmation-boxes/upload-image/MissionUpload";
 import Notification from "../../common-components/Notification";
 import { useNavigate } from "react-router";
 import { UserAuth } from "../../../context/AuthContext";
+import userIcon from "../img/user-solid.svg";
 
 const MissionDetails = ({
   title,
@@ -26,7 +27,7 @@ const MissionDetails = ({
   score,
   duration,
   status,
-  volunteer,
+  volunteers,
   statusText,
   id,
   key,
@@ -92,13 +93,19 @@ const MissionDetails = ({
 
   const HandleAcceptMission = async () => {
     setConfirmAccept(false);
-    await updateDoc(doc(colRefMissions, id), {
-      volunteer: userDoc.email,
-    });
-    await updateDoc(doc(colRefMissions, id), {
-      status: "accepted",
-      statusText: "Đang làm",
-    });
+    if (!mission.volunteers.includes(userDoc.email)) {
+      await updateDoc(doc(colRefMissions, id), {
+        // volunteer: userDoc.email,
+        volunteers: [...mission.volunteers, userDoc.email],
+        volunteersLength: mission.volunteersLength + 1,
+      });
+    }
+    if (mission.volunteersLength + 1 === mission.volunteersRequired) {
+      await updateDoc(doc(colRefMissions, id), {
+        status: "accepted",
+        statusText: "Đang làm",
+      });
+    }
     setStatusDisplay(
       <div className={`mission--details_chip mission--status_accepted`}>
         Đang làm
@@ -147,13 +154,23 @@ const MissionDetails = ({
   const HandleCancelMission = async () => {
     setConfirmCancel(false);
     const updateInfo2 = async (missionId) => {
-      await updateDoc(doc(colRefMissions, missionId), {
-        volunteer: "",
-      });
-      await updateDoc(doc(colRefMissions, missionId), {
-        status: "not accepted",
-        statusText: "",
-      });
+      const index = mission.volunteers.indexOf(userDoc.email);
+      let tmpVolunteers = mission.volunteers;
+      tmpVolunteers.splice(index, 1);
+      // console.log(tmpVolunteers);
+      if (!mission.volunteers.includes(userDoc.email)) {
+        await updateDoc(doc(colRefMissions, missionId), {
+          // volunteer: "",
+          volunteers: tmpVolunteers,
+          volunteersLength: mission.volunteersLength - 1,
+        });
+      }
+      if (mission.volunteersLength - 1 === 0) {
+        await updateDoc(doc(colRefMissions, missionId), {
+          status: "not accepted",
+          statusText: "",
+        });
+      }
       setStatusDisplay(<></>);
       const getMission = async () => {
         const data2 = await getDocs(colRefMissions);
@@ -229,47 +246,55 @@ const MissionDetails = ({
           <div className="mission-details--header--first_line">
             <div className="mission-details--mission-title">{title}</div>
             <div className="mission-details--mission-rewards">+{score}</div>
+            <div className="mission-details--volunteers_required">
+              <img src={userIcon} alt="" /> {mission.volunteersLength} /{" "}
+              {mission.volunteersRequired}
+            </div>
             {statusDisplay ? (
               statusDisplay
             ) : (
               <div>
-                {mission.status === "accepted" ? (
-                  <div
-                    className={`mission--details_chip mission--status_accepted`}
-                  >
-                    Đang làm
-                  </div>
-                ) : (
+                {volunteers.includes(userDoc.email) ? (
                   <div>
-                    {mission.status === "pending" ? (
+                    {mission.status === "accepted" ? (
                       <div
-                        className={`mission--details_chip mission--status_pending`}
+                        className={`mission--details_chip mission--status_accepted`}
                       >
-                        Chưa duyệt
+                        Đang làm
                       </div>
                     ) : (
-                      <dv>
-                        {mission.status === "denied" ? (
+                      <div>
+                        {mission.status === "pending" ? (
                           <div
                             className={`mission--details_chip mission--status_pending`}
                           >
-                            Chưa đạt
+                            Chưa duyệt
                           </div>
                         ) : (
-                          <div>
-                            {mission.status === "done" ? (
+                          <dv>
+                            {mission.status === "denied" ? (
                               <div
                                 className={`mission--details_chip mission--status_pending`}
                               >
-                                Đã duyệt
+                                Chưa đạt
                               </div>
-                            ) : null}
-                          </div>
+                            ) : (
+                              <div>
+                                {mission.status === "done" ? (
+                                  <div
+                                    className={`mission--details_chip mission--status_pending`}
+                                  >
+                                    Đã duyệt
+                                  </div>
+                                ) : null}
+                              </div>
+                            )}
+                          </dv>
                         )}
-                      </dv>
+                      </div>
                     )}
                   </div>
-                )}
+                ) : null}
               </div>
             )}
           </div>
@@ -290,7 +315,11 @@ const MissionDetails = ({
           </div>
         </div>
         <div className="mission-details--button-container">
-          {mission.status === "not accepted" || !user ? (
+          {!user ||
+          (userDoc.role === "user" &&
+            (mission.status === "not accepted" ||
+              (mission.volunteers &&
+                !mission.volunteers.includes(userDoc.email)))) ? (
             <button
               className="mission-details--button mission-details--join-button"
               onClick={HandleAcceptMissionClicked}

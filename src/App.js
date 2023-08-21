@@ -173,7 +173,7 @@ const App = () => {
                       score={mission.score}
                       duration={mission.duration}
                       status={mission.status}
-                      volunteer={mission.volunteer}
+                      volunteers={mission.volunteers}
                       statusText={mission.statusText}
                       id={mission.id}
                       key={mission.id}

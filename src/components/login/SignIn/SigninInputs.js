@@ -57,6 +57,10 @@ const SigninInputs = () => {
           m =
             "Quyền truy cập tài khoản đã tạm thời bị khóa vì có quá nhiều lần đăng nhập thất bại! Xin hãy thử lại sau.";
           break;
+        case "auth/user-not-found":
+          m =
+            "Tài khoản này không tồn tại! Bạn hãy thử đăng kí nhé!";
+          break;
       }
       Notify("Báo lỗi", m);
       console.log(e.message);

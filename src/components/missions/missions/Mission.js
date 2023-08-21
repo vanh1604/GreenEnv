@@ -45,7 +45,7 @@ const Mission = (props) => {
     const getVolunteerDoc = async () => {
       const data = await getDocs(colRefUsers);
       data.docs.forEach((doc) => {
-        if (doc.data().email === props.volunteer) {
+        if (props.volunteers.includes(doc.data().email)) {
           setVolunteerDoc({ ...doc.data(), id: doc.id });
           return;
         }
@@ -94,9 +94,12 @@ const Mission = (props) => {
 
   const HandleAcceptMission = async () => {
     setConfirmAccept(false);
-    await updateDoc(doc(colRefMissions, props.id), {
-      volunteer: userDoc.email,
-    });
+    if (!mission.volunteers.includes(userDoc.email)) {
+      await updateDoc(doc(colRefMissions, props.id), {
+        volunteers: [...mission.volunteers, userDoc.email],
+        volunteersLength: mission.volunteersLength + 1,
+      });
+    }
     await updateDoc(doc(colRefMissions, props.id), {
       status: "accepted",
       statusText: "Đang làm",
@@ -142,7 +145,7 @@ const Mission = (props) => {
     });
     setStatus("done");
     let newScore = volunteerDoc.score + props.score;
-    await updateDoc(doc(colRefUsers, `${props.volunteer}`), {
+    await updateDoc(doc(colRefUsers, `${userDoc.email}`), {
       // score: userDoc.score + props.score,
       score: newScore,
     });
@@ -200,7 +203,7 @@ const Mission = (props) => {
                 statusDisplay
               ) : (
                 <>
-                  {props.volunteer === userDoc.email ? (
+                  {props.volunteers.includes(userDoc.email) ? (
                     <div
                       className={`mission--status_chip mission--status_${props.status}`}
                     >
@@ -236,22 +239,28 @@ const Mission = (props) => {
             <img src={rewardIcon} alt="" className="mission--reward_icon" />
             <div className="mission--reward_value">+{props.score}</div>
           </div>
+          <div className="mission--volunteers_required">
+            <img src={userIcon} alt="" /> {mission.volunteersLength} /{" "}
+            {mission.volunteersRequired}
+          </div>
           {userDoc.role === "admin" ? (
             <div className="mission--admin_monitor_part">
               {status !== "not accepted" ? (
                 <>
-                  <div className="mission--volunteer">
-                    <img
-                      src={userIcon}
-                      alt=""
-                      className="mission--volunteer_icon"
-                    />
-                    <div className="mission--volunteer_info">
-                      Người nhận:{" "}
-                      <span className="mission--volunteer_email">
-                        {props.volunteer}
-                      </span>
-                    </div>
+                  <div className="mission--volunteer_info">
+                    Người nhận:
+                    {props.volunteers.map((volunteer) => (
+                      <div className="mission--volunteer">
+                        <img
+                          src={userIcon}
+                          alt=""
+                          className="mission--volunteer_icon"
+                        />
+                        <div className="mission--volunteer_email">
+                          {volunteer}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                   <div className="mission--result">
                     {status === "accepted" || status === "pending" ? (

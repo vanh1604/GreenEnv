@@ -37,7 +37,7 @@ const MissionBoard = (props) => {
       </div>
       <div className="mission-board--missions">
         {missions.map((mission) => {
-          if (mission.volunteer === user.email)
+          if (mission.volunteers.includes(user.email))
             return (
               <MissionItem
                 id={mission.id}

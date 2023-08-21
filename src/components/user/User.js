@@ -12,7 +12,7 @@ import PresentItem from "./PresentItem";
 
 const User = (props) => {
   const navigate = useNavigate();
-  const [dem, setDem] = useState(0); 
+  const [dem, setDem] = useState(0);
   const { user, logout } = UserAuth();
   const [userDoc, setUserDoc] = useState({});
   const [confirmLogout, setConfirmLogout] = useState(false);
@@ -37,7 +37,7 @@ const User = (props) => {
       setPresents(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getPresents();
-    
+
     if (props.role !== props.userRole) {
       if (props.role === "user") navigate("/admin");
       else navigate("/user");
@@ -121,41 +121,43 @@ const User = (props) => {
               </div>
               <div>{user.email}</div>
             </div>
-            <div className="user-menu--score">
-              <div className="user-menu--label user-menu--score_label">
-                Điểm
+            {userDoc.role !== "admin" ? (
+              <div className="user-menu--score">
+                <div className="user-menu--label user-menu--score_label">
+                  Điểm
+                </div>
+                <div className="user-menu--score_value">{userDoc.score}</div>
               </div>
-              <div className="user-menu--score_value">{userDoc.score}</div>
-            </div>
+            ) : null}
           </div>
 
-          <div className="user-menu-present">
+          {userDoc.role !== "admin" ? (
+            <div className="user-menu-present">
               <div className="user-menu--label user-menu--email_label">
                 Quà đã đổi
               </div>
               <div className="user-present-board">
-      <div className="user-present-board--labels">
-        <div className="user-present-board--label">Mã quà</div>
-        <div className="user-present-board--label">Tên quà</div>
-        <div className="user-present-board--label2">Ảnh</div>
-      </div>
-      <div className="user-present-board--missions">
-      {presents.map((present) => {
-            if(present.status === userDoc.email) {
-              return (
-                <PresentItem
-                  id={present.id}
-                  name = {present.name}
-                  link = {present.pic}
-                />
-              );
-              }
-        })}
-      </div>
-    </div>
-              
+                <div className="user-present-board--labels">
+                  <div className="user-present-board--label">Mã quà</div>
+                  <div className="user-present-board--label">Tên quà</div>
+                  <div className="user-present-board--label2">Ảnh</div>
+                </div>
+                <div className="user-present-board--missions">
+                  {presents.map((present) => {
+                    if (present.status === userDoc.email) {
+                      return (
+                        <PresentItem
+                          id={present.id}
+                          name={present.name}
+                          link={present.pic}
+                        />
+                      );
+                    }
+                  })}
+                </div>
+              </div>
             </div>
-
+          ) : null}
         </div>
       </div>
     </>

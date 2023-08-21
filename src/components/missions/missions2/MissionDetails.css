@@ -22,6 +22,18 @@
   gap: 16px;
 }
 
+.mission-details--volunteers_required {
+  display: flex;
+  /* flex-direction: column; */
+  font-size: 30px;
+  align-items: center;
+  gap: 5px;
+}
+
+.mission-details--volunteers_required img {
+  height: 30px;
+}
+
 .mission-details--header--first_line, .mission-details--header--second_line {
   font-size: 40px;
   display: flex;

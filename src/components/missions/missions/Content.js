@@ -26,9 +26,12 @@ const Content = (props) => {
   return (
     <div>
       {missions.map((mission) => {
+        {
+          /* console.log(mission.volunteers.includes(user.email)); */
+        }
         if (
-          mission.status === "not accepted" ||
-          (user && mission.volunteer === user.email) ||
+          mission.volunteersLength < mission.volunteersRequired ||
+          (user && mission.volunteers.includes(user.email)) ||
           props.userRole === "admin"
         ) {
           cnt++;
@@ -41,7 +44,7 @@ const Content = (props) => {
               score={mission.score}
               status={mission.status}
               statusText={mission.statusText}
-              volunteer={mission.volunteer}
+              volunteers={mission.volunteers}
               id={mission.id}
               key={mission.id}
               // missionReload={missionReload}

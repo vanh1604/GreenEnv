@@ -23,9 +23,9 @@
 
 .mission--container {
   width: 700px;
-  height: 700px;
+  /* height: 700px; */
   background-color: rgb(246, 249, 235);
-  padding: 130px 175px 285px 105px;
+  padding: 100px 175px 100px 105px;
   position: relative;
 }
 
@@ -91,7 +91,8 @@
 .mission--reward_icon,
 .mission--location_icon,
 .mission--volunteer_icon,
-.mission--result_icon {
+.mission--result_icon,
+.mission--volunteers_required img {
   height: 24px;
   width: 24px;
   margin-right: 8px;
@@ -110,6 +111,10 @@
 #mission--contact_call {
   font-size: 15px;
   font-weight: 700;
+}
+
+.mission--volunteers_required {
+  display: flex;
 }
 
 .mission--admin_monitor_part {
@@ -157,4 +162,10 @@
   transform: translate(0, -50%);
   right: -400px;
   width: 500px;
+}
+
+.mission--volunteer_info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
