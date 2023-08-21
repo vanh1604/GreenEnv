@@ -141,7 +141,7 @@ const User = (props) => {
       </div>
       <div className="user-present-board--missions">
       {presents.map((present) => {
-            if(present.status === userDoc.email) {
+            if(userDoc.exchange[present.id] === true) {
               return (
                 <PresentItem
                   id={present.id}

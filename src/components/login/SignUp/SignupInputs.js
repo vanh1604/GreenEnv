@@ -19,6 +19,7 @@ const SignUpInputs = () => {
   const [message, setMessage] = useState("");
   const [messageShowing, setMessageShowing] = useState(false);
   const [notifType, setNotifType] = useState("Thông báo");
+  const [exchange, setExchange] = useState([]); 
 
   const { user, createUser } = UserAuth();
 
@@ -37,6 +38,9 @@ const SignUpInputs = () => {
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
+    for(let i = 0; i <= 6; ++i) {
+      setExchange(exchange => [...exchange, false]);
+    }
     if (repassword === password) {
       try {
         await createUser(email, password);
@@ -60,6 +64,7 @@ const SignUpInputs = () => {
             email: email,
             score: 0,
             role: role,
+            exchange: exchange,
           });
         };
         saveInfo();
