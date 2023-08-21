@@ -57,7 +57,6 @@ const Exchange = () => {
       newExchange[present.id] = true;
 
       await updateDoc(doc(colRefUsers, `${userDoc.email}`), {
-        // score: userDoc.score + props.score,
         score: newScore,
         exchange: newExchange,
       });
@@ -107,7 +106,7 @@ const Exchange = () => {
 
                   <button
                     className={
-                      userDoc.exchange[present.id] === false
+                      (userDoc.exchange == undefined || userDoc.exchange[present.id] === false)
                         ? "exchange--button--instock"
                         : "exchange--button--outstock"
                     }
