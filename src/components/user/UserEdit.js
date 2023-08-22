@@ -8,6 +8,7 @@ import { UserAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 import { updateProfile } from "firebase/auth";
 import Error from "../error/Error";
+import Notification from "../common-components/Notification";
 
 const UserEdit = (props) => {
   const navigate = useNavigate();
@@ -39,11 +40,26 @@ const UserEdit = (props) => {
   const [phoneNumber, setPhoneNumber] = useState(userDoc.phoneNumber);
   const [password, setPassword] = useState("");
 
+  const [message, setMessage] = useState("");
+  const [messageShowing, setMessageShowing] = useState(false);
+  const [notifType, setNotifType] = useState("Thông báo");
+
+  const HandleMessageExit = () => {
+    setMessageShowing(!messageShowing);
+  };
+
+  const Notify = (nType, nMessage) => {
+    //notification type, notification message
+    setNotifType(nType);
+    setMessage(nMessage);
+    if (nMessage != "") HandleMessageExit();
+  };
+
   const handleUserEdit = (e) => {
     e.preventDefault();
 
     if (password !== localStorage.getItem("password")) {
-      alert("Mật khẩu chưa đúng!");
+      Notify("Báo lỗi", "Mật khẩu không đúng.");
       return;
     }
 
@@ -81,54 +97,62 @@ const UserEdit = (props) => {
   };
 
   return (
-    <form className="user-edit" onSubmit={handleUserEdit}>
-      <div className="user-edit--account_line">
-        <div className="user-edit--account_container">
-          <img src={avatar} alt="" className="user-edit--avatar" />
-          <input
-            className="user-edit--input"
-            id="user-edit--account"
-            placeholder="Username..."
-            defaultValue={userDoc.username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-        </div>
-      </div>
-      <div className="user-edit--info">
-        <div className="user-edit--info_line1">
-          <div className="user-edit--name">
-            <div className="user-edit--label user-edit--name_label">
-              Họ và tên
-            </div>
+    <>
+      {messageShowing ? (
+        <Notification
+          notifType={notifType}
+          message={message}
+          HandleMessageExit={HandleMessageExit}
+        />
+      ) : null}
+      <form className="user-edit" onSubmit={handleUserEdit}>
+        <div className="user-edit--account_line">
+          <div className="user-edit--account_container">
+            <img src={avatar} alt="" className="user-edit--avatar" />
             <input
-              type="text"
-              className="user-edit--input marginTop12"
-              placeholder="Họ và tên..."
-              defaultValue={userDoc.name}
+              className="user-edit--input"
+              id="user-edit--account"
+              placeholder="Username..."
+              defaultValue={userDoc.username}
               onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-          </div>
-          <div className="user-edit--phone">
-            <div className="user-edit--label user-edit--phone_label">
-              Số điện thoại
-            </div>
-            <input
-              id="user-edit--phone_number"
-              className="user-edit--input marginTop12"
-              defaultValue={userDoc.phoneNumber}
-              placeholder="Số điện thoại..."
-              onChange={(e) => {
-                setPhoneNumber(e.target.value);
+                setUsername(e.target.value);
               }}
             />
           </div>
         </div>
-        <div className="user-edit--info_line2">
-          {/* <div className="user-edit--new_password">
+        <div className="user-edit--info">
+          <div className="user-edit--info_line1">
+            <div className="user-edit--name">
+              <div className="user-edit--label user-edit--name_label">
+                Họ và tên
+              </div>
+              <input
+                type="text"
+                className="user-edit--input marginTop12"
+                placeholder="Họ và tên..."
+                defaultValue={userDoc.name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+            </div>
+            <div className="user-edit--phone">
+              <div className="user-edit--label user-edit--phone_label">
+                Số điện thoại
+              </div>
+              <input
+                id="user-edit--phone_number"
+                className="user-edit--input marginTop12"
+                defaultValue={userDoc.phoneNumber}
+                placeholder="Số điện thoại..."
+                onChange={(e) => {
+                  setPhoneNumber(e.target.value);
+                }}
+              />
+            </div>
+          </div>
+          <div className="user-edit--info_line2">
+            {/* <div className="user-edit--new_password">
             <div className="user-edit--label user-edit--new_password_label">
               Mật khẩu mới
             </div>
@@ -141,24 +165,25 @@ const UserEdit = (props) => {
               }}
             />
           </div> */}
-          <div className="user-edit--password_confirm">
-            <div className="user-edit--label user-edit--password_confirm_label">
-              Mật khẩu
+            <div className="user-edit--password_confirm">
+              <div className="user-edit--label user-edit--password_confirm_label">
+                Mật khẩu
+              </div>
+              <input
+                type="password"
+                id="user-edit--password"
+                className="user-edit--input marginTop12"
+                placeholder="Mật khẩu..."
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
             </div>
-            <input
-              type="password"
-              id="user-edit--password"
-              className="user-edit--input marginTop12"
-              placeholder="Mật khẩu..."
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
           </div>
+          <button className="user-edit--update_btn">Cập nhật</button>
         </div>
-        <button className="user-edit--update_btn">Cập nhật</button>
-      </div>
-    </form>
+      </form>
+    </>
   );
 };
 
