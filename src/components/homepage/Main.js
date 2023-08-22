@@ -17,6 +17,10 @@ const Main = () => {
     navigate("/missions");
   }
 
+  const handleToContact = () => {
+    navigate("/contact");
+  }
+
   return (
     <div className="main--container">
       <Header /> 
@@ -34,7 +38,7 @@ const Main = () => {
             </div>
           </div>
 
-          <button className="main--thamgia">Tham gia cùng chúng tôi</button>
+          <button className="main--thamgia" onClick={handleToContact}>Tham gia cùng chúng tôi</button>
         </div>
 
         <div className="main--challenge">
