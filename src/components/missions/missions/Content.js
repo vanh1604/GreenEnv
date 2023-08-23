@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { UserAuth } from "../../../context/AuthContext";
+import MissionBoard from "../../mission-board/MissionBoard";
 
 const Content = (props) => {
   const [missions, setMissions] = useState([]);
@@ -24,40 +25,46 @@ const Content = (props) => {
   let cnt = 0;
 
   return (
-    <div>
-      {missions.map((mission) => {
-        {
-          /* console.log(mission.volunteers.includes(user.email)); */
-        }
-        if (
-          mission.volunteersLength < mission.volunteersRequired ||
-          (user && mission.volunteers.includes(user.email)) ||
-          props.userRole === "admin"
-        ) {
-          cnt++;
-          return (
-            <Mission
-              title={mission.title}
-              content={mission.content}
-              address={mission.address}
-              number={mission.number}
-              score={mission.score}
-              status={mission.status}
-              statusText={mission.statusText}
-              volunteers={mission.volunteers}
-              id={mission.id}
-              key={mission.id}
-              // missionReload={missionReload}
-            />
-          );
-        }
-      })}
-      {cnt == 0 ? (
-        <div className="missions--empty_notification">
-          Chưa có nhiệm vụ nào, bạn hãy quay lại sau nhé!
+    <>
+      {props.userRole === "admin" ? (
+        <MissionBoard />
+      ) : (
+        <div>
+          {missions.map((mission) => {
+            {
+              /* console.log(mission.volunteers.includes(user.email)); */
+            }
+            if (
+              mission.volunteersLength < mission.volunteersRequired ||
+              (user && mission.volunteers.includes(user.email))
+              //|| props.userRole === "admin"
+            ) {
+              cnt++;
+              return (
+                <Mission
+                  title={mission.title}
+                  content={mission.content}
+                  address={mission.address}
+                  number={mission.number}
+                  score={mission.score}
+                  status={mission.status}
+                  statusText={mission.statusText}
+                  volunteers={mission.volunteers}
+                  id={mission.id}
+                  key={mission.id}
+                  // missionReload={missionReload}
+                />
+              );
+            }
+          })}
+          {cnt == 0 ? (
+            <div className="missions--empty_notification">
+              Chưa có nhiệm vụ nào, bạn hãy quay lại sau nhé!
+            </div>
+          ) : null}
         </div>
-      ) : null}
-    </div>
+      )}
+    </>
   );
 };
 

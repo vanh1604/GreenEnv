@@ -90,8 +90,8 @@ const CollaborationInvitation = () => {
               onChange={(e) => setColabName(e.target.value)}
             />
             <input
-              type="tel"
-              className="ci--form_phone"
+              type="email"
+              className="ci--form_email"
               placeholder="Email"
               onChange={(e) => setColabEmail(e.target.value)}
             />

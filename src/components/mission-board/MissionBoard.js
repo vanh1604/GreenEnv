@@ -3,11 +3,12 @@ import "./MissionBoard.css";
 import MissionItem from "./MissionItem";
 import { UserAuth } from "../../context/AuthContext";
 import { getDocs } from "firebase/firestore";
-import { colRefMissions } from "../../firebase";
+import { colRefMissions, colRefUsers } from "../../firebase";
 import { useNavigate } from "react-router";
 
 const MissionBoard = (props) => {
   const [missions, setMissions] = useState([]);
+  const [userDoc, setUserDoc] = useState({});
   const navigate = useNavigate();
   useEffect(() => {
     const getMissions = async () => {
@@ -17,8 +18,19 @@ const MissionBoard = (props) => {
 
     getMissions();
 
+    const getUserDoc = async () => {
+      const data = await getDocs(colRefUsers);
+      data.docs.forEach((doc) => {
+        if (doc.data().email === localStorage.email) {
+          setUserDoc({ ...doc.data(), id: doc.id });
+          return;
+        }
+      });
+    };
+    getUserDoc();
+
     if (props.role !== props.userRole) {
-      if (props.role === "user") navigate("/admin/missions")
+      if (props.role === "user") navigate("/admin/missions");
       else navigate("/user/missions");
     }
   }, []);
@@ -31,13 +43,21 @@ const MissionBoard = (props) => {
       <div className="mission-board--labels">
         <div className="mission-board--label">Nhiệm vụ</div>
         <div className="mission-board--label">Địa điểm</div>
-        <div className="mission-board--label">Thời gian</div>
+        {userDoc.role !== "admin" ? (
+          <div className="mission-board--label">Thời gian</div>
+        ) : null}
         <div className="mission-board--label">Điểm thưởng</div>
         <div className="mission-board--label">Trạng thái</div>
+        {userDoc.role === "admin" ? (
+          <div className="mission-board--label">Người nhận</div>
+        ) : null}
       </div>
       <div className="mission-board--missions">
         {missions.map((mission) => {
-          if (mission.volunteers.includes(user.email))
+          if (
+            mission.volunteers.includes(user.email) ||
+            (userDoc.role === "admin" && mission.status !== "not accepted")
+          )
             return (
               <MissionItem
                 id={mission.id}
@@ -50,7 +70,9 @@ const MissionBoard = (props) => {
                 number={mission.number}
                 score={mission.score}
                 status={mission.status}
+                volunteers={mission.volunteers}
                 statusText={mission.statusText}
+                userRole={userDoc.role}
                 //key = {mission.id}
               />
             );

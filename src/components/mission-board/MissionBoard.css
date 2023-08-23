@@ -12,7 +12,7 @@
 .mission-board--labels {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1.5fr;
   justify-content: center;
   align-items: center;
   text-transform: uppercase;

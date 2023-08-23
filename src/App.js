@@ -115,7 +115,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route
+          {/* <Route
             exact
             path="/admin/missions"
             element={
@@ -124,7 +124,7 @@ const App = () => {
                 <MissionBoard role="admin" userRole={userDoc.role} /> <Footer />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/about"
             element={
