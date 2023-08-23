@@ -6,13 +6,10 @@ import { useNavigate } from "react-router";
 import { getDocs } from "firebase/firestore";
 import { colRefUsers, colRefPresents } from "../../firebase";
 import ConfirmLogout from "../common-components/ConfirmLogout";
-import Error from "../error/Error";
 import PresentItem from "./PresentItem";
-// import backArrow from "../common-components/img/arrow-left-solid.svg";
 
 const User = (props) => {
   const navigate = useNavigate();
-  const [dem, setDem] = useState(0);
   const { user, logout } = UserAuth();
   const [userDoc, setUserDoc] = useState({});
   const [confirmLogout, setConfirmLogout] = useState(false);
