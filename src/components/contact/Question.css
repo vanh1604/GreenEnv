@@ -2,7 +2,7 @@
   display: flex;
   gap: 16px;
   text-align: center;
-  margin-bottom: 32px;
+  cursor: pointer;
 }
 
 .plus {
@@ -14,4 +14,12 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 30px;
+}
+
+.questionAnswer {
+  color: green;
+  font-weight: 500;
+  font-size: 18px;
+  padding-left: 30px;
+  width: 700px;
 }
