@@ -20,7 +20,6 @@ const UserEdit = (props) => {
     const getUserDoc = async () => {
       const data = await getDocs(colRefUsers);
       data.docs.forEach((doc) => {
-        // console.log(doc.data());
         if (doc.data().email === localStorage.email) {
           setUserDoc({ ...doc.data(), id: doc.id });
           return;

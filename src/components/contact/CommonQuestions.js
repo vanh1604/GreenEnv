@@ -11,7 +11,7 @@ const CommonQuestions = () => {
       <div className="cq--questions_container">
         <Question question={"Sứ mệnh của Green Env là gì?"}/>
         <Question question={"Green Env hoạt động trên lĩnh vực nào?"}/>
-        <Question question={"Green Env là tên viết tắt của những chữ cài nào?"}/>
+        <Question question={"Green Env là tên viết tắt của những chữ cái nào?"}/>
         <Question question={"Làm thế nào để tổ chức doanh nghiệp hợp tác cùng Green Env?"}/>
         <Question question={"Làm thế nào để bạn có thể tham gia?"}/>
         <Question question={"Tại sao Green Env cần sự đóng góp từ bạn?"}/>
