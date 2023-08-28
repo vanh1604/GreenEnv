@@ -50,15 +50,25 @@ const Exchange = () => {
       return;
     }
 
+    if (present.remain === 0) {
+      Notify("Báo lỗi", "Quà bạn muốn đổi đã hết"); 
+      return; 
+    }
+
     if (user.score >= present.point) {
       Notify("Chúc mừng!", "Bạn đã đổi quà thành công!");
       let newScore = user.score - present.point;
       let newExchange = userDoc.exchange;
+      let newRemain = present.remain - 1; 
       newExchange[present.id] = true;
 
       await updateDoc(doc(colRefUsers, `${userDoc.email}`), {
         score: newScore,
         exchange: newExchange,
+      });
+
+      await updateDoc(doc(colRefPresents, `${present.id}`), {
+        remain: newRemain, 
       });
 
       window.location.reload(true);
@@ -104,11 +114,13 @@ const Exchange = () => {
                     ></img>
                   </div>
 
+                  <div className="present--name present--remain">SL: {present.remain}</div>
+
                   <button
                     className={
-                      (userDoc.exchange == undefined || userDoc.exchange[present.id] === false)
-                        ? "exchange--button--instock"
-                        : "exchange--button--outstock"
+                      (userDoc.exchange === undefined || userDoc.exchange[present.id] === true || present.remain === 0)
+                        ? "exchange--button--outstock"
+                        : "exchange--button--instock"
                     }
                     onClick={() =>
                       handleExchangePresent(
