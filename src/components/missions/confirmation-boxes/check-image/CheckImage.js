@@ -42,7 +42,7 @@ const CheckImage = ({
     listAll(imageListRef).then((response) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
-          setImagelist((imageList) => [...imageList, url]);
+          setImagelist((imageList) => [...imageList, {name: item.name, url: url}]);
         });
       });
     });
@@ -57,9 +57,27 @@ const CheckImage = ({
         </div>
         <div className="mission-confirm--headline">Ảnh đã nộp</div>
 
-        <div className="checkImg--img_container">
-          <img src={imageList[0]} className="CheckImage--img"></img>
+        {imageList.map((image) => {
+
+          return (
+            <div>
+              <div className="checkImg--img_container">
+                <div>
+                {image.name}
+                </div>
+            <img src={image.url} className="CheckImage--img"></img>
         </div>
+
+            </div>
+            
+          )
+          
+         
+        })}
+
+        {console.log(imageList)}
+
+        
 
         {userDoc.role === "admin" ? <div className="mission-confirm--buttons">
           <button

@@ -1,9 +1,9 @@
 import React from "react";
 import "../MissionConfirmCancel.css";
 import { useNavigate } from "react-router";
-import { colRefMissions } from "../../../../firebase";
+import { colRefMissions, colRefUsers } from "../../../../firebase";
 import { getDocs, updateDoc, doc } from "firebase/firestore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { storage } from "../../../../firebase";
 import { ref, uploadBytes } from "firebase/storage";
 // import { v4 } from "uuid"
@@ -23,13 +23,14 @@ const MissionUpload = ({
   HandleUploadImageStatusChange
 }) => {
   const [imageUpload, setImageUpload] = useState(null);
+  const [userDoc, setUserDoc] = useState({});
 
   const HandleUploadImage = async () => {
     if (!imageUpload) return;
 
-    const imageRef = ref(storage, `images/${id}/pic.jpg`);
+    const imageRef = ref(storage, `images/${id}/${userDoc.email}`);
     uploadBytes(imageRef, imageUpload).then(() => {
-      // alert("Đã tải ảnh lên");
+      
     });
 
     await updateDoc(doc(colRefMissions, id), {
@@ -39,6 +40,19 @@ const MissionUpload = ({
     HandleUploadImageStatusChange();
     HandleConfirmUploadExit();
   };
+
+  useEffect(() => {
+    const getUserDoc = async () => {
+      const data = await getDocs(colRefUsers);
+      data.docs.forEach((doc) => {
+        if (doc.data().email === localStorage.email) {
+          setUserDoc({ ...doc.data(), id: doc.id });
+          return;
+        }
+      });
+    };
+    getUserDoc();
+  }, []);
 
   return (
     <div className="mision-confirm">
@@ -81,6 +95,7 @@ const MissionUpload = ({
         </div>
       </div>
     </div>
+
   );
 };
 
