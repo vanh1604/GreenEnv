@@ -27,6 +27,7 @@
 .mission-confirm--notif_checkImg {
   margin-top: 50px;
   width: 60vw;
+  height: 700px;
 }
 
 .checkImg--xmark_container {
@@ -85,7 +86,7 @@
 
 .checkImg--img_container {
   width: 100%;
-  max-height: 300px;
+  max-height: 600px;
   overflow: auto;
 }
 
@@ -118,4 +119,15 @@
 .test {
   width: 190px;
   margin: 0 auto;
+}
+
+.checkImg--eachImg {
+  font-size: 15px;
+  line-height: 26px;
+  font-family: "Open Sans";
+  font-weight: 800;
+}
+
+.test2 {
+  padding: 18px 0px;
 }

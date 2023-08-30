@@ -57,23 +57,22 @@ const CheckImage = ({
         </div>
         <div className="mission-confirm--headline">Ảnh đã nộp</div>
 
+        <div className="checkImg--img_container">
         {imageList.map((image) => {
 
           return (
-            <div>
-              <div className="checkImg--img_container">
-                <div>
+            <div className = "test2">
+              <div className= "checkImg--eachImg">
                 {image.name}
-                </div>
-            <img src={image.url} className="CheckImage--img"></img>
-        </div>
-
+              </div>
+              <img src={image.url} className="CheckImage--img"></img>
             </div>
             
           )
           
          
         })}
+        </div>
 
         {console.log(imageList)}
 
