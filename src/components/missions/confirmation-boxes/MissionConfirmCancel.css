@@ -122,12 +122,13 @@
 }
 
 .checkImg--eachImg {
-  font-size: 15px;
+  font-size: 18px;
   line-height: 26px;
   font-family: "Open Sans";
   font-weight: 800;
+  padding-bottom: 12px;
 }
 
 .test2 {
-  padding: 18px 0px;
+  padding: 20px 0px;
 }
