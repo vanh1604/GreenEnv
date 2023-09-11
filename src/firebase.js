@@ -26,13 +26,9 @@ export const db = getFirestore(app);
 export const colRefUsers = collection(db, "users");
 export const colRefMissions = collection(db, "missions");
 export const colRefPresents = collection(db, "presents");
-<<<<<<< Updated upstream
 export const colRefMessages = collection(db, "messages");
 export const colRefMessengerCount = collection(db, "messengerCount");
-export const storage = getStorage(app); 
-=======
 export const colRefUserMission = collection(db, "UserMission");
-export const storage = getStorage(app);
->>>>>>> Stashed changes
+export const storage = getStorage(app); 
 export default app;
 // const analytics = getAnalytics(app);

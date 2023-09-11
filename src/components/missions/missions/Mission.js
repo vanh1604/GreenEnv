@@ -161,12 +161,6 @@ const Mission = (props) => {
         volunteersLength: mission.volunteersLength + 1,
       });
     }
-<<<<<<< Updated upstream
-    await updateDoc(doc(colRefMissions, props.id), {
-      status: "accepted",
-      statusText: "Đang làm",
-    });
-=======
     // await updateDoc(doc(colRefMissions, props.id), {
     //   volunteer: userDoc.email,
     // });
@@ -201,7 +195,6 @@ const Mission = (props) => {
     // };
     // getUserMissionLink();
 
->>>>>>> Stashed changes
     setStatusDisplay(
       <div className={`mission--status_chip mission--status_accepted`}>
         Đang làm
@@ -223,7 +216,7 @@ const Mission = (props) => {
     setConfirmAccept(false);
   };
 
-  const HandleNotAcceptImage = async () => {
+  const HandleAdminNotAcceptImage = async () => {
     // await updateDoc(doc(colRefMissions, props.id), {
     //   status: "denied",
     //   statusText: "Chưa đạt",
@@ -247,7 +240,7 @@ const Mission = (props) => {
     navigate(`/missions/details/${props.id}`);
   };
 
-  const HandleAcceptImage = async () => {
+  const HandleAdminAcceptImage = async () => {
     // await updateDoc(doc(colRefMissions, props.id), {
     //   status: "done",
     //   statusText: "Đã duyệt",
@@ -264,7 +257,7 @@ const Mission = (props) => {
     );
     setStatus("done");
     let newScore = volunteerDoc.score + props.score;
-    await updateDoc(doc(colRefUsers, `${userDoc.email}`), {
+    await updateDoc(doc(colRefUsers, `${props.volunteer}`), {
       // score: userDoc.score + props.score,
       score: newScore,
     });
@@ -311,8 +304,8 @@ const Mission = (props) => {
           score={mission.score}
           duration={mission.duration}
           id={mission.id}
-          HandleAcceptImage={HandleAcceptImage}
-          HandleNotAcceptImage={HandleNotAcceptImage}
+          // HandleAcceptImage={HandleAcceptImage}
+          // HandleNotAcceptImage={HandleNotAcceptImage}
           HandleConfirmCheckExit={HandleConfirmCheckExit}
         />
       ) : null}
@@ -326,8 +319,8 @@ const Mission = (props) => {
           score={mission.score}
           duration={mission.duration}
           id={mission.id}
-          // HandleAcceptImage={HandleAdminAcceptImage}
-          // HandleNotAcceptImage={HandleAdminNotAcceptImage}
+          HandleAcceptImage={HandleAdminAcceptImage}
+          HandleNotAcceptImage={HandleAdminNotAcceptImage}
           HandleConfirmCheckExit={HandleConfirmAdminCheckExit}
         />
       ) : null}
@@ -381,28 +374,22 @@ const Mission = (props) => {
             <img src={userIcon} alt="" /> {mission.volunteersLength} /{" "}
             {mission.volunteersRequired}
           </div>
-<<<<<<< Updated upstream
-          {userDoc.role === "admin" ? (
-=======
           {/* {userDoc.role === "admin" ? (
->>>>>>> Stashed changes
             <div className="mission--admin_monitor_part">
               {status !== "not accepted" ? (
                 <>
-                  <div className="mission--volunteer_info">
-                    Người nhận:
-                    {props.volunteers.map((volunteer) => (
-                      <div className="mission--volunteer">
-                        <img
-                          src={userIcon}
-                          alt=""
-                          className="mission--volunteer_icon"
-                        />
-                        <div className="mission--volunteer_email">
-                          {volunteer}
-                        </div>
-                      </div>
-                    ))}
+                  <div className="mission--volunteer">
+                    <img
+                      src={userIcon}
+                      alt=""
+                      className="mission--volunteer_icon"
+                    />
+                    <div className="mission--volunteer_info">
+                      Người nhận:{" "}
+                      <span className="mission--volunteer_email">
+                        {props.volunteer}
+                      </span>
+                    </div>
                   </div>
                   <div className="mission--result">
                     {status === "accepted" || status === "pending" ? (
@@ -505,7 +492,7 @@ const Mission = (props) => {
                 className="mision--button mision--check--admin_button"
                 onClick={HandleAdminCheckImageClicked}
               >
-                Danh sách đã nộp
+                Những người nhận nhiệm vụ
               </button>
             ) : null}
           </div>

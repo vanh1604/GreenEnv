@@ -10,7 +10,6 @@ import {
 } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { UserAuth } from "../../../context/AuthContext";
-import MissionBoard from "../../mission-board/MissionBoard";
 
 const Content = (props) => {
   const [missions, setMissions] = useState([]);
@@ -70,22 +69,6 @@ const Content = (props) => {
   let cnt = 0;
 
   return (
-<<<<<<< Updated upstream
-    <>
-      {props.userRole === "admin" ? (
-        <MissionBoard />
-      ) : (
-        <div>
-          {missions.map((mission) => {
-            {
-              /* console.log(mission.volunteers.includes(user.email)); */
-            }
-            if (
-              mission.volunteersLength < mission.volunteersRequired ||
-              (user && mission.volunteers.includes(user.email))
-              //|| props.userRole === "admin"
-            ) {
-=======
     <div>
       {userMissionLinks.map((userMissionLink) => {
         //does not work!!!
@@ -96,7 +79,6 @@ const Content = (props) => {
               userMissionLink.userStatus !== "done"
             ) {
               tmp = [...tmp, mission.id];
->>>>>>> Stashed changes
               cnt++;
               return (
                 <Mission
@@ -107,12 +89,9 @@ const Content = (props) => {
                   score={mission.score}
                   status={mission.status}
                   statusText={mission.statusText}
-<<<<<<< Updated upstream
-=======
                   userStatus={userMissionLink.userStatus}
                   userStatusText={userMissionLink.userStatusText}
                   // volunteer={mission.volunteer}
->>>>>>> Stashed changes
                   volunteers={mission.volunteers}
                   id={mission.id}
                   key={mission.id}
@@ -120,14 +99,6 @@ const Content = (props) => {
                 />
               );
             }
-<<<<<<< Updated upstream
-          })}
-          {cnt == 0 ? (
-            <div className="missions--empty_notification">
-              Chưa có nhiệm vụ nào, bạn hãy quay lại sau nhé!
-            </div>
-          ) : null}
-=======
           });
         }
       })}
@@ -211,16 +182,13 @@ const Content = (props) => {
       {cnt == 0 ? (
         <div className="missions--empty_notification">
           Chưa có nhiệm vụ nào, bạn hãy quay lại sau nhé!
->>>>>>> Stashed changes
         </div>
-      )}
-    </>
+      ) : null}
+    </div>
   );
 };
 
 export default Content;
-<<<<<<< Updated upstream
-=======
 
 // import React from "react";
 // import "./Content.css";
@@ -379,4 +347,3 @@ export default Content;
 // };
 
 // export default Content;
->>>>>>> Stashed changes

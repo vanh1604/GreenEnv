@@ -1,5 +1,6 @@
 import React from "react";
 import "../MissionConfirmCancel.css";
+import DarkBackground from "../../../common-components/DarkBackground";
 
 const MissionAccept = ({
   title,
@@ -15,7 +16,8 @@ const MissionAccept = ({
 }) => {
   return (
     <div className="mission-confirm">
-      <div className="mission-confirm--bg"></div>
+      {/* <div className="mission-confirm--bg"></div> */}
+      <DarkBackground />
       <div className="mission-confirm--notif">
         <div className="mission-confirm--headline">Xác nhận tham gia</div>
         <div className="mission-confirm--question">

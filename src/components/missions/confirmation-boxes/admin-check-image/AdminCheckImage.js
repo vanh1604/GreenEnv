@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import "../MissionConfirmCancel.css";
+// import "../MissionConfirmCancel.css";
+import "./AdminCheckImage.css"
 import { storage } from "../../../../firebase";
 import { listAll, ref, getDownloadURL } from "firebase/storage";
 import { colRefUsers } from "../../../../firebase";
@@ -8,6 +9,7 @@ import { getDocs } from "firebase/firestore";
 import { UserAuth } from "../../../../context/AuthContext";
 import xmark from "./img/circle-xmark-regular.svg";
 import MissionBoard from "../../../mission-board/MissionBoard";
+import DarkBackground from "../../../common-components/DarkBackground";
 
 const AdminCheckImage = ({
   title,
@@ -50,16 +52,17 @@ const AdminCheckImage = ({
   }, []);
 
   return (
-    <div className="mission-confirm">
-      <div className="mission-confirm--bg"></div>
-      <div className="mission-confirm--notif mission-confirm--notif_checkImg">
+    <div className="check-image">
+      {/* <div className="check-image--bg"></div> */}
+      <DarkBackground />
+      <div className="check-image--notif check-image--notif_checkImg">
         <div
           className="checkImg--xmark_container"
           onClick={HandleConfirmCheckExit}
         >
           <img src={xmark} alt="exit" />
         </div>
-        {/* <div className="mission-confirm--headline">
+        {/* <div className="check-image--headline">
           Danh sách người dùng đã nộp
         </div> */}
 
@@ -70,20 +73,20 @@ const AdminCheckImage = ({
         <MissionBoard
           role="admin"
           userRole={userDoc.role}
-          headline="DANH SÁCH NGƯỜI DÙNG ĐÃ NỘP"
+          headline="DANH SÁCH NGƯỜI NHẬN NHIỆM VỤ"
           missionId={id}
         />
 
         {/* {userDoc.role === "admin" ? (
-          <div className="mission-confirm--buttons">
+          <div className="check-image--buttons">
             <button
-              className="mission-confirm--button mission-confirm--btn1_accept"
+              className="check-image--button check-image--btn1_accept"
               onClick={HandleNotAcceptImage}
             >
               Không duyệt
             </button>
             <button
-              className="mission-confirm--button mission-confirm--btn2_accept"
+              className="check-image--button check-image--btn2_accept"
               onClick={HandleAcceptImage}
             >
               Duyệt

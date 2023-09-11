@@ -1,21 +1,18 @@
 import React from "react";
 import "../MissionConfirmCancel.css";
 import { useNavigate } from "react-router";
-<<<<<<< Updated upstream
-import { colRefMissions, colRefUsers } from "../../../../firebase";
-=======
 import {
   colRefUsers,
   colRefMissions,
   colRefUserMission,
 } from "../../../../firebase";
->>>>>>> Stashed changes
 import { getDocs, updateDoc, doc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { storage } from "../../../../firebase";
 import { ref, uploadBytes } from "firebase/storage";
 // import { v4 } from "uuid"
 import xmark from "./img/circle-xmark-regular.svg";
+import DarkBackground from "../../../common-components/DarkBackground";
 
 const MissionUpload = ({
   title,
@@ -32,8 +29,6 @@ const MissionUpload = ({
 }) => {
   const [imageUpload, setImageUpload] = useState(null);
   const [userDoc, setUserDoc] = useState({});
-<<<<<<< Updated upstream
-=======
   const [mission, setMission] = useState({});
 
   useEffect(() => {
@@ -60,14 +55,13 @@ const MissionUpload = ({
     };
     getMission();
   }, []);
->>>>>>> Stashed changes
 
   const HandleUploadImage = async () => {
     if (!imageUpload) return;
 
-    const imageRef = ref(storage, `images/${id}/${userDoc.email}`);
+    const imageRef = ref(storage, `images/${id}/pic.jpg`);
     uploadBytes(imageRef, imageUpload).then(() => {
-      
+      // alert("Đã tải ảnh lên");
     });
 
     // await updateDoc(doc(colRefMissions, id), {
@@ -88,22 +82,10 @@ const MissionUpload = ({
     HandleConfirmUploadExit();
   };
 
-  useEffect(() => {
-    const getUserDoc = async () => {
-      const data = await getDocs(colRefUsers);
-      data.docs.forEach((doc) => {
-        if (doc.data().email === localStorage.email) {
-          setUserDoc({ ...doc.data(), id: doc.id });
-          return;
-        }
-      });
-    };
-    getUserDoc();
-  }, []);
-
   return (
     <div className="mission-confirm">
-      <div className="mission-confirm--bg"></div>
+      {/* <div className="mission-confirm--bg"></div> */}
+      <DarkBackground />
       <div className="mission-confirm--notif mission-confirm--notif_upload">
         <div
           className="checkImg--xmark_container"
@@ -140,7 +122,6 @@ const MissionUpload = ({
         </div>
       </div>
     </div>
-
   );
 };
 

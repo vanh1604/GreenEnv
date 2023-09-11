@@ -21,7 +21,6 @@ import MissionUpload from "../confirmation-boxes/upload-image/MissionUpload";
 import Notification from "../../common-components/Notification";
 import { useNavigate } from "react-router";
 import { UserAuth } from "../../../context/AuthContext";
-import userIcon from "../img/user-solid.svg";
 
 const MissionDetails = ({
   title,
@@ -31,7 +30,7 @@ const MissionDetails = ({
   score,
   duration,
   status,
-  volunteers,
+  volunteer,
   statusText,
   id,
   key,
@@ -112,12 +111,9 @@ const MissionDetails = ({
 
   const HandleAcceptMission = async () => {
     setConfirmAccept(false);
-<<<<<<< Updated upstream
-=======
     // await updateDoc(doc(colRefMissions, id), {
     //   volunteer: userDoc.email,
     // });
->>>>>>> Stashed changes
     if (!mission.volunteers.includes(userDoc.email)) {
       await updateDoc(doc(colRefMissions, id), {
         // volunteer: userDoc.email,
@@ -125,14 +121,6 @@ const MissionDetails = ({
         volunteersLength: mission.volunteersLength + 1,
       });
     }
-<<<<<<< Updated upstream
-    if (mission.volunteersLength + 1 === mission.volunteersRequired) {
-      await updateDoc(doc(colRefMissions, id), {
-        status: "accepted",
-        statusText: "Đang làm",
-      });
-    }
-=======
     // await updateDoc(doc(colRefMissions, id), {
     //   status: "accepted",
     //   statusText: "Đang làm",
@@ -149,7 +137,6 @@ const MissionDetails = ({
         userStatusText: "Đang làm",
       }
     );
->>>>>>> Stashed changes
     setStatusDisplay(
       <div className={`mission--details_chip mission--status_accepted`}>
         Đang làm
@@ -198,12 +185,9 @@ const MissionDetails = ({
   const HandleCancelMission = async () => {
     setConfirmCancel(false);
     const updateInfo2 = async (missionId) => {
-<<<<<<< Updated upstream
-=======
       // await updateDoc(doc(colRefMissions, missionId), {
       //   volunteer: "",
       // });
->>>>>>> Stashed changes
       const index = mission.volunteers.indexOf(userDoc.email);
       let tmpVolunteers = mission.volunteers;
       tmpVolunteers.splice(index, 1);
@@ -215,14 +199,6 @@ const MissionDetails = ({
           volunteersLength: mission.volunteersLength - 1,
         });
       }
-<<<<<<< Updated upstream
-      if (mission.volunteersLength - 1 === 0) {
-        await updateDoc(doc(colRefMissions, missionId), {
-          status: "not accepted",
-          statusText: "",
-        });
-      }
-=======
       // await updateDoc(doc(colRefMissions, missionId), {
       //   status: "not accepted",
       //   statusText: "",
@@ -245,7 +221,6 @@ const MissionDetails = ({
           `${userDoc.email} | ${mission.title} (id: ${mission.id})`
         )
       );
->>>>>>> Stashed changes
       setStatusDisplay(<></>);
       const getMission = async () => {
         const data2 = await getDocs(colRefMissions);
@@ -341,19 +316,10 @@ const MissionDetails = ({
           <div className="mission-details--header--first_line">
             <div className="mission-details--mission-title">{title}</div>
             <div className="mission-details--mission-rewards">+{score}</div>
-            <div className="mission-details--volunteers_required">
-              <img src={userIcon} alt="" /> {mission.volunteersLength} /{" "}
-              {mission.volunteersRequired}
-            </div>
             {statusDisplay ? (
               statusDisplay
             ) : (
               <div>
-<<<<<<< Updated upstream
-                {volunteers.includes(userDoc.email) ? (
-                  <div>
-                    {mission.status === "accepted" ? (
-=======
                 {userMissionLink.userStatus === "accepted" ? (
                   <div
                     className={`mission--details_chip mission--status_accepted`}
@@ -363,55 +329,34 @@ const MissionDetails = ({
                 ) : (
                   <div>
                     {userMissionLink.userStatus === "pending" ? (
->>>>>>> Stashed changes
                       <div
-                        className={`mission--details_chip mission--status_accepted`}
+                        className={`mission--details_chip mission--status_pending`}
                       >
-                        Đang làm
+                        Chưa duyệt
                       </div>
                     ) : (
-<<<<<<< Updated upstream
-                      <div>
-                        {mission.status === "pending" ? (
-=======
                       <dv>
                         {userMissionLink.userStatus === "denied" ? (
->>>>>>> Stashed changes
                           <div
                             className={`mission--details_chip mission--status_pending`}
                           >
-                            Chưa duyệt
+                            Chưa đạt
                           </div>
                         ) : (
-<<<<<<< Updated upstream
-                          <dv>
-                            {mission.status === "denied" ? (
-=======
                           <div>
                             {userMissionLink.userStatus === "done" ? (
->>>>>>> Stashed changes
                               <div
                                 className={`mission--details_chip mission--status_pending`}
                               >
-                                Chưa đạt
+                                Đã duyệt
                               </div>
-                            ) : (
-                              <div>
-                                {mission.status === "done" ? (
-                                  <div
-                                    className={`mission--details_chip mission--status_pending`}
-                                  >
-                                    Đã duyệt
-                                  </div>
-                                ) : null}
-                              </div>
-                            )}
-                          </dv>
+                            ) : null}
+                          </div>
                         )}
-                      </div>
+                      </dv>
                     )}
                   </div>
-                ) : null}
+                )}
               </div>
             )}
           </div>
@@ -431,17 +376,8 @@ const MissionDetails = ({
             </div>
           </div>
         </div>
-<<<<<<< Updated upstream
-        <div className="mission-details--button-container">
-          {!user ||
-          (userDoc.role === "user" &&
-            (mission.status === "not accepted" ||
-              (mission.volunteers &&
-                !mission.volunteers.includes(userDoc.email)))) ? (
-=======
         {/* {/* ) : null}
           {mission.status === "not accepted" || !user ? (
->>>>>>> Stashed changes
             <button
               className="mission-details--button mission-details--join-button"
               onClick={HandleAcceptMissionClicked}

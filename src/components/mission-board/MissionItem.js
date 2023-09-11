@@ -1,54 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./MissionItem.css";
-<<<<<<< Updated upstream
-import userIcon from "./img/user-solid.svg";
-=======
 import { updateDoc, doc, getDocs } from "firebase/firestore";
 import { colRefUserMission } from "../../firebase";
 import { UserAuth } from "../../context/AuthContext";
 import { colRefMissions, colRefUsers } from "../../firebase";
 import CheckImage from "../missions/confirmation-boxes/check-image/CheckImage";
->>>>>>> Stashed changes
 
 const MissionItem = (props) => {
   let statusDisplay = (
     <div
-<<<<<<< Updated upstream
-      className={`mission-item--status_chip mission-item--status_${props.status}`}
-    >
-      {props.statusText}
-    </div>
-  );
-
-  return (
-    <>
-      {props.volunteers.map((volunteer) => (
-        <div className="mission-item">
-          <div className="mission-item--mission">
-            {props.id + ". " + props.mission}
-          </div>
-          <div className="mission-item--location">{props.address}</div>
-          {props.userRole !== "admin" ? (
-            <div className="mission-item--time">{props.time}</div>
-          ) : null}
-          <div className="mission-item--reward">{props.score}</div>
-          <div className="mission-item--status">{statusDisplay}</div>
-          {props.userRole === "admin" ? (
-            <div className="mission-item--buttons">
-              <div className="mission-item--volunteer">
-                <img src={userIcon} alt="" />
-                <div>{volunteer}</div>
-              </div>
-              {props.status !== "not accepted" && props.status !== "accepted" ? (
-                <button className="mission-item--button mission-item--check_button">
-                  Xem ảnh nộp
-                </button>
-              ) : null}
-            </div>
-          ) : null}
-        </div>
-      ))}
-=======
       className={`mission-item--status_chip mission-item--status_${props.userStatus}`}
     >
       {props.userStatusText}
@@ -203,6 +163,7 @@ const MissionItem = (props) => {
     <>
       {checkImage ? (
         <CheckImage
+          prev="MissionItem"
           HandleNotAcceptImage={HandleNotAcceptImage}
           HandleAcceptImage={HandleAcceptImage}
           HandleConfirmCheckExit={HandleCheckExit}
@@ -233,7 +194,6 @@ const MissionItem = (props) => {
           </butto>
         </div>
       </div>
->>>>>>> Stashed changes
     </>
   );
 };

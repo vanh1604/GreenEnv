@@ -1,12 +1,8 @@
 .mission-item {
   width: 100%;
   display: grid;
-<<<<<<< Updated upstream
-  grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1.5fr;
-=======
   /* grid-template-columns: 2fr 2fr 1fr 1fr 1fr; */
   grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr 1.2fr;
->>>>>>> Stashed changes
   justify-content: center;
   align-items: center;
   color: var(--neutral-black-100, #1f201d);
@@ -19,7 +15,7 @@
 }
 
 .mission-item--location {
-  max-width: 250px;
+  max-width: 300px;
 }
 
 .mission-item--reward {
@@ -28,43 +24,6 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 36px;
-}
-
-.mission-item--buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  justify-content: center;
-}
-
-.mission-item--volunteer {
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.mission-item--volunteer img {
-  height: 16px;
-}
-
-.mission-item--button {
-  width: 150px;
-  padding: 5px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-weight: 700;
-}
-
-.mission-item--check_button {
-  border-radius: 100px;
-  background: var(
-    --brand-gradient,
-    linear-gradient(90deg, #46f04e 0%, #ade34d 100%)
-  );
-  border: none;
 }
 
 .mission-item--status_chip {

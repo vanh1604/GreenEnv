@@ -3,20 +3,12 @@ import "./MissionBoard.css";
 import MissionItem from "./MissionItem";
 import { UserAuth } from "../../context/AuthContext";
 import { getDocs } from "firebase/firestore";
-<<<<<<< Updated upstream
-import { colRefMissions, colRefUsers } from "../../firebase";
-=======
 import { colRefMissions, colRefUserMission } from "../../firebase";
->>>>>>> Stashed changes
 import { useNavigate } from "react-router";
 
 const MissionBoard = (props) => {
   const [missions, setMissions] = useState([]);
-<<<<<<< Updated upstream
-  const [userDoc, setUserDoc] = useState({});
-=======
   const [userMissionLinks, setUserMissionLinks] = useState([]);
->>>>>>> Stashed changes
   const navigate = useNavigate();
   useEffect(() => {
     const getMissions = async () => {
@@ -26,23 +18,6 @@ const MissionBoard = (props) => {
 
     getMissions();
 
-<<<<<<< Updated upstream
-    const getUserDoc = async () => {
-      const data = await getDocs(colRefUsers);
-      data.docs.forEach((doc) => {
-        if (doc.data().email === localStorage.email) {
-          setUserDoc({ ...doc.data(), id: doc.id });
-          return;
-        }
-      });
-    };
-    getUserDoc();
-
-    if (props.role !== props.userRole) {
-      if (props.role === "user") navigate("/admin/missions");
-      else navigate("/user/missions");
-    }
-=======
     const getUserMissionLinks = async () => {
       const data = await getDocs(colRefUserMission);
       setUserMissionLinks(
@@ -55,7 +30,6 @@ const MissionBoard = (props) => {
     //   if (props.role === "admin") navigate("/user/missions");
     //   // else navigate("/admin/missions");
     // }
->>>>>>> Stashed changes
   }, []);
 
   const { user } = UserAuth();
@@ -66,25 +40,6 @@ const MissionBoard = (props) => {
     <div className="mission-board">
       <div className="mission-board--title">{props.headline}</div>
       <div className="mission-board--labels">
-<<<<<<< Updated upstream
-        <div className="mission-board--label">Nhiệm vụ</div>
-        <div className="mission-board--label">Địa điểm</div>
-        {userDoc.role !== "admin" ? (
-          <div className="mission-board--label">Thời gian</div>
-        ) : null}
-        <div className="mission-board--label">Điểm thưởng</div>
-        <div className="mission-board--label">Trạng thái</div>
-        {userDoc.role === "admin" ? (
-          <div className="mission-board--label">Người nhận</div>
-        ) : null}
-      </div>
-      <div className="mission-board--missions">
-        {missions.map((mission) => {
-          if (
-            mission.volunteers.includes(user.email) ||
-            (userDoc.role === "admin" && mission.status !== "not accepted")
-          )
-=======
         {props.userRole === "user" ? (
           <div className="mission-board--label">Nhiệm vụ</div>
         ) : null}
@@ -164,7 +119,6 @@ const MissionBoard = (props) => {
             })}
         {/* {missions.map((mission) => {
           if (mission.volunteer === user.email)
->>>>>>> Stashed changes
             return (
               <MissionItem
                 id={mission.id}
@@ -177,16 +131,14 @@ const MissionBoard = (props) => {
                 number={mission.number}
                 score={mission.score}
                 status={mission.status}
-                volunteers={mission.volunteers}
                 statusText={mission.statusText}
-                userRole={userDoc.role}
                 //key = {mission.id}
               />
             );
         })} */}
         {cnt == 0 ? (
           <div className="mission-board--empty_notification">
-            Chưa có người dùng nào nộp nhiệm vụ
+            Chưa có người dùng nào nhận nhiệm vụ
           </div>
         ) : null}
       </div>
