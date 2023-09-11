@@ -14,7 +14,7 @@ const MissionAccept = ({
   HandleAcceptMission,
 }) => {
   return (
-    <div className="mision-confirm">
+    <div className="mission-confirm">
       <div className="mission-confirm--bg"></div>
       <div className="mission-confirm--notif">
         <div className="mission-confirm--headline">Xác nhận tham gia</div>

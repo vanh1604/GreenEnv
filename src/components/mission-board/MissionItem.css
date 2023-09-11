@@ -1,7 +1,12 @@
 .mission-item {
   width: 100%;
   display: grid;
+<<<<<<< Updated upstream
   grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1.5fr;
+=======
+  /* grid-template-columns: 2fr 2fr 1fr 1fr 1fr; */
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr 1.2fr;
+>>>>>>> Stashed changes
   justify-content: center;
   align-items: center;
   color: var(--neutral-black-100, #1f201d);
@@ -92,4 +97,20 @@
 .mission-item--status_done {
   border: 1px solid var(--secondary-in-progress, #8de06a);
   background: rgba(141, 224, 106, 0.5);
+}
+
+.mission-item--check_image_button {
+  border-radius: 100px;
+  background: var(
+    --brand-gradient,
+    linear-gradient(90deg, #46f04e 0%, #ade34d 100%)
+  );
+  border: none;
+  display: flex;
+  padding: 11px 22px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  cursor: pointer;
 }

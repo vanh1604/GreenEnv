@@ -141,7 +141,8 @@
 }
 
 .mission--join_button,
-.mission--check_button {
+.mission--check_button,
+.mision--check--admin_button {
   border-radius: 100px;
   background: var(
     --brand-gradient,
@@ -168,4 +169,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

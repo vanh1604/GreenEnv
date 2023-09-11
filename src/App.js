@@ -19,7 +19,7 @@ import { useState, useEffect } from "react";
 import { db } from "./firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { colRefMissions, colRefUsers } from "./firebase";
-import Exchange from "./components/exchange/Exchange"
+import Exchange from "./components/exchange/Exchange";
 
 const App = () => {
   const [missions, setMissions] = useState([]);
@@ -111,7 +111,12 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Header />
-                <MissionBoard role="user" userRole={userDoc.role} /> <Footer />
+                <MissionBoard
+                  role="user"
+                  userRole={userDoc.role}
+                  headline="BẢNG NHIỆM VỤ"
+                />
+                <Footer />
               </ProtectedRoute>
             }
           />
@@ -140,7 +145,7 @@ const App = () => {
             element={
               <>
                 <Header />
-                <Exchange/>
+                <Exchange />
                 <Footer />
               </>
             }
@@ -151,13 +156,35 @@ const App = () => {
             element={
               <>
                 <Header />
-                <Content
-                  userRole={userDoc.role}
-                />
+                <Content userRole={userDoc.role} />
                 <Footer />
               </>
             }
           />
+
+          {/* {userMissionLinks.map((userMissionLink) => {
+            //does not work!!!
+            return missions.map((mission) => {
+              return (
+                <Mission
+                  title={mission.title}
+                  content={mission.content}
+                  address={mission.address}
+                  number={mission.number}
+                  score={mission.score}
+                  status={mission.status}
+                  statusText={mission.statusText}
+                  userStatus={userMissionLink.userStatus}
+                  userStatusText={userMissionLink.userStatusText}
+                  volunteer={mission.volunteer}
+                  id={mission.id}
+                  key={mission.id}
+                  // missionReload={missionReload}
+                />
+              );
+            });
+          })} */}
+
           {missions.map((mission) => {
             return (
               <Route

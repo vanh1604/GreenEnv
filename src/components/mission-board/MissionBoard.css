@@ -1,7 +1,7 @@
 .mission-board {
   width: 100%;
-  padding: 0 10%;
-  margin: 64px 0;
+  padding: 0 8%;
+  margin: 30px 0;
 }
 
 .mission-board--title {
@@ -12,7 +12,12 @@
 .mission-board--labels {
   margin-top: 20px;
   display: grid;
+<<<<<<< Updated upstream
   grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1.5fr;
+=======
+  /* grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr; */
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr 1.2fr;
+>>>>>>> Stashed changes
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
@@ -27,3 +32,12 @@
   max-height: 90vh;
   overflow-y: none;
 } */
+
+.mission-board--empty_notification {
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+}

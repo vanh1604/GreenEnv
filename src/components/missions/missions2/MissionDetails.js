@@ -9,8 +9,12 @@ import map from "../img/map.png";
 import dot1 from "../img/Ellipse 3.svg";
 import dot2 from "../img/Ellipse 4.svg";
 import dot3 from "../img/Ellipse 5.svg";
-import { colRefMissions, colRefUsers } from "../../../firebase";
-import { getDocs, updateDoc, doc } from "firebase/firestore";
+import {
+  colRefMissions,
+  colRefUsers,
+  colRefUserMission,
+} from "../../../firebase";
+import { getDocs, updateDoc, doc, setDoc, deleteDoc } from "firebase/firestore";
 import MissionCancel from "../confirmation-boxes/mission-cancel/MissionCancel";
 import MissionAccept from "../confirmation-boxes/mission-accept/MissionAccept";
 import MissionUpload from "../confirmation-boxes/upload-image/MissionUpload";
@@ -44,6 +48,7 @@ const MissionDetails = ({
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { user } = UserAuth();
+  const [userMissionLink, setUserMissionLink] = useState({});
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -67,10 +72,24 @@ const MissionDetails = ({
         }
       });
     };
-    if (user) {
-      getMission();
-    }
+    if (user) getMission();
   }, []);
+
+  useEffect(() => {
+    const getUserMissionLink = async () => {
+      const data = await getDocs(colRefUserMission);
+      data.docs.forEach((doc) => {
+        if (
+          doc.data().userEmail === userDoc.email &&
+          doc.data().missionId == mission.id
+        ) {
+          setUserMissionLink({ ...doc.data(), id: doc.id });
+          return;
+        }
+      });
+    };
+    getUserMissionLink();
+  }, [mission]);
 
   // const HandleBackToMissions = () => {
   //   navigate("/missions");
@@ -93,6 +112,12 @@ const MissionDetails = ({
 
   const HandleAcceptMission = async () => {
     setConfirmAccept(false);
+<<<<<<< Updated upstream
+=======
+    // await updateDoc(doc(colRefMissions, id), {
+    //   volunteer: userDoc.email,
+    // });
+>>>>>>> Stashed changes
     if (!mission.volunteers.includes(userDoc.email)) {
       await updateDoc(doc(colRefMissions, id), {
         // volunteer: userDoc.email,
@@ -100,12 +125,31 @@ const MissionDetails = ({
         volunteersLength: mission.volunteersLength + 1,
       });
     }
+<<<<<<< Updated upstream
     if (mission.volunteersLength + 1 === mission.volunteersRequired) {
       await updateDoc(doc(colRefMissions, id), {
         status: "accepted",
         statusText: "Đang làm",
       });
     }
+=======
+    // await updateDoc(doc(colRefMissions, id), {
+    //   status: "accepted",
+    //   statusText: "Đang làm",
+    // });
+    await setDoc(
+      doc(
+        colRefUserMission,
+        `${userDoc.email} | ${mission.title} (id: ${mission.id})`
+      ),
+      {
+        missionId: mission.id,
+        userEmail: userDoc.email,
+        userStatus: "accepted",
+        userStatusText: "Đang làm",
+      }
+    );
+>>>>>>> Stashed changes
     setStatusDisplay(
       <div className={`mission--details_chip mission--status_accepted`}>
         Đang làm
@@ -154,6 +198,12 @@ const MissionDetails = ({
   const HandleCancelMission = async () => {
     setConfirmCancel(false);
     const updateInfo2 = async (missionId) => {
+<<<<<<< Updated upstream
+=======
+      // await updateDoc(doc(colRefMissions, missionId), {
+      //   volunteer: "",
+      // });
+>>>>>>> Stashed changes
       const index = mission.volunteers.indexOf(userDoc.email);
       let tmpVolunteers = mission.volunteers;
       tmpVolunteers.splice(index, 1);
@@ -165,12 +215,37 @@ const MissionDetails = ({
           volunteersLength: mission.volunteersLength - 1,
         });
       }
+<<<<<<< Updated upstream
       if (mission.volunteersLength - 1 === 0) {
         await updateDoc(doc(colRefMissions, missionId), {
           status: "not accepted",
           statusText: "",
         });
       }
+=======
+      // await updateDoc(doc(colRefMissions, missionId), {
+      //   status: "not accepted",
+      //   statusText: "",
+      // });
+      // await updateDoc(
+      //   doc(
+      //     colRefUserMission,
+      //     `${userDoc.email} | ${mission.title} (id: ${mission.id})`
+      //   ),
+      //   {
+      //     missionId: null,
+      //     userEmail: null,
+      //     userStatus: null,
+      //     userStatusText: null,
+      //   }
+      // );
+      await deleteDoc(
+        doc(
+          colRefUserMission,
+          `${userDoc.email} | ${mission.title} (id: ${mission.id})`
+        )
+      );
+>>>>>>> Stashed changes
       setStatusDisplay(<></>);
       const getMission = async () => {
         const data2 = await getDocs(colRefMissions);
@@ -189,6 +264,26 @@ const MissionDetails = ({
         updateInfo2(id);
         return;
       }
+    });
+
+    // const getUserMissionLink = async () => {
+    //   const data = await getDocs(colRefUserMission);
+    //   data.docs.forEach((doc) => {
+    //     if (
+    //       doc.data().userEmail === userDoc.email &&
+    //       doc.data().missionId == mission.id
+    //     ) {
+    //       setUserMissionLink({ ...doc.data(), id: doc.id });
+    //       return;
+    //     }
+    //   });
+    // };
+    // getUserMissionLink();
+
+    setUserMissionLink({
+      ...userMissionLink,
+      userStatus: null,
+      userStatusText: null,
     });
   };
 
@@ -254,25 +349,47 @@ const MissionDetails = ({
               statusDisplay
             ) : (
               <div>
+<<<<<<< Updated upstream
                 {volunteers.includes(userDoc.email) ? (
                   <div>
                     {mission.status === "accepted" ? (
+=======
+                {userMissionLink.userStatus === "accepted" ? (
+                  <div
+                    className={`mission--details_chip mission--status_accepted`}
+                  >
+                    Đang làm
+                  </div>
+                ) : (
+                  <div>
+                    {userMissionLink.userStatus === "pending" ? (
+>>>>>>> Stashed changes
                       <div
                         className={`mission--details_chip mission--status_accepted`}
                       >
                         Đang làm
                       </div>
                     ) : (
+<<<<<<< Updated upstream
                       <div>
                         {mission.status === "pending" ? (
+=======
+                      <dv>
+                        {userMissionLink.userStatus === "denied" ? (
+>>>>>>> Stashed changes
                           <div
                             className={`mission--details_chip mission--status_pending`}
                           >
                             Chưa duyệt
                           </div>
                         ) : (
+<<<<<<< Updated upstream
                           <dv>
                             {mission.status === "denied" ? (
+=======
+                          <div>
+                            {userMissionLink.userStatus === "done" ? (
+>>>>>>> Stashed changes
                               <div
                                 className={`mission--details_chip mission--status_pending`}
                               >
@@ -314,14 +431,28 @@ const MissionDetails = ({
             </div>
           </div>
         </div>
+<<<<<<< Updated upstream
         <div className="mission-details--button-container">
           {!user ||
           (userDoc.role === "user" &&
             (mission.status === "not accepted" ||
               (mission.volunteers &&
                 !mission.volunteers.includes(userDoc.email)))) ? (
+=======
+        {/* {/* ) : null}
+          {mission.status === "not accepted" || !user ? (
+>>>>>>> Stashed changes
             <button
               className="mission-details--button mission-details--join-button"
+              onClick={HandleAcceptMissionClicked}
+            >
+              Tham gia
+            </button> */}
+        <div className="mission-details--button-container">
+          {!user ||
+          (userDoc.role !== "admin" && !userMissionLink.userStatus) ? (
+            <button
+              className="mission--button mission--join_button"
               onClick={HandleAcceptMissionClicked}
             >
               Tham gia

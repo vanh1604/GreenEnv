@@ -9,10 +9,15 @@ import xmarkIcon from "../img/circle-xmark-solid.svg";
 import missionImg from "../img/mission-img.png";
 import "./Mission.css";
 import { useNavigate } from "react-router";
-import { colRefMissions, colRefUsers } from "../../../firebase";
-import { updateDoc, doc, getDocs } from "firebase/firestore";
+import {
+  colRefMissions,
+  colRefUsers,
+  colRefUserMission,
+} from "../../../firebase";
+import { updateDoc, doc, getDocs, setDoc } from "firebase/firestore";
 import MissionAccept from "../confirmation-boxes/mission-accept/MissionAccept";
 import CheckImage from "../confirmation-boxes/check-image/CheckImage";
+import AdminCheckImage from "../confirmation-boxes/admin-check-image/AdminCheckImage";
 import Notification from "../../common-components/Notification";
 import { UserAuth } from "../../../context/AuthContext";
 
@@ -20,15 +25,19 @@ const Mission = (props) => {
   const navigate = useNavigate();
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmCheck, setConfirmCheck] = useState(false);
+  const [confirmAdminCheck, setConfirmAdminCheck] = useState(false);
   const [userDoc, setUserDoc] = useState({});
   const [volunteerDoc, setVolunteerDoc] = useState({});
   const [mission, setMission] = useState({});
+  const [userMissionLink, setUserMissionLink] = useState({});
   const { user } = UserAuth();
   const [statusDisplay, setStatusDisplay] = useState(null);
-  const [status, setStatus] = useState(props.status);
+  const [status, setStatus] = useState(props.userStatus);
   const [messageShowing, setMessageShowing] = useState(false);
   const [notifType, setNotifType] = useState("Thông báo");
   const [message, setMessage] = useState("");
+
+  // console.log(props.userStatus, props.userStatusText);
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -53,9 +62,20 @@ const Mission = (props) => {
     };
     getVolunteerDoc();
 
+    // const getVolunteerDoc = async () => {
+    //   const data = await getDocs(colRefUsers);
+    //   data.docs.forEach((doc) => {
+    //     if (doc.data().email === props.volunteer) {
+    //       setVolunteerDoc({ ...doc.data(), id: doc.id });
+    //       return;
+    //     }
+    //   });
+    // };
+    // getVolunteerDoc();
+
     const getMission = async () => {
-      const data2 = await getDocs(colRefMissions);
-      data2.docs.forEach((doc) => {
+      const data = await getDocs(colRefMissions);
+      data.docs.forEach((doc) => {
         if (doc.data().title === props.title) {
           //does not work if compare id
           setMission({ ...doc.data(), id: doc.id });
@@ -64,7 +84,37 @@ const Mission = (props) => {
       });
     };
     if (user) getMission();
+
+    // const getUserMissionLink = async () => {
+    //   const data = await getDocs(colRefUserMission);
+    //   data.docs.forEach((doc) => {
+    //     if (
+    //       doc.data().userEmail === userDoc.email &&
+    //       doc.data().missionId == mission.id
+    //     ) {
+    //       setUserMissionLink({ ...doc.data(), id: doc.id });
+    //       return;
+    //     }
+    //   });
+    // };
+    // getUserMissionLink();
   }, []);
+
+  useEffect(() => {
+    const getUserMissionLink = async () => {
+      const data = await getDocs(colRefUserMission);
+      data.docs.forEach((doc) => {
+        if (
+          doc.data().userEmail === userDoc.email &&
+          doc.data().missionId == mission.id
+        ) {
+          setUserMissionLink({ ...doc.data(), id: doc.id });
+          return;
+        }
+      });
+    };
+    getUserMissionLink();
+  }, [mission]);
 
   const HandleMessageExit = () => {
     setMessageShowing(!messageShowing);
@@ -84,12 +134,23 @@ const Mission = (props) => {
   const HandleCheckImageClicked = () => {
     if (!user) {
       // alert("Vui lòng đăng nhập trước!");
-      setNotifType("Bạn chưa thể nhận nhiệm vụ!");
+      setNotifType("Bạn chưa thể xem ảnh nộp!");
       setMessage("Vui lòng đăng nhập trước!");
       HandleMessageExit();
       return;
     }
     setConfirmCheck(true);
+  };
+
+  const HandleAdminCheckImageClicked = () => {
+    if (!user) {
+      // alert("Vui lòng đăng nhập trước!");
+      setNotifType("Bạn chưa thể xem ảnh nộp!");
+      setMessage("Vui lòng đăng nhập trước!");
+      HandleMessageExit();
+      return;
+    }
+    setConfirmAdminCheck(true);
   };
 
   const HandleAcceptMission = async () => {
@@ -100,10 +161,47 @@ const Mission = (props) => {
         volunteersLength: mission.volunteersLength + 1,
       });
     }
+<<<<<<< Updated upstream
     await updateDoc(doc(colRefMissions, props.id), {
       status: "accepted",
       statusText: "Đang làm",
     });
+=======
+    // await updateDoc(doc(colRefMissions, props.id), {
+    //   volunteer: userDoc.email,
+    // });
+    // await updateDoc(doc(colRefMissions, props.id), {
+    //   status: "accepted",
+    //   statusText: "Đang làm",
+    // });
+    await setDoc(
+      doc(
+        colRefUserMission,
+        `${userDoc.email} | ${mission.title} (id: ${mission.id})`
+      ),
+      {
+        missionId: mission.id,
+        userEmail: userDoc.email,
+        userStatus: "accepted",
+        userStatusText: "Đang làm",
+      }
+    );
+
+    // const getUserMissionLink = async () => {
+    //   const data = await getDocs(colRefUserMission);
+    //   data.docs.forEach((doc) => {
+    //     if (
+    //       doc.data().userEmail === userDoc.email &&
+    //       doc.data().missionId == mission.id
+    //     ) {
+    //       setUserMissionLink({ ...doc.data(), id: doc.id });
+    //       return;
+    //     }
+    //   });
+    // };
+    // getUserMissionLink();
+
+>>>>>>> Stashed changes
     setStatusDisplay(
       <div className={`mission--status_chip mission--status_accepted`}>
         Đang làm
@@ -126,10 +224,21 @@ const Mission = (props) => {
   };
 
   const HandleNotAcceptImage = async () => {
-    await updateDoc(doc(colRefMissions, props.id), {
-      status: "denied",
-      statusText: "Chưa đạt",
-    });
+    // await updateDoc(doc(colRefMissions, props.id), {
+    //   status: "denied",
+    //   statusText: "Chưa đạt",
+    // });
+    await updateDoc(
+      doc(
+        colRefUserMission,
+        `${userDoc.email} | ${mission.title} (id: ${mission.id})`
+      ),
+      {
+        userStatus: "denied",
+        userStatusText: "Chưa đạt",
+      }
+    );
+
     setStatus("denied");
     setConfirmCheck(false);
   };
@@ -139,10 +248,20 @@ const Mission = (props) => {
   };
 
   const HandleAcceptImage = async () => {
-    await updateDoc(doc(colRefMissions, props.id), {
-      status: "done",
-      statusText: "Đã duyệt",
-    });
+    // await updateDoc(doc(colRefMissions, props.id), {
+    //   status: "done",
+    //   statusText: "Đã duyệt",
+    // });
+    await updateDoc(
+      doc(
+        colRefUserMission,
+        `${userDoc.email} | ${mission.title} (id: ${mission.id})`
+      ),
+      {
+        userStatus: "done",
+        userStatusText: "Đã duyệt",
+      }
+    );
     setStatus("done");
     let newScore = volunteerDoc.score + props.score;
     await updateDoc(doc(colRefUsers, `${userDoc.email}`), {
@@ -154,6 +273,10 @@ const Mission = (props) => {
 
   const HandleConfirmCheckExit = () => {
     setConfirmCheck(false);
+  };
+
+  const HandleConfirmAdminCheckExit = () => {
+    setConfirmAdminCheck(false);
   };
 
   return (
@@ -194,6 +317,21 @@ const Mission = (props) => {
         />
       ) : null}
 
+      {confirmAdminCheck ? (
+        <AdminCheckImage
+          title={mission.title}
+          number={mission.number}
+          address={mission.address}
+          content={mission.content}
+          score={mission.score}
+          duration={mission.duration}
+          id={mission.id}
+          // HandleAcceptImage={HandleAdminAcceptImage}
+          // HandleNotAcceptImage={HandleAdminNotAcceptImage}
+          HandleConfirmCheckExit={HandleConfirmAdminCheckExit}
+        />
+      ) : null}
+
       <div className="mission--big_container">
         <div className="mission--container">
           <div className="mission--about_part">
@@ -205,9 +343,9 @@ const Mission = (props) => {
                 <>
                   {props.volunteers.includes(userDoc.email) ? (
                     <div
-                      className={`mission--status_chip mission--status_${props.status}`}
+                      className={`mission--status_chip mission--status_${props.userStatus}`}
                     >
-                      {props.statusText}
+                      {props.userStatusText}
                     </div>
                   ) : null}
                 </>
@@ -243,7 +381,11 @@ const Mission = (props) => {
             <img src={userIcon} alt="" /> {mission.volunteersLength} /{" "}
             {mission.volunteersRequired}
           </div>
+<<<<<<< Updated upstream
           {userDoc.role === "admin" ? (
+=======
+          {/* {userDoc.role === "admin" ? (
+>>>>>>> Stashed changes
             <div className="mission--admin_monitor_part">
               {status !== "not accepted" ? (
                 <>
@@ -324,11 +466,12 @@ const Mission = (props) => {
                 "Nhiệm vụ chưa được nhận."
               )}
             </div>
-          ) : null}
+          ) : null} */}
 
           <div className="mission--buttons">
             {userDoc.role !== "admin" &&
-            (mission.status === "not accepted" || !user) ? (
+            !props.userStatus &&
+            (!userMissionLink.userStatus || !user) ? (
               <button
                 className="mission--button mission--join_button"
                 onClick={HandleAcceptMissionClicked}
@@ -344,7 +487,10 @@ const Mission = (props) => {
             </button>
             {
               //userDoc.role === "admin" &&
-              user && status !== "not accepted" && status !== "accepted" ? (
+              user &&
+              status &&
+              status !== "not accepted" &&
+              status !== "accepted" ? (
                 <button
                   className="mission--button mission--check_button"
                   //onClick={handleApproveMissionWork}
@@ -354,6 +500,14 @@ const Mission = (props) => {
                 </button>
               ) : null
             }
+            {userDoc.role === "admin" ? (
+              <button
+                className="mision--button mision--check--admin_button"
+                onClick={HandleAdminCheckImageClicked}
+              >
+                Danh sách đã nộp
+              </button>
+            ) : null}
           </div>
           <div className="img-part">
             <img src={missionImg} alt="mission img" className="mission--img" />
