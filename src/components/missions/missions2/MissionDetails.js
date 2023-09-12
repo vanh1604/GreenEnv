@@ -21,6 +21,7 @@ import MissionUpload from "../confirmation-boxes/upload-image/MissionUpload";
 import Notification from "../../common-components/Notification";
 import { useNavigate } from "react-router";
 import { UserAuth } from "../../../context/AuthContext";
+import userIcon from "../img/user-solid.svg";
 
 const MissionDetails = ({
   title,
@@ -71,7 +72,8 @@ const MissionDetails = ({
         }
       });
     };
-    if (user) getMission();
+    // if (user) 
+    getMission();
   }, []);
 
   useEffect(() => {
@@ -316,6 +318,10 @@ const MissionDetails = ({
           <div className="mission-details--header--first_line">
             <div className="mission-details--mission-title">{title}</div>
             <div className="mission-details--mission-rewards">+{score}</div>
+            <div className="mission-details--volunteers_required">
+              <img src={userIcon} alt="" /> {mission.volunteersLength} /{" "}
+              {mission.volunteersRequired}
+            </div>
             {statusDisplay ? (
               statusDisplay
             ) : (

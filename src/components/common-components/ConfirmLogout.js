@@ -1,10 +1,12 @@
 import React from "react";
 import "../missions/confirmation-boxes/MissionConfirmCancel.css";
+import DarkBackground from "./DarkBackground";
 
 const ConfirmLogout = ({ handleNotLogout, handleLogout }) => {
   return (
     <div className="mision-confirm">
-      <div className="mission-confirm--bg"></div>
+      {/* <div className="mission-confirm--bg"></div> */}
+      <DarkBackground />
       <div className="mission-confirm--notif">
         <div className="mission-confirm--headline">Đăng xuất</div>
         <div className="mission-confirm--question">

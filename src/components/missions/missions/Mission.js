@@ -83,7 +83,8 @@ const Mission = (props) => {
         }
       });
     };
-    if (user) getMission();
+    // if (user) 
+    getMission();
 
     // const getUserMissionLink = async () => {
     //   const data = await getDocs(colRefUserMission);

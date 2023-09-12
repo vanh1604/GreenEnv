@@ -22,13 +22,21 @@ const CheckImage = ({
   HandleNotAcceptImage,
   HandleAcceptImage,
   HandleConfirmCheckExit,
-  prev
+  prev,
 }) => {
   const [imageList, setImagelist] = useState([]);
   const imageListRef = ref(storage, `images/${id}/`);
   const [userDoc, setUserDoc] = useState({});
 
   const { user } = UserAuth();
+
+  let style = {};
+
+  {
+    prev !== "MissionItem"
+      ? (style = { marginTop: "10px" })
+      : (style = { marginTop: "-25px" });
+  }
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -55,7 +63,10 @@ const CheckImage = ({
     <div className="mission-confirm">
       {/* <div className="mission-confirm--bg"></div> */}
       {prev !== "MissionItem" ? <DarkBackground /> : null}
-      <div className="mission-confirm--notif mission-confirm--notif_checkImg">
+      <div
+        className="mission-confirm--notif mission-confirm--notif_checkImg"
+        style={style}
+      >
         <div
           className="checkImg--xmark_container"
           onClick={HandleConfirmCheckExit}
@@ -66,7 +77,7 @@ const CheckImage = ({
 
         <div className="checkImg--img_container">
           {imageList.length > 0 ? (
-            <img src={imageList[0]} className="CheckImage--img"></img>
+              <img src={imageList[0]} className="CheckImage--img"></img>
           ) : (
             <div>Chưa có ảnh nộp</div>
           )}
