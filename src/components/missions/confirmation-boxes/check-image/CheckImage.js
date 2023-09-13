@@ -27,6 +27,7 @@ const CheckImage = ({
   const [imageList, setImagelist] = useState([]);
   const imageListRef = ref(storage, `images/${id}/`);
   const [userDoc, setUserDoc] = useState({});
+  const [userPic, setUserPic] = useState(""); 
 
   const { user } = UserAuth();
 
@@ -57,6 +58,12 @@ const CheckImage = ({
         });
       });
     });
+
+    getDownloadURL(ref(storage, `images/${id}/${localStorage.email}`)).then((url) => {
+      setUserPic(url);
+    })
+
+    console.log(userPic);
   }, []);
 
   return (
@@ -78,7 +85,7 @@ const CheckImage = ({
 
         <div className="checkImg--img_container">
           {imageList.length > 0 ? (
-            <img src={imageList[0]} className="CheckImage--img"></img>
+            <img src={userPic} className="CheckImage--img"></img>
           ) : (
             <div>Chưa có ảnh nộp</div>
           )}

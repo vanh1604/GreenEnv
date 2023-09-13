@@ -167,6 +167,7 @@ const MissionItem = (props) => {
           HandleNotAcceptImage={HandleNotAcceptImage}
           HandleAcceptImage={HandleAcceptImage}
           HandleConfirmCheckExit={HandleCheckExit}
+          id={mission.id}
         />
       ) : null}
       <div className="mission-item">

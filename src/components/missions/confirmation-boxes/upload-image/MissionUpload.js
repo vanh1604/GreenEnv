@@ -59,7 +59,7 @@ const MissionUpload = ({
   const HandleUploadImage = async () => {
     if (!imageUpload) return;
 
-    const imageRef = ref(storage, `images/${id}/pic.jpg`);
+    const imageRef = ref(storage, `images/${id}/${localStorage.email}`);
     uploadBytes(imageRef, imageUpload).then(() => {
       // alert("Đã tải ảnh lên");
     });
