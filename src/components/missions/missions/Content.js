@@ -75,6 +75,9 @@ const Content = (props) => {
         if (userMissionLink.userEmail == userDoc.email) {
           return missions.map((mission) => {
             if (
+              (mission.volunteers.includes(userDoc.email) ||
+                (mission.status !== "done" &&
+                  mission.volunteersLength < mission.volunteersRequired)) &&
               mission.id == userMissionLink.missionId &&
               userMissionLink.userStatus !== "done"
             ) {
@@ -91,6 +94,7 @@ const Content = (props) => {
                   statusText={mission.statusText}
                   userStatus={userMissionLink.userStatus}
                   userStatusText={userMissionLink.userStatusText}
+                  userRole={userDoc.role}
                   // volunteer={mission.volunteer}
                   volunteers={mission.volunteers}
                   id={mission.id}
@@ -106,12 +110,16 @@ const Content = (props) => {
         //does not work!!!
         return missions.map((mission) => {
           if (
+            (mission.volunteers.includes(userDoc.email) ||
+              (mission.status !== "done" &&
+                mission.volunteersLength < mission.volunteersRequired)) &&
             mission.id == userMissionLink.missionId &&
             userMissionLink.userStatus === "done"
           ) {
             tmp2 = [...tmp2, mission.id];
             cnt++;
-            return (
+            {
+              /* return (
               <Mission
                 title={mission.title}
                 content={mission.content}
@@ -122,14 +130,16 @@ const Content = (props) => {
                 statusText={mission.statusText}
                 userStatus={userMissionLink.userStatus}
                 userStatusText={userMissionLink.userStatusText}
-                volunteer={mission.volunteer}
+                // volunteer={mission.volunteer}
+                userRole={userDoc.role}
                 volunteers={mission.volunteers}
                 volunteersRequired={mission.volunteersRequired}
                 id={mission.id}
                 key={mission.id}
                 // missionReload={missionReload}
               />
-            );
+            ); */
+            }
           }
         });
       })}
@@ -155,7 +165,13 @@ const Content = (props) => {
         }
       })} */}
       {missions.map((mission) => {
-        if (!tmp.includes(mission.id) && !tmp2.includes(mission.id)) {
+        if (
+          (mission.volunteers.includes(userDoc.email) ||
+            (mission.status !== "done" &&
+              mission.volunteersLength < mission.volunteersRequired)) &&
+          !tmp.includes(mission.id) &&
+          !tmp2.includes(mission.id)
+        ) {
           cnt++;
           return (
             <Mission
@@ -168,7 +184,8 @@ const Content = (props) => {
               statusText={mission.statusText}
               userStatus={null}
               userStatusText={null}
-              volunteer={mission.volunteer}
+              // volunteer={mission.volunteer}
+              userRole={userDoc.role}
               volunteers={mission.volunteers}
               volunteersRequired={mission.volunteersRequired}
               id={mission.id}
@@ -177,6 +194,34 @@ const Content = (props) => {
             />
           );
         }
+      })}
+
+      {userMissionLinks.map((userMissionLink) => {
+        //does not work!!!
+        return missions.map((mission) => {
+          if (tmp2.includes(mission.id)) {
+            return (
+              <Mission
+                title={mission.title}
+                content={mission.content}
+                address={mission.address}
+                number={mission.number}
+                score={mission.score}
+                status={mission.status}
+                statusText={mission.statusText}
+                userStatus={userMissionLink.userStatus}
+                userStatusText={userMissionLink.userStatusText}
+                // volunteer={mission.volunteer}
+                userRole={userDoc.role}
+                volunteers={mission.volunteers}
+                volunteersRequired={mission.volunteersRequired}
+                id={mission.id}
+                key={mission.id}
+                // missionReload={missionReload}
+              />
+            );
+          }
+        });
       })}
 
       {cnt == 0 ? (

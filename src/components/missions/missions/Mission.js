@@ -36,6 +36,7 @@ const Mission = (props) => {
   const [messageShowing, setMessageShowing] = useState(false);
   const [notifType, setNotifType] = useState("Thông báo");
   const [message, setMessage] = useState("");
+  const [volunteers, setVolunteers] = useState(null);
 
   // console.log(props.userStatus, props.userStatusText);
 
@@ -83,7 +84,7 @@ const Mission = (props) => {
         }
       });
     };
-    // if (user) 
+    // if (user)
     getMission();
 
     // const getUserMissionLink = async () => {
@@ -115,6 +116,8 @@ const Mission = (props) => {
       });
     };
     getUserMissionLink();
+
+    setVolunteers(mission.volunteers);
   }, [mission]);
 
   const HandleMessageExit = () => {
@@ -335,11 +338,25 @@ const Mission = (props) => {
                 statusDisplay
               ) : (
                 <>
-                  {props.volunteers.includes(userDoc.email) ? (
+                  {/* {props.volunteers.includes(userDoc.email) ? ( */}
+                  {!userMissionLink.userStatus || !user ? (
                     <div
                       className={`mission--status_chip mission--status_${props.userStatus}`}
                     >
                       {props.userStatusText}
+                    </div>
+                  ) : (
+                    <div
+                      className={`mission--status_chip mission--status_${userMissionLink.userStatus}`}
+                    >
+                      {userMissionLink.userStatusText}
+                    </div>
+                  )}
+                  {userDoc.role === "admin" ? (
+                    <div
+                      className={`mission--status_chip mission--status_${mission.status}`}
+                    >
+                      {mission.statusText}
                     </div>
                   ) : null}
                 </>

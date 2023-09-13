@@ -42,17 +42,17 @@
   padding: 6px 16px;
 }
 
-.mission--status_accepted {
+.mission--status_accepted, .mission--status_registerOpen  {
   background: rgba(94, 129, 247, 0.5);
   border: 1px solid var(--secondary-new, #5e81f7);
 }
 
-.mission--status_pending {
+.mission--status_pending, .mission--status_inProgress {
   border: 1px solid var(--secondary-closed, #ff7a00);
   background: rgba(255, 122, 0, 0.5);
 }
 
-.mission--status_denied {
+.mission--status_denied, .mission--status_registerClosed {
   border: 1px solid var(--secondary-closed, #ff2727);
   background: rgba(255, 0, 0, 0.5);
 }
