@@ -46,9 +46,15 @@ const MissionBoard = (props) => {
         {props.userRole === "user" ? (
           <div className="mission-board--label">Địa điểm</div>
         ) : null}
-        <div className="mission-board--label">Người dùng</div>
-        <div className="mission-board--label">Nhận lúc</div>
-        <div className="mission-board--label">Cập nhật lúc</div>
+        {props.userRole === "admin" ? (
+          <div className="mission-board--label">Người dùng</div>
+        ) : null}
+        {props.userRole === "admin" ? (
+          <div className="mission-board--label">Nhận lúc</div>
+        ) : null}
+        {props.userRole === "admin" ? (
+          <div className="mission-board--label">Cập nhật lúc</div>
+        ) : null}
         {props.userRole === "user" ? (
           <div className="mission-board--label">Điểm thưởng</div>
         ) : null}

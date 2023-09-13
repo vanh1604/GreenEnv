@@ -62,7 +62,8 @@ const CheckImage = ({
   return (
     <div className="mission-confirm">
       {/* <div className="mission-confirm--bg"></div> */}
-      {prev !== "MissionItem" ? <DarkBackground /> : null}
+      {/* {prev !== "MissionItem" ? <DarkBackground /> : null} */}
+      {userDoc.role && userDoc.role !== "admin" ? <DarkBackground /> : null}
       <div
         className="mission-confirm--notif mission-confirm--notif_checkImg"
         style={style}
@@ -77,7 +78,7 @@ const CheckImage = ({
 
         <div className="checkImg--img_container">
           {imageList.length > 0 ? (
-              <img src={imageList[0]} className="CheckImage--img"></img>
+            <img src={imageList[0]} className="CheckImage--img"></img>
           ) : (
             <div>Chưa có ảnh nộp</div>
           )}

@@ -178,9 +178,15 @@ const MissionItem = (props) => {
         {props.userRole === "user" ? (
           <div className="mission-item--location">{props.address}</div>
         ) : null}
-        <div className="mission-item--volunteer">{props.userEmail}</div>
-        <div className="mission-item--time">{props.acceptedAt}</div>
-        <div className="mission-item--time">{props.updatedAt}</div>
+        {props.userRole === "admin" ? (
+          <div className="mission-item--volunteer">{props.userEmail}</div>
+        ) : null}
+        {props.userRole === "admin" ? (
+          <div className="mission-item--time">{props.acceptedAt}</div>
+        ) : null}
+        {props.userRole === "admin" ? (
+          <div className="mission-item--time">{props.updatedAt}</div>
+        ) : null}
         {props.userRole === "user" ? (
           <div className="mission-item--reward">{props.score}</div>
         ) : null}
