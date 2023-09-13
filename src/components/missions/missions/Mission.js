@@ -20,12 +20,15 @@ import CheckImage from "../confirmation-boxes/check-image/CheckImage";
 import AdminCheckImage from "../confirmation-boxes/admin-check-image/AdminCheckImage";
 import Notification from "../../common-components/Notification";
 import { UserAuth } from "../../../context/AuthContext";
+import AdminChangeMissionStatus from "../confirmation-boxes/admin-change-mission-status/AdminChangeMissionStatus";
 
 const Mission = (props) => {
   const navigate = useNavigate();
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmCheck, setConfirmCheck] = useState(false);
   const [confirmAdminCheck, setConfirmAdminCheck] = useState(false);
+  const [confirmAdminChangeStatus, setConfirmAdminChangeStatus] =
+    useState(false);
   const [userDoc, setUserDoc] = useState({});
   const [volunteerDoc, setVolunteerDoc] = useState({});
   const [mission, setMission] = useState({});
@@ -276,6 +279,58 @@ const Mission = (props) => {
     setConfirmAdminCheck(false);
   };
 
+  const AdminMissionStatusClicked = () => {
+    setConfirmAdminChangeStatus(true);
+  };
+
+  const AdminMissionStatusExit = () => {
+    setConfirmAdminChangeStatus(false);
+    const getMission = async () => {
+      const data = await getDocs(colRefMissions);
+      data.docs.forEach((doc) => {
+        if (doc.data().title === props.title) {
+          //does not work if compare id
+          setMission({ ...doc.data(), id: doc.id });
+          return;
+        }
+      });
+    };
+    // if (user)
+    getMission();
+  };
+
+  const AdminMissionStatusRegisterOpen = async () => {
+    await updateDoc(doc(colRefMissions, props.id), {
+      status: "registerOpen",
+      statusText: "Mở đăng kí",
+    });
+    AdminMissionStatusExit();
+  };
+
+  const AdminMissionStatusRegisterClosed = async () => {
+    await updateDoc(doc(colRefMissions, props.id), {
+      status: "registerClosed",
+      statusText: "Đóng đăng kí",
+    });
+    AdminMissionStatusExit();
+  };
+
+  const AdminMissionStatusInProgress = async () => {
+    await updateDoc(doc(colRefMissions, props.id), {
+      status: "inProgress",
+      statusText: "Đang thực hiện",
+    });
+    AdminMissionStatusExit();
+  };
+
+  const AdminMissionStatusDone = async () => {
+    await updateDoc(doc(colRefMissions, props.id), {
+      status: "done",
+      statusText: "Kết thúc",
+    });
+    AdminMissionStatusExit();
+  };
+
   return (
     <div className="mission">
       {messageShowing ? (
@@ -329,6 +384,16 @@ const Mission = (props) => {
         />
       ) : null}
 
+      {confirmAdminChangeStatus ? (
+        <AdminChangeMissionStatus
+          AdminMissionStatusExit={AdminMissionStatusExit}
+          AdminMissionStatusRegisterOpen={AdminMissionStatusRegisterOpen}
+          AdminMissionStatusRegisterClosed={AdminMissionStatusRegisterClosed}
+          AdminMissionStatusInProgress={AdminMissionStatusInProgress}
+          AdminMissionStatusDone={AdminMissionStatusDone}
+        />
+      ) : null}
+
       <div className="mission--big_container">
         <div className="mission--container">
           <div className="mission--about_part">
@@ -354,7 +419,8 @@ const Mission = (props) => {
                   )}
                   {userDoc.role === "admin" ? (
                     <div
-                      className={`mission--status_chip mission--status_${mission.status}`}
+                      className={`mission--status_chip mission--status_${mission.status} clickable`}
+                      onClick={AdminMissionStatusClicked}
                     >
                       {mission.statusText}
                     </div>

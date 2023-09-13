@@ -69,57 +69,85 @@ const Content = (props) => {
   let cnt = 0;
 
   return (
-    <div>
-      {userMissionLinks.map((userMissionLink) => {
-        //does not work!!!
-        if (userMissionLink.userEmail == userDoc.email) {
-          return missions.map((mission) => {
-            if (
-              (mission.volunteers.includes(userDoc.email) ||
-                (mission.status !== "done" &&
-                  mission.volunteersLength < mission.volunteersRequired)) &&
-              mission.id == userMissionLink.missionId &&
-              userMissionLink.userStatus !== "done"
-            ) {
-              tmp = [...tmp, mission.id];
-              cnt++;
-              return (
-                <Mission
-                  title={mission.title}
-                  content={mission.content}
-                  address={mission.address}
-                  number={mission.number}
-                  score={mission.score}
-                  status={mission.status}
-                  statusText={mission.statusText}
-                  userStatus={userMissionLink.userStatus}
-                  userStatusText={userMissionLink.userStatusText}
-                  userRole={userDoc.role}
-                  // volunteer={mission.volunteer}
-                  volunteers={mission.volunteers}
-                  id={mission.id}
-                  key={mission.id}
-                  // missionReload={missionReload}
-                />
-              );
-            }
-          });
-        }
-      })}
-      {userMissionLinks.map((userMissionLink) => {
-        //does not work!!!
-        return missions.map((mission) => {
-          if (
-            (mission.volunteers.includes(userDoc.email) ||
-              (mission.status !== "done" &&
-                mission.volunteersLength < mission.volunteersRequired)) &&
-            mission.id == userMissionLink.missionId &&
-            userMissionLink.userStatus === "done"
-          ) {
-            tmp2 = [...tmp2, mission.id];
+    <>
+      {userDoc.role === "admin" ? (
+        <div>
+          {missions.map((mission) => {
             cnt++;
-            {
-              /* return (
+            return (
+              <Mission
+                title={mission.title}
+                content={mission.content}
+                address={mission.address}
+                number={mission.number}
+                score={mission.score}
+                status={mission.status}
+                statusText={mission.statusText}
+                userStatus={null}
+                userStatusText={null}
+                // volunteer={mission.volunteer}
+                userRole={userDoc.role}
+                volunteers={mission.volunteers}
+                volunteersRequired={mission.volunteersRequired}
+                id={mission.id}
+                key={mission.id}
+                // missionReload={missionReload}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <div>
+          {userMissionLinks.map((userMissionLink) => {
+            //does not work!!!
+            if (userMissionLink.userEmail == userDoc.email) {
+              return missions.map((mission) => {
+                if (
+                  (mission.volunteers.includes(userDoc.email) ||
+                    (mission.status !== "done" &&
+                      mission.volunteersLength < mission.volunteersRequired)) &&
+                  mission.id == userMissionLink.missionId &&
+                  userMissionLink.userStatus !== "done"
+                ) {
+                  tmp = [...tmp, mission.id];
+                  cnt++;
+                  return (
+                    <Mission
+                      title={mission.title}
+                      content={mission.content}
+                      address={mission.address}
+                      number={mission.number}
+                      score={mission.score}
+                      status={mission.status}
+                      statusText={mission.statusText}
+                      userStatus={userMissionLink.userStatus}
+                      userStatusText={userMissionLink.userStatusText}
+                      userRole={userDoc.role}
+                      // volunteer={mission.volunteer}
+                      volunteers={mission.volunteers}
+                      id={mission.id}
+                      key={mission.id}
+                      // missionReload={missionReload}
+                    />
+                  );
+                }
+              });
+            }
+          })}
+          {userMissionLinks.map((userMissionLink) => {
+            //does not work!!!
+            return missions.map((mission) => {
+              if (
+                (mission.volunteers.includes(userDoc.email) ||
+                  (mission.status !== "done" &&
+                    mission.volunteersLength < mission.volunteersRequired)) &&
+                mission.id == userMissionLink.missionId &&
+                userMissionLink.userStatus === "done"
+              ) {
+                tmp2 = [...tmp2, mission.id];
+                cnt++;
+                {
+                  /* return (
               <Mission
                 title={mission.title}
                 content={mission.content}
@@ -139,11 +167,11 @@ const Content = (props) => {
                 // missionReload={missionReload}
               />
             ); */
-            }
-          }
-        });
-      })}
-      {/* {missions.map((mission) => {
+                }
+              }
+            });
+          })}
+          {/* {missions.map((mission) => {
         if (tmp.includes(mission.id)) {
           return (
             <Mission
@@ -164,72 +192,73 @@ const Content = (props) => {
           );
         }
       })} */}
-      {missions.map((mission) => {
-        if (
-          (mission.volunteers.includes(userDoc.email) ||
-            (mission.status !== "done" &&
-              mission.volunteersLength < mission.volunteersRequired)) &&
-          !tmp.includes(mission.id) &&
-          !tmp2.includes(mission.id)
-        ) {
-          cnt++;
-          return (
-            <Mission
-              title={mission.title}
-              content={mission.content}
-              address={mission.address}
-              number={mission.number}
-              score={mission.score}
-              status={mission.status}
-              statusText={mission.statusText}
-              userStatus={null}
-              userStatusText={null}
-              // volunteer={mission.volunteer}
-              userRole={userDoc.role}
-              volunteers={mission.volunteers}
-              volunteersRequired={mission.volunteersRequired}
-              id={mission.id}
-              key={mission.id}
-              // missionReload={missionReload}
-            />
-          );
-        }
-      })}
+          {missions.map((mission) => {
+            if (
+              (mission.volunteers.includes(userDoc.email) ||
+                (mission.status !== "done" &&
+                  mission.volunteersLength < mission.volunteersRequired)) &&
+              !tmp.includes(mission.id) &&
+              !tmp2.includes(mission.id)
+            ) {
+              cnt++;
+              return (
+                <Mission
+                  title={mission.title}
+                  content={mission.content}
+                  address={mission.address}
+                  number={mission.number}
+                  score={mission.score}
+                  status={mission.status}
+                  statusText={mission.statusText}
+                  userStatus={null}
+                  userStatusText={null}
+                  // volunteer={mission.volunteer}
+                  userRole={userDoc.role}
+                  volunteers={mission.volunteers}
+                  volunteersRequired={mission.volunteersRequired}
+                  id={mission.id}
+                  key={mission.id}
+                  // missionReload={missionReload}
+                />
+              );
+            }
+          })}
 
-      {userMissionLinks.map((userMissionLink) => {
-        //does not work!!!
-        return missions.map((mission) => {
-          if (tmp2.includes(mission.id)) {
-            return (
-              <Mission
-                title={mission.title}
-                content={mission.content}
-                address={mission.address}
-                number={mission.number}
-                score={mission.score}
-                status={mission.status}
-                statusText={mission.statusText}
-                userStatus={userMissionLink.userStatus}
-                userStatusText={userMissionLink.userStatusText}
-                // volunteer={mission.volunteer}
-                userRole={userDoc.role}
-                volunteers={mission.volunteers}
-                volunteersRequired={mission.volunteersRequired}
-                id={mission.id}
-                key={mission.id}
-                // missionReload={missionReload}
-              />
-            );
-          }
-        });
-      })}
-
+          {userMissionLinks.map((userMissionLink) => {
+            //does not work!!!
+            return missions.map((mission) => {
+              if (tmp2.includes(mission.id)) {
+                return (
+                  <Mission
+                    title={mission.title}
+                    content={mission.content}
+                    address={mission.address}
+                    number={mission.number}
+                    score={mission.score}
+                    status={mission.status}
+                    statusText={mission.statusText}
+                    userStatus={userMissionLink.userStatus}
+                    userStatusText={userMissionLink.userStatusText}
+                    // volunteer={mission.volunteer}
+                    userRole={userDoc.role}
+                    volunteers={mission.volunteers}
+                    volunteersRequired={mission.volunteersRequired}
+                    id={mission.id}
+                    key={mission.id}
+                    // missionReload={missionReload}
+                  />
+                );
+              }
+            });
+          })}
+        </div>
+      )}
       {cnt == 0 ? (
         <div className="missions--empty_notification">
           Chưa có nhiệm vụ nào, bạn hãy quay lại sau nhé!
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 
