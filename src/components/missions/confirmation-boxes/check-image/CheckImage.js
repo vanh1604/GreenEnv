@@ -23,6 +23,7 @@ const CheckImage = ({
   HandleAcceptImage,
   HandleConfirmCheckExit,
   prev,
+  email,
 }) => {
   const [imageList, setImagelist] = useState([]);
   const imageListRef = ref(storage, `images/${id}/`);
@@ -54,14 +55,12 @@ const CheckImage = ({
     listAll(imageListRef).then((response) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
+          if (item.name === email) 
           setImagelist((imageList) => [...imageList, url]);
+          //console.log(item.name);
         });
       });
     });
-
-    getDownloadURL(ref(storage, `images/${id}/${localStorage.email}`)).then((url) => {
-      setUserPic(url);
-    })
 
     console.log(userPic);
   }, []);
@@ -85,7 +84,7 @@ const CheckImage = ({
 
         <div className="checkImg--img_container">
           {imageList.length > 0 ? (
-            <img src={userPic} className="CheckImage--img"></img>
+            <img src={imageList[0]} className="CheckImage--img"></img>
           ) : (
             <div>Chưa có ảnh nộp</div>
           )}

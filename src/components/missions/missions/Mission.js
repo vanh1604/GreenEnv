@@ -363,6 +363,7 @@ const Mission = (props) => {
           score={mission.score}
           duration={mission.duration}
           id={mission.id}
+          email = {localStorage.email}
           // HandleAcceptImage={HandleAcceptImage}
           // HandleNotAcceptImage={HandleNotAcceptImage}
           HandleConfirmCheckExit={HandleConfirmCheckExit}

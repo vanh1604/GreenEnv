@@ -168,6 +168,7 @@ const MissionItem = (props) => {
           HandleAcceptImage={HandleAcceptImage}
           HandleConfirmCheckExit={HandleCheckExit}
           id={mission.id}
+          email = {props.userEmail}
         />
       ) : null}
       <div className="mission-item">
