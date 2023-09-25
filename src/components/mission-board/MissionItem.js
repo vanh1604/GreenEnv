@@ -72,6 +72,7 @@ const MissionItem = (props) => {
       const data = await getDocs(colRefUserMission);
       data.docs.forEach((doc) => {
         if (
+          // doc.data().userEmail === props.userEmail &&
           doc.data().userEmail === user.email &&
           doc.data().missionId == mission.id
         ) {
