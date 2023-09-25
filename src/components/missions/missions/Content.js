@@ -172,7 +172,8 @@ const Content = (props) => {
               mission.status !== "done" &&
               mission.volunteersLength < mission.volunteersRequired &&
               !tmp.includes(mission.id) &&
-              !tmp2.includes(mission.id)
+              !tmp2.includes(mission.id) &&
+              mission.status === "registerOpen"
             ) {
               cnt++;
               return (
