@@ -14,7 +14,10 @@
 }
 
 .header {
-  width: 100%;
+  /* width: 100%; */
+  top: 0;
+  left: 0;
+  right: 0;
   height: 96px;
   justify-content: space-between;
   padding: 0 10%;
