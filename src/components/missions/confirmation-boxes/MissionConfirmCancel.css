@@ -134,3 +134,20 @@
 .test2 {
   padding: 20px 0px;
 }
+
+.form-info {
+  display: flex;
+  width: 360px;
+  padding: 7px 0px;
+  font-size: 18px;
+  text-align: left;
+}
+
+.input--css {
+  border-radius: 8px;
+  border: #3ca034 1px solid;
+}
+
+.input--name {
+  width: 90px;
+}

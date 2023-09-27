@@ -4,10 +4,14 @@ import { useState, useEffect } from "react";
 import { db, colRefUsers, colRefPresents } from "../../firebase";
 import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import Notification from "../common-components/Notification";
+import Address from "../missions/confirmation-boxes/Address/Address";
 
 const Exchange = () => {
   const [presents, setPresents] = useState([]);
+  const [nPresent, setnPresent] = useState([]);
+  const [nUser, setnUser] = useState([]);
   const [userDoc, setUserDoc] = useState({});
+  const [confirmAddress, setConfirmAddress] = useState(false);
 
   const [message, setMessage] = useState("");
   const [messageShowing, setMessageShowing] = useState(false);
@@ -37,6 +41,30 @@ const Exchange = () => {
     setMessageShowing(!messageShowing);
   };
 
+  const HandleNotAcceptAddress = async () => {
+    setConfirmAddress(false);
+  };
+
+  const HandleAcceptAddress = async () => {
+    setConfirmAddress(false);
+    Notify("Chúc mừng!", "Bạn đã đổi quà thành công!");
+      let newScore = nUser.score - nPresent.point;
+      let newExchange = userDoc.exchange;
+      let newRemain = nPresent.remain - 1; 
+      newExchange[nPresent.id] = true;
+
+      await updateDoc(doc(colRefUsers, `${userDoc.email}`), {
+        score: newScore,
+        exchange: newExchange,
+      });
+
+      await updateDoc(doc(colRefPresents, `${nPresent.id}`), {
+        remain: newRemain, 
+      });
+
+      window.location.reload(true);
+  };
+
   const Notify = (nType, nMessage) => {
     //notification type, notification message
     setNotifType(nType);
@@ -56,22 +84,11 @@ const Exchange = () => {
     }
 
     if (user.score >= present.point) {
-      Notify("Chúc mừng!", "Bạn đã đổi quà thành công!");
-      let newScore = user.score - present.point;
-      let newExchange = userDoc.exchange;
-      let newRemain = present.remain - 1; 
-      newExchange[present.id] = true;
-
-      await updateDoc(doc(colRefUsers, `${userDoc.email}`), {
-        score: newScore,
-        exchange: newExchange,
-      });
-
-      await updateDoc(doc(colRefPresents, `${present.id}`), {
-        remain: newRemain, 
-      });
-
-      window.location.reload(true);
+      setConfirmAddress(true);
+      setnPresent(present);
+      setnUser(user);
+      return;
+      
     } else {
       Notify("Báo lỗi", "Bạn không đủ điểm để đổi quà");
     }
@@ -84,6 +101,12 @@ const Exchange = () => {
           notifType={notifType}
           message={message}
           HandleMessageExit={HandleMessageExit}
+        />
+      ) : null}
+      {confirmAddress ? (
+        <Address
+          HandleAcceptMission={HandleAcceptAddress}
+          HandleNotAcceptMission={HandleNotAcceptAddress}
         />
       ) : null}
       <div>
