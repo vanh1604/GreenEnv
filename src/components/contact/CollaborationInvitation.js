@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./CollaborationInvitation.css";
 import sendIcon from "./img/end icon.svg";
 import { useState } from "react";
-import { colRefMessages, colRefMessengerCount } from "../../firebase";
+import { colRefMessages, colRefMessageCount } from "../../firebase";
 import { getDoc, setDoc, doc, updateDoc } from "firebase/firestore";
 import Notification from "../common-components/Notification";
 
@@ -10,21 +10,25 @@ const CollaborationInvitation = () => {
   const [colabName, setColabName] = useState("");
   const [colabEmail, setColabEmail] = useState("");
   const [colabMessage, setColabMessage] = useState("");
-  const [messengerCount, setMessengerCount] = useState(0);
+  const [messageCount, setmessageCount] = useState(0);
 
   const [message, setMessage] = useState("");
   const [messageShowing, setMessageShowing] = useState(false);
   const [notifType, setNotifType] = useState("Thông báo");
 
   useEffect(() => {
-    const getMessengerCount = async () => {
-      const count = await getDoc(doc(colRefMessengerCount, "messengerCount"));
-      setMessengerCount(count.data().value);
+    const getmessageCount = async () => {
+      const count = await getDoc(doc(colRefMessageCount, "messageCount"));
+      setmessageCount(count.data().value);
     };
-    getMessengerCount();
+    getmessageCount();
   });
 
   const HandleMessageExit = () => {
+    // var millisecondsToWait = 2000;
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, millisecondsToWait);
     setMessageShowing(!messageShowing);
   };
 
@@ -41,7 +45,7 @@ const CollaborationInvitation = () => {
     await setDoc(
       doc(
         colRefMessages,
-        `${messengerCount + 1} | ${colabEmail} | ${colabName} | ${d}`
+        `${messageCount + 1} | ${colabEmail} | ${colabName} | ${d}`
       ),
       {
         email: colabEmail,
@@ -49,10 +53,13 @@ const CollaborationInvitation = () => {
         message: colabMessage,
       }
     );
-    await updateDoc(doc(colRefMessengerCount, "messengerCount"), {
-      value: messengerCount + 1,
+    await updateDoc(doc(colRefMessageCount, "messageCount"), {
+      value: messageCount + 1,
     });
-    Notify("Thông báo", "Bạn đã gửi biểu mẫu thành công! Xin cảm ơn bạn vì đã liên hệ với Green Env.")
+    Notify(
+      "Thông báo",
+      "Bạn đã gửi biểu mẫu thành công! Xin cảm ơn bạn vì đã liên hệ với Green Env."
+    );
   };
 
   return (
@@ -88,12 +95,14 @@ const CollaborationInvitation = () => {
               className="ci--form_name"
               placeholder="Tên"
               onChange={(e) => setColabName(e.target.value)}
+              required="true"
             />
             <input
               type="email"
               className="ci--form_email"
               placeholder="Email"
               onChange={(e) => setColabEmail(e.target.value)}
+              required="true"
             />
           </div>
           <input
@@ -101,6 +110,7 @@ const CollaborationInvitation = () => {
             className="ci--form_details"
             placeholder="Chi tiết"
             onChange={(e) => setColabMessage(e.target.value)}
+            required="true"
           />
           <div className="ci--btn_container">
             <button className="ci--send">

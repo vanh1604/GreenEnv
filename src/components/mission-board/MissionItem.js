@@ -7,7 +7,7 @@ import { colRefMissions, colRefUsers } from "../../firebase";
 import CheckImage from "../missions/confirmation-boxes/check-image/CheckImage";
 
 const MissionItem = (props) => {
-  let statusDisplay = (
+  const [statusDisplay, setStatusDisplay] = useState(
     <div
       className={`mission-item--status_chip mission-item--status_${props.userStatus}`}
     >
@@ -29,17 +29,6 @@ const MissionItem = (props) => {
   // console.log(props.userStatus, props.userStatusText);
 
   useEffect(() => {
-    const getVolunteerDoc = async () => {
-      const data = await getDocs(colRefUsers);
-      data.docs.forEach((doc) => {
-        if (props.volunteers.includes(doc.data().email)) {
-          setVolunteerDoc({ ...doc.data(), id: doc.id });
-          return;
-        }
-      });
-    };
-    getVolunteerDoc();
-
     // const getVolunteerDoc = async () => {
     //   const data = await getDocs(colRefUsers);
     //   data.docs.forEach((doc) => {
@@ -76,13 +65,14 @@ const MissionItem = (props) => {
     //   });
     // };
     // getUserMissionLink();
-  }, []);
+  }, [mission]);
 
   useEffect(() => {
     const getUserMissionLink = async () => {
       const data = await getDocs(colRefUserMission);
       data.docs.forEach((doc) => {
         if (
+          // doc.data().userEmail === props.userEmail &&
           doc.data().userEmail === user.email &&
           doc.data().missionId == mission.id
         ) {
@@ -92,10 +82,25 @@ const MissionItem = (props) => {
       });
     };
     getUserMissionLink();
-  }, [mission]);
+  }, [mission, userMissionLink]);
+
+  useEffect(() => {
+    const getVolunteerDoc = async () => {
+      const data = await getDocs(colRefUsers);
+      data.docs.forEach((doc) => {
+        if (doc.data().email === props.userEmail) {
+          // console.log("reached");
+          setVolunteerDoc({ ...doc.data(), id: doc.id });
+          return;
+        }
+      });
+    };
+    getVolunteerDoc();
+  }, [volunteerDoc]);
 
   const checkImageButtonClicked = () => {
     setCheckImage(true);
+    // console.log(props.userEmail, volunteerDoc.email);
   };
 
   const HandleNotAcceptImage = async () => {
@@ -106,7 +111,7 @@ const MissionItem = (props) => {
     await updateDoc(
       doc(
         colRefUserMission,
-        `${user.email} | ${props.title} (id: ${props.missionId})`
+        `${props.userEmail} | ${mission.title} (id: ${mission.id})`
       ),
       {
         userStatus: "denied",
@@ -115,6 +120,12 @@ const MissionItem = (props) => {
     );
 
     setStatus("denied");
+
+    setStatusDisplay(
+      <div className={`mission-item--status_chip mission-item--status_denied`}>
+        Chưa đạt
+      </div>
+    );
     setCheckImage(false);
   };
 
@@ -126,7 +137,7 @@ const MissionItem = (props) => {
     await updateDoc(
       doc(
         colRefUserMission,
-        `${user.email} | ${props.title} (id: ${props.missionId})`
+        `${props.userEmail} | ${mission.title} (id: ${mission.id})`
       ),
       {
         userStatus: "done",
@@ -134,8 +145,13 @@ const MissionItem = (props) => {
       }
     );
     setStatus("done");
+    setStatusDisplay(
+      <div className={`mission-item--status_chip mission-item--status_done`}>
+        Đã duyệt
+      </div>
+    );
     let newScore = volunteerDoc.score + props.score;
-    await updateDoc(doc(colRefUsers, `${props.volunteer}`), {
+    await updateDoc(doc(colRefUsers, `${props.userEmail}`), {
       // score: userDoc.score + props.score,
       score: newScore,
     });
@@ -168,7 +184,7 @@ const MissionItem = (props) => {
           HandleAcceptImage={HandleAcceptImage}
           HandleConfirmCheckExit={HandleCheckExit}
           id={mission.id}
-          email = {props.userEmail}
+          email={props.userEmail}
         />
       ) : null}
       <div className="mission-item">

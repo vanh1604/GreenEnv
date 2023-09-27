@@ -30,7 +30,7 @@ const MissionBoard = (props) => {
     //   if (props.role === "admin") navigate("/user/missions");
     //   // else navigate("/admin/missions");
     // }
-  }, []);
+  }, [missions, userMissionLinks]);
 
   const { user } = UserAuth();
 

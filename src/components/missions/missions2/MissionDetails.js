@@ -344,7 +344,7 @@ const MissionDetails = ({
                       <dv>
                         {userMissionLink.userStatus === "denied" ? (
                           <div
-                            className={`mission--details_chip mission--status_pending`}
+                            className={`mission--details_chip mission--status_denied`}
                           >
                             Chưa đạt
                           </div>
@@ -352,7 +352,7 @@ const MissionDetails = ({
                           <div>
                             {userMissionLink.userStatus === "done" ? (
                               <div
-                                className={`mission--details_chip mission--status_pending`}
+                                className={`mission--details_chip mission--status_done`}
                               >
                                 Đã duyệt
                               </div>
