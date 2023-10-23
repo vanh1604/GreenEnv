@@ -430,7 +430,7 @@ const MissionDetails = ({
         </div>
       </div>
       <div className="mission-details--mission-info">
-        <div className="mission-details--mission-description">{content}</div>
+        <div className="mission-details--mission-description" dangerouslySetInnerHTML={ {__html:content} }></div>
         <div className="mission-details--mission-instruction">
           <div className="mission-details--title">Hướng dẫn:</div>
           <ul>
