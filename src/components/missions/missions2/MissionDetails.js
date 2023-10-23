@@ -423,7 +423,7 @@ const MissionDetails = ({
         </div>
       </div>
       <div className="mission-details--mission-hero">
-        <img src={missionImg} alt="" className="mission-details--mission-img" />
+        <img src={mission.img} alt="" className="mission-details--mission-img" />
         <div className="mission-details--dots">
           <img src={dot1} alt="" className="mission-details--dot" />
           <img src={dot2} alt="" className="mission-details--dot" />
