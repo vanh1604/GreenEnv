@@ -91,7 +91,6 @@ const Content = (props) => {
                 volunteers={mission.volunteers}
                 volunteersRequired={mission.volunteersRequired}
                 id={mission.id}
-                key={mission.id}
                 // missionReload={missionReload}
               />
             );
@@ -125,7 +124,6 @@ const Content = (props) => {
                       // volunteer={mission.volunteer}
                       volunteers={mission.volunteers}
                       id={mission.id}
-                      key={mission.id}
                       // missionReload={missionReload}
                     />
                   );
@@ -158,7 +156,6 @@ const Content = (props) => {
                       // volunteer={mission.volunteer}
                       volunteers={mission.volunteers}
                       id={mission.id}
-                      key={mission.id}
                       // missionReload={missionReload}
                     />
                   ); */
@@ -192,7 +189,6 @@ const Content = (props) => {
                   volunteers={mission.volunteers}
                   volunteersRequired={mission.volunteersRequired}
                   id={mission.id}
-                  key={mission.id}
                   // missionReload={missionReload}
                 />
               );
@@ -223,7 +219,6 @@ const Content = (props) => {
                       // volunteer={mission.volunteer}
                       volunteers={mission.volunteers}
                       id={mission.id}
-                      key={mission.id}
                       // missionReload={missionReload}
                     />
                   );
