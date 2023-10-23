@@ -178,7 +178,6 @@ const App = () => {
                   userStatusText={userMissionLink.userStatusText}
                   volunteer={mission.volunteer}
                   id={mission.id}
-                  key={mission.id}
                   // missionReload={missionReload}
                 />
               );
@@ -203,7 +202,6 @@ const App = () => {
                       volunteers={mission.volunteers}
                       statusText={mission.statusText}
                       id={mission.id}
-                      key={mission.id}
                     />
                     <Footer />
                   </>

@@ -34,7 +34,6 @@ const MissionDetails = ({
   volunteer,
   statusText,
   id,
-  key,
   // missionReload,
 }) => {
   const [userDoc, setUserDoc] = useState({});

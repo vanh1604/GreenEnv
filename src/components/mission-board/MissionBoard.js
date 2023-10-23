@@ -88,7 +88,6 @@ const MissionBoard = (props) => {
                       userEmail={userMissionLink.userEmail}
                       userStatus={userMissionLink.userStatus}
                       userStatusText={userMissionLink.userStatusText}
-                      key={mission.id}
                     />
                   );
                 }
@@ -117,7 +116,6 @@ const MissionBoard = (props) => {
                       userEmail={userMissionLink.userEmail}
                       userStatus={userMissionLink.userStatus}
                       userStatusText={userMissionLink.userStatusText}
-                      key={mission.id}
                     />
                   );
                 }
@@ -138,7 +136,6 @@ const MissionBoard = (props) => {
                 score={mission.score}
                 status={mission.status}
                 statusText={mission.statusText}
-                //key = {mission.id}
               />
             );
         })} */}
