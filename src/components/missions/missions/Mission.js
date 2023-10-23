@@ -429,7 +429,7 @@ const Mission = (props) => {
                 </>
               )}
             </div>
-            <div className="mission--description">{props.content}</div>
+            <div className="mission--description" dangerouslySetInnerHTML={ {__html:props.content} }></div>
           </div>
           <div className="mission--contacts">
             <div className="mission--contact">
@@ -582,7 +582,7 @@ const Mission = (props) => {
             ) : null}
           </div>
           <div className="img-part">
-            <img src={missionImg} alt="mission img" className="mission--img" />
+            <img src={mission.img} alt="mission img" className="mission--img" />
           </div>
         </div>
       </div>
