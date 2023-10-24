@@ -1,3 +1,11 @@
+# WEBSITE LINK:
+* https://cool-cranachan-e2c544.netlify.app
+
+## Alternative Links:
+* https://main--cool-cranachan-e2c544.netlify.app/
+* https://6536836bd40f0f24d8d38a3c--cool-cranachan-e2c544.netlify.app/ (permalink)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
