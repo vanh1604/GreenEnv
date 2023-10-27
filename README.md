@@ -1,11 +1,4 @@
-# WEBSITE LINK:
-## Permalink:
-* https://6536836bd40f0f24d8d38a3c--cool-cranachan-e2c544.netlify.app/
-  
-## Alternative Links:
-* https://cool-cranachan-e2c544.netlify.app
-* https://main--cool-cranachan-e2c544.netlify.app/
-
+# WEBSITE LINK: https://green-env.netlify.app
 
 # Getting Started with Create React App
 
