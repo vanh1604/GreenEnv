@@ -2,6 +2,8 @@
 
 # DEMO VIDEO LINK: https://youtu.be/Al23Jg1rwvI
 
+This website was created to start an environmental organization that attracts volunteers to do environmental work and contribute positively to the environment.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
